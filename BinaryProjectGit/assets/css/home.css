@@ -1,0 +1,137 @@
+/*.landingPage{*/
+/*    padding-top: 60px;*/
+/*}*/
+
+.masthead {
+    position: relative;
+    background-color: #343a40;
+    background: url("../images/bg-headLanding4.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+}
+
+.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.4;
+}
+
+.headTitle{
+    font-family: 'Josefin Sans';
+}
+
+.btnHeadLanding{
+    border: 2px solid #202a33;
+    background-color: #202a33;
+    opacity: 0.95;
+    color: whitesmoke;
+    width: 240px;
+    height: 60px;
+    font-size: 20px;
+}
+
+.btnHeadLanding:hover{
+    background-color: #202a33;
+    opacity: 1;
+    color: whitesmoke;
+}
+
+.headLandingContainer{
+    padding-top: 140px;
+}
+
+.colButtonLanding{
+    margin-bottom: 140px;
+}
+
+.text-headLanding{
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+header.masthead h1 {
+    font-size: 2rem;
+}
+
+
+/* REGION EXPLAIN */
+
+.icon-learn {
+    background: url('../images/learnSM.svg');
+    /*height: 250px;*/
+    /*width: 250px;*/
+    height: 200px;
+    width: 200px;
+    display: block;
+    color: whitesmoke;
+    /* Other styles here */
+}
+
+.icon-trade {
+    background: url('../images/tradeSM.svg');
+    /*height: 250px;*/
+    /*width: 250px;*/
+    height: 200px;
+    width: 200px;
+    display: block;
+    color: whitesmoke;
+    /* Other styles here */
+}
+
+.icon-compete {
+    background: url('../images/competeSM.svg');
+    /*height: 250px;*/
+    /*width: 250px;*/
+    height: 200px;
+    width: 200px;
+    display: block;
+    color: whitesmoke;
+    /* Other styles here */
+}
+
+.features-icons-icon{
+    margin-bottom: 24px;
+}
+
+.containerExplain p{
+    color: whitesmoke;
+}
+
+.containerExplain h3{
+    color: whitesmoke;
+}
+
+.containerExplain{
+    padding-top: 100px;
+    padding-bottom: 120px;
+}
+
+.btcChartLegendDiv{
+    color: whitesmoke;
+    text-align: center;
+}
+
+
+
+.showcase-img{
+    background-color: #343a40;
+    background: url("../images/bg-headLanding2.jpg") no-repeat center center;
+    position: relative;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 450px;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+}
+
+
+.btcChartDiv{
+    padding-top: 48px;
+    padding-bottom: 48px;
+}

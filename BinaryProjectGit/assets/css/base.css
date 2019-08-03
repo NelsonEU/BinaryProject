@@ -1,0 +1,77 @@
+html {
+    height: 100%;
+}
+body {
+    background: #0e3554;
+    /*background: linear-gradient(to right, #17232d, #143956);*/
+    background: linear-gradient(to right, #202a33, #253e52);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: auto;
+    top: auto;
+}
+
+.navbar{
+    background-color: #202a33;
+}
+
+.nav-item{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.logo-header{
+    height: 65px;
+}
+
+header{
+    position: relative;
+}
+
+.loginLink{
+    text-decoration: underline;
+}
+
+.checkedImg{
+    width: 128px;
+    height: 128px;
+}
+
+footer{
+    background-color:transparent;
+    padding-bottom: 100px;
+    height: 75px;
+    font-size: medium;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #202a33;
+}
+
+
+#balanceFooter{
+    color:whitesmoke;
+    padding-top: 25px;
+    text-align: right;
+    margin-right: 36px;
+}
+
+@media screen and (max-width: 600px) {
+    .logo-header{
+        height: 40px;
+    }
+    footer{
+        height: 50px;
+    }
+    .footer-text{
+        font-size: small;
+    }
+    #balanceFooter{
+        padding-top: 6px;
+    }
+}
+
+
+
+

@@ -1,0 +1,78 @@
+<div class="login-page">
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+                        <form class="form-signin" method="post">
+                            <div class="form-label-group">
+                                <input type="email" id="emailLogin" name="emailLogin" class="form-control"
+                                       placeholder="Email address" required>
+                                <label for="emailLogin" id="emailLoginLabel">Email address</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="passwordLogin" name="passwordLogin" class="form-control"
+                                       placeholder="Password"
+                                       required>
+                                <label for="passwordLogin" id="passwordLoginLabel">Password</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input passwordCheckbox" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            </div>
+                            <button class="btn btnLogIn btn-lg btn-primary btn-block text-uppercase" name="submit"
+                                    id="submitLogin" value="Sign in">Sign in</button>
+                            <hr class="my-4 separator separatorLogin">
+                            <div class="mt-2 mb-3">
+                                Don't have an account ? <a href="" id="registerLink">Click here !</a>
+                            </div>
+                        </form>
+                        <form class="form-register" method="post">
+                            <div class="form-label-group">
+                                <input type="email" id="emailRegister" name="emailRegister" class="form-control"
+                                       placeholder="Email address"
+                                       required autofocus>
+                                <label for="emailRegister" id="emailRegisterLabel">Email address</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" id="usernameRegister" name="usernameRegister" class="form-control"
+                                       placeholder="Username">
+                                <label for="usernameRegister" id="usernameRegisterLabel">Username</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="passwordRegister" name="passwordRegister" class="form-control"
+                                       placeholder="Password"
+                                       required>
+                                <label for="passwordRegister" id="passwordRegisterLabel">Password</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="passwordRegisterBis" name="passwordRegisterBis"
+                                       class="form-control"
+                                       placeholder="Confirm you password"
+                                       required>
+                                <label for="passwordRegisterBis" id="passwordRegisterBisLabel">Password</label>
+                            </div>
+
+
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            </div>
+                            <input class="btn btnLogIn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                                   name="submit"
+                                   id="submitRegister" value="Register"/>
+                            <hr class="my-4 separator separatorLogin">
+                            <div class="mt-2 mb-3">
+                                You already have an account ? <a href="" id="signInLink">Click here !</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

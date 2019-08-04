@@ -1,7 +1,10 @@
 package ihm;
 
+import biz.dto.ITournamentDto;
 import biz.dto.IUserDto;
+import biz.ucc.ITournamentUcc;
 import biz.ucc.IUserUcc;
+import biz.ucc.TournamentUcc;
 import biz.ucc.UserUcc;
 
 import javax.servlet.http.Cookie;
@@ -9,13 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.auth0.jwt.JWTSigner;
 import com.owlike.genson.Genson;
 import exceptions.BizException;
 import exceptions.FatalException;
+
 
 public class Dispatcher {
 
@@ -24,9 +31,12 @@ public class Dispatcher {
     private IUserDto user;
     private Genson genson;
     private String jwtSecret;
+    private ITournamentUcc tournamentUcc;
 
     public Dispatcher() {
         this.userUcc = new UserUcc();
+        this.tournamentUcc = new TournamentUcc();
+//        this.genson = new GensonBuilder().useConstructorWithArguments(true).withBundle(new JavaDateTimeBundle()).create();
         this.genson = new Genson();
         this.jwtSecret = "fsdfgjkladhsf";
     }
@@ -54,6 +64,8 @@ public class Dispatcher {
                     System.out.println("On arrive logout");
                     logout(req, resp, session);
                     break;
+                case "getTournaments":
+                    getTournaments(req, resp, session);
                 default:
                     break;
             }
@@ -72,6 +84,21 @@ public class Dispatcher {
             sendResponse(resp, exception.getMessage(), 500);
 
         }
+    }
+
+    private void getTournaments(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws InterruptedException, IOException {
+        List<ITournamentDto> list = new ArrayList<>();
+        if(this.user != null) {
+            list = this.tournamentUcc.get24hTournaments(this.user.getUserId());
+        }else{
+            list = this.tournamentUcc.get24hTournaments(-1);
+        }
+//        for(ITournamentDto tournament : list){
+//            System.out.println(tournament.toString());
+//        }
+        resp.setCharacterEncoding("UTF-8");
+        resp.getOutputStream().print(this.genson.serialize(list));
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {

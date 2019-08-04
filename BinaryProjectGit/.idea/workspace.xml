@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3eb34dd-200c-4d50-907f-7021d400b4e1" name="Default Changelist" comment="" />
+    <list default="true" id="d3eb34dd-200c-4d50-907f-7021d400b4e1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/genson_1_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/genson-1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/bizObject/ITournamentBiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/dto/ITournamentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/impl/Tournament.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BinaryProjectGit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BinaryProjectGit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/tournaments.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/tournaments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/genson-1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/DalServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/DalServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/IBackendDalServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/IBackendDalServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/properties/prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dal/services/DalServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/services/DalServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dal/services/IBackendDalServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/services/IBackendDalServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ihm/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/home.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,21 +45,27 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1Ors3fKNTXdB9GOeSY8bimnVnRf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utility" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -39,6 +77,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utility" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -91,11 +130,26 @@
       <updated>1564746852031</updated>
       <workItem from="1564746855877" duration="865000" />
       <workItem from="1564748552027" duration="45732000" />
+      <workItem from="1564872538350" duration="16972000" />
+      <workItem from="1564923364461" duration="11335000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -104,6 +158,16 @@
           <url>file://$PROJECT_DIR$/src/biz/impl/User.java</url>
           <line>101</line>
           <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

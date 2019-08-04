@@ -5,10 +5,7 @@ import ihm.Config;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DalServices implements IDalServices, IBackendDalServices {
 
@@ -26,7 +23,6 @@ public class DalServices implements IDalServices, IBackendDalServices {
         this.url = this.config.getValueOfKey("url");
         this.username = this.config.getValueOfKey("username");
         this.password = this.config.getValueOfKey("password");
-
     }
 
     @Override
@@ -40,7 +36,16 @@ public class DalServices implements IDalServices, IBackendDalServices {
 //            logger.info("Exception lancée lors de l'appel de la methode: getPreparedStatement : "
 //                    + exception.getMessage() + "----" + exception.getErrorCode() + "-----");
             System.out.println("Erreur getPS");
-            throw new FatalException("Erreur getPS");
+            throw new FatalException("Fatal error: " + exception.getMessage());
+        }
+    }
+
+    @Override
+    public Array getArrayId(Object[] array) throws FatalException {
+        try {
+            return this.conn.createArrayOf("INT", array);
+        }catch (SQLException e){
+            throw new FatalException("Fatal error: " + e.getMessage());
         }
     }
 
@@ -54,7 +59,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
             conn.setAutoCommit(true);
         }catch(SQLException e){
             System.out.println("Erreur establish");
-            throw new FatalException("Erreur establish");
+            throw new FatalException("Fatal error: " + e.getMessage());
         }
 
     }
@@ -72,7 +77,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
             rollbackTransaction();
             closeConnection();
             System.out.println("Erreur start: " + e.getMessage());
-            throw new FatalException("Erreur start: " + e.getMessage());
+            throw new FatalException("Fatal error: " + e.getMessage());
         }
     }
 
@@ -86,7 +91,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
         }catch (SQLException e){
             rollbackTransaction();
             System.out.println("Erreur commit: " + e.getMessage());
-            throw new FatalException("Erreur commit: " + e.getMessage());
+            throw new FatalException("Fatal error: " + e.getMessage());
         }finally{
             closeConnection();
         }
@@ -102,7 +107,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
             }
         }catch (SQLException e){
             System.out.println("Erreur rollback: " + e.getMessage());
-            throw new FatalException("Erreur rollback: " + e.getMessage());
+            throw new FatalException("Fatal error: " + e.getMessage());
         }
     }
 
@@ -115,7 +120,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
             }
         }catch (SQLException e){
             System.out.println("Erreur close");
-            throw new FatalException("Erreur close");
+            throw new FatalException("Fatal error: " + e.getMessage());
         }
     }
 }

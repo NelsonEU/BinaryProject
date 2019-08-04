@@ -31,9 +31,10 @@ function OnCookieAccept(){
     $('#cookie-msg').hide();
 }
 
-$('#btnStartCompeting').on('click', function () {
-    window.location.href="index.php?action=tournaments";
-})
+$('#btnStartCompeting').on('click', function (e) {
+    console.log("On click home");
+    goTournaments(e);
+});
 
 /*
 $(function(){

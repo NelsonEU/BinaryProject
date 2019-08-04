@@ -2,7 +2,9 @@ package dal.services;
 
 import exceptions.FatalException;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public interface IBackendDalServices {
     /**
@@ -14,4 +16,6 @@ public interface IBackendDalServices {
      * @throws FatalException s'il n'arrive pas à se connecter
      */
     PreparedStatement getPreparedStatement(String query) throws FatalException;
+
+    Array getArrayId(Object[] array) throws SQLException;
 }

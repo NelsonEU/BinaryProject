@@ -1,6 +1,7 @@
 .tournamentsPage{
     padding-top: 50px;
     min-height:100%;
+    display: none;
 }
 
 .confirmDiv{
@@ -33,6 +34,10 @@
     .confirmDiv h3{
         margin-bottom: 8px;
     }
+}
+
+.tabTournamentsSpinner{
+    /*display: none;*/
 }
 
 
@@ -123,9 +128,11 @@ table{
 .priceBox{
     border: 1px solid #7684a0;
     text-align: center;
+    padding: 4px;
 }
 
 .rulesBox{
     border: 1px solid #7684a0;
     text-align: center;
+    padding: 4px;
 }

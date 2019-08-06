@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface ITournamentUcc {
     List<ITournamentDto> get24hTournaments(int userId);
+
+    void register(int userId, int tournamentId);
 }

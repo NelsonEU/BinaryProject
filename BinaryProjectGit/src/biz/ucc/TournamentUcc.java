@@ -52,6 +52,19 @@ public class TournamentUcc implements ITournamentUcc {
         return listTournaments;
     }
 
+    @Override
+    public void register(int userId, int tournamentId) {
+        try{
+            this.dalServices.startTransaction();
+            tournamentDao.registerUser(userId, tournamentId);
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally {
+            this.dalServices.commitTransaction();
+        }
+    }
+
     private void checkUserRegistration(int userId, List<ITournamentDto> listTournaments) {
         for(ITournamentDto tournamentDto : listTournaments){
             ITournamentBiz tournamentBiz = (ITournamentBiz)tournamentDto;

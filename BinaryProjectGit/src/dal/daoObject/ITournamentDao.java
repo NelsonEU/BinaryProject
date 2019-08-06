@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ITournamentDao {
     List<ITournamentDto> get24hTournaments();
+
+    void registerUser(int userId, int tournamentId);
 }

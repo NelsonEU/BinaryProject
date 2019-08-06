@@ -37,13 +37,14 @@ $('#tournamentsLinkHeader').on('click',function(e){
 
 function goTournaments(e){
     console.log("On est goTournaments");
-    e.preventDefault();
+    if(e != null) {
+        e.preventDefault();
+    }
     //TODO AJAX CALL TO GET DATA
     $('.landingPage').css('display','none');
     $('.tournamentsPage').css('display', 'block');
     $('#tabTournamentsBody').hide();
     $('#tabTournamentsSpinner').show();
-    console.log("ON FAIT L'APPEL");
     $.ajax({
         url: '/',
         type: 'POST',
@@ -63,10 +64,6 @@ function feedTournamentsTab(response){
     var tournaments = JSON.parse(response);
     tournaments.forEach(function(key, index){
         var tournament = tournaments[index];
-        console.log("INDEX: " + index);
-        console.log("TOURNAMENT ID: " + tournament.tournamentId);
-        console.log(tournament.startingDate);
-        console.log("REGISTERED| " + tournament.registered + " |");
         var line = " <tr>" +
                 "<td class=\"partyCell\"><p>" + tournament.party.length + "</p></td>" +
                 "<td class=\"startingCell\"><p>" + tournament.startingDate + "</p></td>" +
@@ -75,7 +72,7 @@ function feedTournamentsTab(response){
         if(tournament.registered === true){
             line += "<img class='checkedTableImg' src='images/checked.png'></td></tr>";
         }else{
-            line += "<button class='joinButton btn' onclick='onJoinClick()'>Join</button></td></tr>";
+            line += "<button class='joinButton btn' id='" + tournament.tournamentId + "'>Join</button></td></tr>";
         }
         tbody.append(line);
     });
@@ -88,7 +85,6 @@ $('#homeButtonHeader').on('click', function (e) {
 });
 
 $('#homeLinkHeader').on('click', function (e) {
-    console.log("go home");
     goHome(e);
 });
 

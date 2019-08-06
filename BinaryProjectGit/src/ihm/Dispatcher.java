@@ -66,7 +66,18 @@ public class Dispatcher {
                     break;
                 case "getTournaments":
                     getTournaments(req, resp, session);
+                    break;
                 default:
+                    if(userConnected(req,resp)){
+                        switch(action){
+                            case "registerTournament":
+                                System.out.println("On est dans le regsiter !");
+                                registerTournament(req, resp);
+                                break;
+                        }
+                    }else {
+                        sendResponse(resp, "Unauthorized", 401);
+                    }
                     break;
             }
         } catch (IOException exception) {
@@ -86,6 +97,22 @@ public class Dispatcher {
         }
     }
 
+    private void registerTournament(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int userId = this.user.getUserId();
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try {
+            this.tournamentUcc.register(userId, tournamentId);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
+
+    }
+
+    private boolean userConnected(HttpServletRequest req, HttpServletResponse resp) {
+        return this.user != null;
+    }
+
     private void getTournaments(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws InterruptedException, IOException {
         List<ITournamentDto> list = new ArrayList<>();
         if(this.user != null) {
@@ -93,9 +120,6 @@ public class Dispatcher {
         }else{
             list = this.tournamentUcc.get24hTournaments(-1);
         }
-//        for(ITournamentDto tournament : list){
-//            System.out.println(tournament.toString());
-//        }
         resp.setCharacterEncoding("UTF-8");
         resp.getOutputStream().print(this.genson.serialize(list));
         resp.setStatus(HttpServletResponse.SC_OK);

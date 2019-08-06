@@ -47,7 +47,6 @@ public class TournamentDao implements ITournamentDao {
                     if(!mapTournaments.containsKey(tournament.getTournamentId())){
                         mapTournaments.put(tournament.getTournamentId(), tournament);
                     }
-//                    tournament.addPlayerFromDao(rs.getInt(8));
 //                    logger.info("Utilisateur trouvé selon son login avec succès.");
                 }
 
@@ -83,7 +82,6 @@ public class TournamentDao implements ITournamentDao {
                         mapTournamentsParticipants.put(rs.getInt(2), listPlayers);
                     }
                     listPlayers.add(rs.getInt(1));
-//                    tournament.addPlayerFromDao(rs.getInt(8));
 //                    logger.info("Utilisateur trouvé selon son login avec succès.");
                 }
 
@@ -91,10 +89,13 @@ public class TournamentDao implements ITournamentDao {
             }
             for(Map.Entry<Integer,List<Integer>> entry : mapTournamentsParticipants.entrySet()){
                 ITournamentDto tournament = mapTournaments.get(entry.getKey());
-                tournament.setParty(entry.getValue());
+                if(tournament != null && entry.getValue() != null) {
+                    tournament.setParty(entry.getValue());
+                }
             }
 
             listTournaments = new ArrayList<>(mapTournaments.values());
+            listTournaments.sort((t1, t2) -> t1.getStartingDate().compareTo(t2.getStartingDate()));
 
         } catch (SQLException exception) {
 //            logger.info("Exception lancée lors de l'appel de la methode: findUserByLogin : "
@@ -104,6 +105,24 @@ public class TournamentDao implements ITournamentDao {
         }
 
         return listTournaments;
+    }
+
+    @Override
+    public void registerUser(int userId, int tournamentId) {
+        try {
+            // Si il n'y pas de user pour ce login, on peut l'inscrire
+            PreparedStatement ps =
+                    dalBackendServices.getPreparedStatement(config.getValueOfKey("registerPlayer"));
+
+            ps.setInt(1, userId);
+            ps.setInt(2, tournamentId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException exception) {
+            System.out.println("Erreur registerPlayer");
+            throw new FatalException("Erreur: " + exception.getMessage());
+        }
     }
 
     private ITournamentDto createTournament(ResultSet rs) throws SQLException {
@@ -117,7 +136,7 @@ public class TournamentDao implements ITournamentDao {
         String startingDateFormatted;
         if(startingTimestamp != null){
             startingDate = new Date(startingTimestamp.getTime());
-            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' h:mm a");
+            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
             startingDateFormatted = ft.format(startingDate);
         }else{
             startingDateFormatted = null;
@@ -129,7 +148,7 @@ public class TournamentDao implements ITournamentDao {
         String endingDateFormatted;
         if(endingTimestamp != null){
             endingDate = new Date(endingTimestamp.getTime());
-            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' h:mm a");
+            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
             endingDateFormatted = ft.format(endingDate);
         }else{
             endingDateFormatted = null;

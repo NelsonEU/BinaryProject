@@ -35,14 +35,7 @@ public class Servlet extends DefaultServlet {
             op.write(Files.readAllBytes(Paths.get("webcontent/header.html")));
             op.write(Files.readAllBytes(Paths.get("webcontent/home.html")));
             op.write(Files.readAllBytes(Paths.get("webcontent/footer.html")));
-        } else if(request.getServletPath().equalsIgnoreCase("/login.html")){
-            response.setContentType("text/html");
-            ServletOutputStream op = response.getOutputStream();
-            op.write(Files.readAllBytes(Paths.get("webcontent/header.html")));
-            op.write(Files.readAllBytes(Paths.get("webcontent/login.html")));
-            op.write(Files.readAllBytes(Paths.get("webcontent/footer.html")));
-        }
-        else {
+        } else {
             super.doGet(request, response);
         }
     }

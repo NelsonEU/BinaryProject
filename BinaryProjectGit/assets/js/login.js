@@ -105,15 +105,12 @@ $('#signInLink').on('click', function(e) {
 });
 
 
-
-
 function loginSuccessful(response){
-    console.log("REPONSE: " + response);
     var user = JSON.parse(response);
-    console.log("SUCCES: " + user.email);
     $('.notifError').remove();
-    localStorage.setItem("connectedUser",user);
-    window.location.href="/";
+    isConnected();
+    goTournaments(null);
+    // window.location.href="/";
 }
 
 function loginError(jqXHR, textStatus, errorThrown){
@@ -145,25 +142,17 @@ function fieldError(field, label){
 }
 
 function registerSuccessful(response){
-    console.log("REPONSE: " + response);
     var user = JSON.parse(response);
-    console.log("SUCCES REGISTER: " + user.email);
     $('.notifError').remove();
-    localStorage.setItem("connectedUser", user);
-    window.location.href="/";
+    isConnected();
+    goTournaments(null);
 }
 
 function registerError(jqXHR, textStatus, errorThrown){
-    // var erreur = JSON.par;
-    console.log("ERREUR REGISTER: " + jqXHR.status + " " + "///" + jqXHR.responseText + " /// ");
     switch(jqXHR.responseText){
         case "email_taken":
             fieldError($('#emailRegister'),$('#emailRegisterLabel'));
             $('#emailRegister').after("<p class='notifError'>This email is already taken</p>")
             break;
     }
-}
-
-function logout() {
-
 }

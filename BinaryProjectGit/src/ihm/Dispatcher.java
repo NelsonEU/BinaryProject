@@ -52,16 +52,20 @@ public class Dispatcher {
                 return;
             }
             switch (action) {
+                case "isConnected":
+                    if(userConnected(req, resp)){
+                        sendResponse(resp, "Connected", 200);
+                    }else{
+                        sendResponse(resp, "Not connected", 402);
+                    }
+                    break;
                 case "login":
-                    System.out.println("On arrive ici login");
                     login(req, resp, session);
                     break;
                 case "register":
-                    System.out.println("On arrive ici");
                     register(req, resp, session);
                     break;
                 case "logout":
-                    System.out.println("On arrive logout");
                     logout(req, resp, session);
                     break;
                 case "getTournaments":
@@ -71,7 +75,6 @@ public class Dispatcher {
                     if(userConnected(req,resp)){
                         switch(action){
                             case "registerTournament":
-                                System.out.println("On est dans le regsiter !");
                                 registerTournament(req, resp);
                                 break;
                         }

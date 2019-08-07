@@ -10,6 +10,7 @@
     background: #0e3554;
     background: linear-gradient(to right, #031e33, #112b40);
     height: 100%;
+    display: none;
 }
 
 .login-container{

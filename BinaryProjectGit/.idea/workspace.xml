@@ -3,16 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="d3eb34dd-200c-4d50-907f-7021d400b4e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/tournaments.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/tournaments.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/META-INF/BinaryProjectGit.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/properties/prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/properties/prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Servlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Servlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ihm/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ihm/Servlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Servlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/login.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +112,7 @@
       <workItem from="1564746855877" duration="865000" />
       <workItem from="1564748552027" duration="45732000" />
       <workItem from="1564872538350" duration="16972000" />
-      <workItem from="1564923364461" duration="16728000" />
+      <workItem from="1564923364461" duration="20553000" />
     </task>
     <servers />
   </component>

@@ -25,4 +25,3 @@ var graph =   new TradingView.widget(
   "container_id": "tradingview_6ae6b"
 }
   );
-console.log("yooooo");

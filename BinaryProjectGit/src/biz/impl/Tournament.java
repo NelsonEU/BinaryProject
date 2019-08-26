@@ -1,10 +1,9 @@
 package biz.impl;
 
 import biz.bizObject.ITournamentBiz;
+import biz.dto.IDistributionDto;
 import biz.dto.ITournamentDto;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +12,16 @@ public class Tournament implements ITournamentDto, ITournamentBiz {
     private int tournamentId;
     private int bid;
     private int playingSum;
+    private int distribution;
+    private IDistributionDto distributionString;
     private String startingDate;
     private String endingDate;
-    private String durarion;
+    private String duration;
     private String state;
     private List<Integer> party;
+    //TODO BUGGY DE OFU CA JE PENSE
     private boolean registered;
+    private int minPlayers;
 
     public Tournament(){
         super();
@@ -94,12 +97,12 @@ public class Tournament implements ITournamentDto, ITournamentBiz {
 
     @Override
     public String getDuration() {
-        return durarion;
+        return duration;
     }
 
     @Override
     public void setDuration(String durarion) {
-        this.durarion = durarion;
+        this.duration = durarion;
     }
 
     @Override
@@ -118,12 +121,14 @@ public class Tournament implements ITournamentDto, ITournamentBiz {
                 "tournamentId=" + tournamentId +
                 ", bid=" + bid +
                 ", playingSum=" + playingSum +
-                ", startingDateUTC=" + startingDate +
+                ", startingDate=" + startingDate +
                 ", endingDateUTC=" + endingDate +
-                ", durarion=" + durarion +
+                ", duration=" + duration +
                 ", state='" + state + '\'' +
                 ", party=" + party +
                 ", registered=" + registered +
+                ", distributionId=" + distribution +
+                ", distribution=" + distributionString +
                 '}';
     }
 
@@ -137,5 +142,34 @@ public class Tournament implements ITournamentDto, ITournamentBiz {
         return this.registered;
     }
 
+    @Override
+    public int getDistribution() {
+        return distribution;
+    }
+
+    @Override
+    public void setDistribution(int distribution) {
+        this.distribution = distribution;
+    }
+
+    @Override
+    public IDistributionDto getDistributionString() {
+        return distributionString;
+    }
+
+    @Override
+    public void setDistributionString(IDistributionDto distributionString) {
+        this.distributionString = distributionString;
+    }
+
+    @Override
+    public int getMinPlayers() {
+        return this.minPlayers;
+    }
+
+    @Override
+    public void setMinPlayers(int minPlayers) {
+        this.minPlayers = minPlayers;
+    }
 
 }

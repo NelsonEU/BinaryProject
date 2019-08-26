@@ -109,8 +109,11 @@ function loginSuccessful(response){
     var user = JSON.parse(response);
     $('.notifError').remove();
     isConnected();
+    if(user.admin) {
+        console.log("IL EST ADMIN");
+        isAdmin();
+    }
     goTournaments(null);
-    // window.location.href="/";
 }
 
 function loginError(jqXHR, textStatus, errorThrown){

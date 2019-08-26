@@ -35,6 +35,12 @@ public class Servlet extends DefaultServlet {
             op.write(Files.readAllBytes(Paths.get("webcontent/header.html")));
             op.write(Files.readAllBytes(Paths.get("webcontent/home.html")));
             op.write(Files.readAllBytes(Paths.get("webcontent/footer.html")));
+            //TODO ICI TRAITER LES URL CUSTOMS
+            /*
+             * En fonction des urls que j'aurai custom avec encoreURI();
+             * LA OU JE CATCH LE RELOAD DANS LE JS (faut que ce soit apres)
+             * JE FAIS UN SWITCH EN FONCTION DU LIEN JE FAIS goTournaments() ou autre
+             */
         } else {
             super.doGet(request, response);
         }

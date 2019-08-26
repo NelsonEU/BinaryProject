@@ -1,6 +1,10 @@
+<!--CSS Spinner-->
+<div class="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
 <!-- ################################################## HOME PAGE ################################################## -->
 <div class="landingPage">
-    <div class="headLanding masthead text-white text-center" id ="kingsLanding">
+    <div class="headLanding masthead text-white text-center" id="kingsLanding">
         <div class="overlay"></div>
         <div class="container headLandingContainer">
             <div class="row">
@@ -50,7 +54,8 @@
     <div class="separatorDiv">
         <div class="container-fluid p-0">
             <div class="row no-gutters">
-                <div class="col-12 order-lg-2 text-white showcase-img parallax-window" data-parallax="scroll" data-image-src="Views/Assets/images/bg-headLanding2.jpg"></div>
+                <div class="col-12 order-lg-2 text-white showcase-img parallax-window" data-parallax="scroll"
+                     data-image-src="Views/Assets/images/bg-headLanding2.jpg"></div>
             </div>
         </div>
     </div>
@@ -67,7 +72,10 @@
         <div class="tradingview-widget-container pt-4">
             <div class="row justify-content-center">
                 <div id="tradingview_6ae6b" class="graph col-sm-12 col-md-10 col-lg-8"></div>
-                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div>
+                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/"
+                                                             rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
+                    by TradingView
+                </div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                 <script type="text/javascript">
                     new TradingView.widget(
@@ -90,72 +98,271 @@
         </div>
         <!-- TradingView Widget END -->
     </div>
-    <div id="cookie-msg" style="position: fixed; bottom: 0px; width: 100%; text-align: center; padding: 30px 50px; background-color: #202a33; color: whitesmoke; font-size: 16px;"><span class="msg">This website uses cookies. By using this website you consent to our use of these cookies. For more information visit our <a href="https://www.jqueryscript.net/privacy/" style="color: rgb(255, 255, 0); text-decoration: underline;">Privacy Policy</a>. <button onclick="OnCookieAccept()" class="btn-aceptar" style="text-decoration: none; padding: 5px 10px; border-radius: 5px; background-color: whitesmoke; color:#202a33; font-size: 11px;">Got It!</button></span></div>
+    <div id="cookie-msg"
+         style="position: fixed; bottom: 0px; width: 100%; text-align: center; padding: 30px 50px; background-color: #202a33; color: whitesmoke; font-size: 16px;">
+        <span class="msg">This website uses cookies. By using this website you consent to our use of these cookies. For more information visit our <a
+                href="https://www.jqueryscript.net/privacy/"
+                style="color: rgb(255, 255, 0); text-decoration: underline;">Privacy Policy</a>. <button
+                onclick="OnCookieAccept()" class="btn-aceptar"
+                style="text-decoration: none; padding: 5px 10px; border-radius: 5px; background-color: whitesmoke; color:#202a33; font-size: 11px;">Got It!</button></span>
+    </div>
 </div>
 <!-- ################################################## TOURNAMENTS PAGE ################################################## -->
 <div class="tournamentsPage">
-    <div class="container-fluid tournamentsContainer">
-        <div class="confirmDiv">
-            <h3>Confirmation</h3>
-            <p>Are you sure to take part in this competition ?</p>
-            <p class="align-right">Once registered, you won't be able to back out.</br>The bid amount will be credited from your account at the beginning of the tournament.</p></br>
-            <div class="containerDetails">
-                <div class="row rowDetails">
-                    <div class="col-6 col-md-12 colDetails">
-                        <p class="bidP">Bid: 50</p>
-                    </div>
-                    <div class="col-6 col-md-12 colDetails">
-                        <p class="startingTimeP">Starting time: Today at 1:00pm</p>
-                    </div>
-                </div>
-            </div>
-            <div class="container containerButtonPopUp">
-                <div class="row containerButtonRow">
-                    <div class="col-6 containerButtonCol">
-                        <button class="btn btn-danger" id="btnCancelPopUp">Cancel</button>
-                    </div>
-                    <div class="col-6 containerButtonCol">
-                        <button class="btn btn-success" id="btnConfirmPopUp">Confirm</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row tabTournamentsRow">
-            <div class="col-12">
-                <div class="tournamentsBox bg-dark">
-                    <h1 class="tournamentsTitle">Tournaments</h1>
-                    <!--                    <hr class="my-4 separator separatorTournament">-->
-                    <div class="table table-responsive">
-                        <table class="table-tournaments table-striped table-dark table-hover">
-                            <thead>
-                            <tr>
-                                <th class="partyCell">Party</th>
-                                <th class="durationCell">Starting date</th>
-                                <th class="bidCell">Bid</th>
-                                <th class="joinCell"></th>
-                            </tr>
-                            <tr>
-                                <th colspan="4" id="tabTournamentsSpinner"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></th>
-                            </tr>
-                            </thead>
-                            <tbody class="table-body-tournaments" id="tabTournamentsBody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid tournamentsPageContainer">
         <div class="row">
-            <div class="col-md-6 col-sm-12 text-light tournamentExplain">
-                <div class="rulesBox">
-                    <h3>Rules</h3>
-                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p><p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+            <div class="col-md-5 col-sm-8 col-xs-12 panelTournamentsCol">
+                    <div class="tournamentsListPanel">
+                        <div class="headerTournamentsList">
+                            <h4 class="titleHeaderTournamentsList">Select a tournament</h4>
+                        </div>
+                        <div class="table table-responsive divTableTournaments">
+                            <table class="table-tournaments table-striped table-dark table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="countdownCell">Countdown</th>
+                                    <th class="endingDateCell">Ending date</th>
+                                    <th class="partyCell">Party</th>
+                                    <th class="entryBudCell">Entry bid</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" id="tabTournamentsSpinner">
+                                        <div class="lds-roller">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-body-tournaments" id="tabTournamentsBody">
+                                </tbody>
+                            </table>
+                         </div>
+                    </div>
+                    <!-- ICI AJOUTER LES AUTRES HEADERS EN VISIBILITY:NONE  -->
+                <div class="tournamentsActionPanel">
+                    <div class="headerTournamentsActionPanel">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-4 btnTournamentsHeader" id="colPrizeHeader">
+                                    <p>Prize/Rules</p>
+                                </div>
+                                <div class="col-4 btnTournamentsHeader" id="colTradeHeader">
+                                    <p>Trade</p>
+                                </div>
+                                <div class="col-4 btnTournamentsHeader" id="colRankHeader">
+                                    <p>Ranking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rulesTournamentsActionPanel">
+                        <p>RULES AND PRIZE</p>
+                    </div>
+                    <div class="tradeTournamentsActionPanel">
+                        <p>TRADE</p>
+                    </div>
+                    <div class="rankTournamentsActionPanel">
+                        <p>RANKING</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12 text-light tournamentExplain">
-                <div class="priceBox">
-                    <h3>Price pool</h3>
-                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p><p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+            <div class="col-md-7 col-sm-4 col-xs-12 graphTournamentsCol">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="row justify-content-center">
+                        <div id="tradingview_tournament" class="graph col-sm-12 col-md-12 col-lg-12 pb-8"></div>
+                        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/"
+                                                                     rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
+                            by TradingView
+                        </div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                        <script type="text/javascript">
+                            new TradingView.widget(
+                                {
+                                    "autosize": true,
+                                    "symbol": "BITSTAMP:BTCUSD",
+                                    "interval": "30",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "Dark",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "toolbar_bg": "#253e52",
+                                    // "toolbar_bg": "#f1f3f6",
+                                    "enable_publishing": false,
+                                    "allow_symbol_change": true,
+                                    "container_id": "tradingview_tournament"
+                                }
+                            );
+                        </script>
+                    </div>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+        </div>
+    </div>
+<!--    <div class="container-fluid tournamentsContainer">-->
+<!--        <div class="confirmDiv">-->
+<!--            <h3>Confirmation</h3>-->
+<!--            <p>Are you sure to take part in this competition ?</p>-->
+<!--            <p class="align-right">Once registered, you won't be able to back out.</br>The bid amount will be credited-->
+<!--                from your account at the beginning of the tournament.</p></br>-->
+<!--            <div class="container containerButtonPopUp">-->
+<!--                <div class="row containerButtonRow">-->
+<!--                    <div class="col-6 containerButtonCol">-->
+<!--                        <button class="btn btn-danger" id="btnCancelPopUp">Cancel</button>-->
+<!--                    </div>-->
+<!--                    <div class="col-6 containerButtonCol">-->
+<!--                        <button class="btn btn-success" id="btnConfirmPopUp">Confirm</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row tabTournamentsRow">-->
+<!--            <div class="col-12">-->
+<!--                <div class="tournamentsBox bg-dark">-->
+<!--                    <h1 class="tournamentsTitle">Tournaments <a href="/" id="refreshTabTournamentsA"><img-->
+<!--                            src="images/refreshW32.png" id="refreshTabTournaments"></a></h1>-->
+<!--                    &lt;!&ndash;                    <hr class="my-4 separator separatorTournament">&ndash;&gt;-->
+<!--                    <div class="table table-responsive divTableTournaments">-->
+<!--                        <table class="table-tournaments table-striped table-dark table-hover">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th class="partyCell">Party</th>-->
+<!--                                <th class="durationCell">Starting date</th>-->
+<!--                                <th class="bidCell">Bid</th>-->
+<!--                                <th class="joinCell"></th>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th colspan="4" id="tabTournamentsSpinner">-->
+<!--                                    <div class="lds-roller">-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                        <div></div>-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody class="table-body-tournaments" id="tabTournamentsBody">-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 col-sm-12 text-light tournamentExplain">-->
+<!--                <div class="rulesBox">-->
+<!--                    <h3>Rules</h3>-->
+<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
+<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
+<!--                        ipsum </p>-->
+<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
+<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
+<!--                        ipsum </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 col-sm-12 text-light tournamentExplain">-->
+<!--                <div class="priceBox">-->
+<!--                    <h3>Price pool</h3>-->
+<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
+<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
+<!--                        ipsum </p>-->
+<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
+<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
+<!--                        ipsum </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+<!-- ################################################## PLAYING PAGE ################################################## -->
+<div class="playingPage">
+    <h1>TIME TO PLAY BITCHES</h1>
+</div>
+<!-- ################################################## ADMIN PAGE ################################################## -->
+<div class="adminPage">
+    <div class="container-fluid containerAdmin">
+        <div class="row rowAdmin">
+            <div class="col-lg-3 col-md-4 col-sm-12 adminCol adminNewCol">
+                <div class="card cardNewTournament">
+                    <div class="card-title card-title-admin"><h4 id="newTournamentTitle">New tournament</h4></div>
+                    <div class="card-body cardBodyNewTournament">
+                        <form>
+                            <div class="form-group">
+                                <label for="startingDateInput">Starting date: </label>
+                                <input type="datetime-local" class="form-control form-text newTournamentInput" id="startingDateInput">
+                            </div>
+                            <div class="form-group">
+                                <label for="durationInput">Duration: </label>
+                                <input type="time" class="form-control form-text newTournamentInput" id="durationInput">
+                            </div>
+                            <div class="form-group">
+                                <label for="minPlayersInput">Min. players:</label>
+                                <input type="number" class="form-control form-text newTournamentInput" id="minPlayersInput">
+                            </div>
+                            <div class="form-group">
+                                <label for="bidInput">Entry bid:</label>
+                                <input type="number" class="form-control form-text newTournamentInput" id="bidInput">
+                            </div>
+                            <div class="form-group">
+                                <label for="playingSumInput">Playing sum:</label>
+                                <input type="number" class="form-control form-text newTournamentInput" id="playingSumInput">
+                            </div>
+                            <div class="form-group">
+                                <label for="selectDistribution">Prize distribution:</label>
+                                <select class=" custom-select selectDistribution" id="selectDistribution">
+
+                                </select>
+                            </div>
+                            <button class="btn text-center btnCreateTournament" id="btnCreateTournament">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-12 adminCol adminTableCol">
+                <div class="table table-responsive divTableAdmin">
+                    <table class="table-tournaments tableAdmin table-striped table-dark table-hover">
+                        <thead>
+                        <tr>
+                            <th class="partyCell">Party</th>
+                            <th class="startingCell">Starting date</th>
+                            <th class="durationCell">Duration</th>
+                            <th class="minPlayersCell">Min. players</th>
+                            <th class="entryBidCell">Entry bid</th>
+                            <th class="playingSumCell">Playing sum</th>
+                            <th class="prizeDistributionCell">Prize distribution</th>
+                            <th class="deleteCell"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" id="tabAdminSpinner">
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body-tournaments" id="tabAdminBody">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -188,7 +395,8 @@
                                 <label class="custom-control-label" for="customCheck1">Remember password</label>
                             </div>
                             <button class="btn btnLogIn btn-lg btn-primary btn-block text-uppercase" name="submit"
-                                    id="submitLogin" value="Sign in">Sign in</button>
+                                    id="submitLogin" value="Sign in">Sign in
+                            </button>
                             <hr class="my-4 separator separatorLogin">
                             <div class="mt-2 mb-3">
                                 Don't have an account ? <a href="" id="registerLink">Click here !</a>
@@ -207,7 +415,8 @@
                                 <label for="usernameRegister" id="usernameRegisterLabel">Username</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="password" id="passwordRegister" name="passwordRegister" class="form-control"
+                                <input type="password" id="passwordRegister" name="passwordRegister"
+                                       class="form-control"
                                        placeholder="Password"
                                        required>
                                 <label for="passwordRegister" id="passwordRegisterLabel">Password</label>

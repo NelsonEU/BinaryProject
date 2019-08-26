@@ -1,11 +1,10 @@
 package ihm;
 
+import biz.dto.IDistributionDto;
 import biz.dto.ITournamentDto;
 import biz.dto.IUserDto;
-import biz.ucc.ITournamentUcc;
-import biz.ucc.IUserUcc;
-import biz.ucc.TournamentUcc;
-import biz.ucc.UserUcc;
+import biz.impl.Tournament;
+import biz.ucc.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import com.auth0.jwt.JWTSigner;
+import com.google.gson.Gson;
 import com.owlike.genson.Genson;
+import com.owlike.genson.GensonBuilder;
 import exceptions.BizException;
 import exceptions.FatalException;
 
@@ -32,18 +32,20 @@ public class Dispatcher {
     private Genson genson;
     private String jwtSecret;
     private ITournamentUcc tournamentUcc;
+    private IDistributionUcc distributionUcc;
 
     public Dispatcher() {
         this.userUcc = new UserUcc();
         this.tournamentUcc = new TournamentUcc();
-//        this.genson = new GensonBuilder().useConstructorWithArguments(true).withBundle(new JavaDateTimeBundle()).create();
-        this.genson = new Genson();
+        this.distributionUcc = new DistributionUcc();
+//        this.genson = new Genson();
+        // lets also enable runtime type usage
+        this.genson = new GensonBuilder().useRuntimeType(true).create();
         this.jwtSecret = "fsdfgjkladhsf";
     }
 
     public void operer(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");
-//        String userJson = req.getParameter("email");
         HttpSession session = null;
         String signature = null;
         try {
@@ -53,11 +55,7 @@ public class Dispatcher {
             }
             switch (action) {
                 case "isConnected":
-                    if(userConnected(req, resp)){
-                        sendResponse(resp, "Connected", 200);
-                    }else{
-                        sendResponse(resp, "Not connected", 402);
-                    }
+                    isConnected(resp);
                     break;
                 case "login":
                     login(req, resp, session);
@@ -71,12 +69,29 @@ public class Dispatcher {
                 case "getTournaments":
                     getTournaments(req, resp, session);
                     break;
+                case "getWeeklyTournaments":
+                    getWeeklyTournaments(req,resp,session);
+                    break;
+                case "getDistributions":
+                    getDistributions(req,resp,session);
+                    break;
                 default:
-                    if(userConnected(req,resp)){
+                    if(userConnected()){
                         switch(action){
                             case "registerTournament":
                                 registerTournament(req, resp);
                                 break;
+                            default:
+                                if(adminConnected()){
+                                    switch (action){
+                                        case "addTournament":
+                                            createTournament(req, resp);
+                                            break;
+                                        case "deleteTournament":
+                                            deleteTournament(req,resp);
+                                            break;
+                                    }
+                                }
                         }
                     }else {
                         sendResponse(resp, "Unauthorized", 401);
@@ -86,6 +101,9 @@ public class Dispatcher {
         } catch (IOException exception) {
 //            logger.info("Exception lancée lors de l'appel de la methode: operer : "
 //                    + exception.getMessage() + "-----");
+            System.out.println("EXCEPTION: " + exception.getMessage());
+            exception.printStackTrace();
+            System.out.println(exception.getLocalizedMessage());
             sendResponse(resp, exception.getMessage(), 002);
         } catch (IllegalStateException exception) {
 //            logger.info("Exception lancée lors de l'appel de la methode: operer : "
@@ -100,6 +118,27 @@ public class Dispatcher {
         }
     }
 
+    private void isConnected(HttpServletResponse resp) throws IOException {
+        if(userConnected()){
+            IUserDto userResponse = this.user;
+            userResponse.setSalt("");
+            userResponse.setPassword("");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getOutputStream().print(this.genson.serialize(userResponse));
+            resp.setStatus(200);
+        }else{
+            sendResponse(resp, "Not connected", 402);
+        }
+    }
+
+    private boolean userConnected() {
+        return this.user != null;
+    }
+
+    private boolean adminConnected() {
+        return this.user.isAdmin();
+    }
+
     private void registerTournament(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int userId = this.user.getUserId();
         int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
@@ -112,20 +151,65 @@ public class Dispatcher {
 
     }
 
-    private boolean userConnected(HttpServletRequest req, HttpServletResponse resp) {
-        return this.user != null;
+    private void createTournament(HttpServletRequest req, HttpServletResponse resp) {
+        String jsonText = req.getParameter("tournament");
+        ITournamentDto tournamentDto = genson.deserialize(jsonText, Tournament.class);
+        try {
+            this.tournamentUcc.addTournament(tournamentDto);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }catch(FatalException e){
+            System.out.println("ERREUR: " + e.getMessage());
+            resp.setStatus(500);
+        }
+    }
+
+    private void deleteTournament(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            this.tournamentUcc.deleteTournament(req.getParameter("id"));
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }
+        catch(FatalException e){
+            System.out.println("ERREUR: " + e.getMessage());
+            resp.setStatus(404);
+        }
+    }
+
+    private void getWeeklyTournaments(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
+        List<ITournamentDto> list = new ArrayList<>();
+        if(this.user != null) {
+            list = this.tournamentUcc.getWeeklyTournaments(this.user.getUserId());
+        }else{
+            list = this.tournamentUcc.getWeeklyTournaments(-1);
+        }
+        resp.setCharacterEncoding("UTF-8");
+        resp.getOutputStream().print(this.genson.serialize(list));
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     private void getTournaments(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws InterruptedException, IOException {
         List<ITournamentDto> list = new ArrayList<>();
         if(this.user != null) {
+//            list = this.tournamentUcc.getWeeklyTournaments(this.user.getUserId());
             list = this.tournamentUcc.get24hTournaments(this.user.getUserId());
         }else{
+//            list = this.tournamentUcc.getWeeklyTournaments(-1);
             list = this.tournamentUcc.get24hTournaments(-1);
         }
         resp.setCharacterEncoding("UTF-8");
         resp.getOutputStream().print(this.genson.serialize(list));
         resp.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    private void getDistributions(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
+        List<IDistributionDto> tabDistributions = this.distributionUcc.getDistributions();
+        if(tabDistributions != null){
+            resp.setContentType("application/json;charset=UTF-8");
+            String json = new Gson().toJson(tabDistributions);
+            resp.getOutputStream().print(json);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }else{
+            resp.setStatus(404);
+        }
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
@@ -181,14 +265,9 @@ public class Dispatcher {
             String password = req.getParameter("password");
             this.user = this.userUcc.login(email, password);
             if (this.user != null) {
-                System.out.println(this.user);
-                System.out.println(this.genson.serialize(this.user));
-                System.out.println("ON EST USER NOT NULL");
                 this.encodeJwt(req, resp, session);
-//                resp.getOutputStream().print(this.genson.serialize(this.user));
                 resp.flushBuffer();
             } else {
-                System.out.println("ON EST USER NULL");
                 sendResponse(resp,
                         "BizException : Probleme", 400);
             }

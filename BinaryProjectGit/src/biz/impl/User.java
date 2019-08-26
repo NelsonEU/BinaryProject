@@ -15,18 +15,30 @@ public class User implements IUserDto, IUserBiz {
     private String username;
     private double balance;
     private String salt;
+    private boolean admin;
 
     public User(){
 
     }
 
 
-    public User(int userId, String email, String password, String username, double balance){
+    public User(int userId, String email, String password, String username, double balance, boolean admin){
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.username = username;
         this.balance = balance;
+        this.admin = admin;
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    @Override
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Override

@@ -2,18 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3eb34dd-200c-4d50-907f-7021d400b4e1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/joda_time_2_10_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/admin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/playing.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/addIconBlack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/addIconWhite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/ongoingTableImg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/refreshW32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/jquery.timesetter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/playing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/gson-2.8.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/joda-time-2.10.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/dto/IDistributionDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/impl/Distribution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/ucc/DistributionUcc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/biz/ucc/IDistributionUcc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dal/daoImpl/DistributionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dal/daoObject/IDistributionDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BinaryProjectGit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BinaryProjectGit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/tournaments.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/tournaments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/tournaments2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/META-INF/BinaryProjectGit.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/tournaments.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/tournaments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/dto/IUserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/dto/IUserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/impl/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/impl/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoImpl/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoImpl/UserDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Servlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Servlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/properties/prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/bizObject/ITournamentBiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizObject/ITournamentBiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/dto/ITournamentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/dto/ITournamentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/dto/IUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/dto/IUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/impl/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/impl/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/impl/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/impl/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ihm/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Dispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ihm/Servlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Servlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webcontent/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webcontent/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webcontent/login.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,9 +69,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -37,6 +82,7 @@
   <component name="ProjectId" id="1Ors3fKNTXdB9GOeSY8bimnVnRf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -45,20 +91,26 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utility" />
+    <property name="jsx.switch.disabled" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/css" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/css" />
+      <recent name="$PROJECT_DIR$/assets/js" />
+      <recent name="$PROJECT_DIR$/src/utility" />
       <recent name="$PROJECT_DIR$" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/utility" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -112,7 +164,8 @@
       <workItem from="1564746855877" duration="865000" />
       <workItem from="1564748552027" duration="45732000" />
       <workItem from="1564872538350" duration="16972000" />
-      <workItem from="1564923364461" duration="20553000" />
+      <workItem from="1564923364461" duration="36671000" />
+      <workItem from="1566373445530" duration="68156000" />
     </task>
     <servers />
   </component>
@@ -131,16 +184,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/biz/impl/User.java</url>
-          <line>101</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

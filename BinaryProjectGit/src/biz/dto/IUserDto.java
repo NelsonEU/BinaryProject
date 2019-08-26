@@ -1,6 +1,10 @@
 package biz.dto;
 
 public interface IUserDto {
+    boolean isAdmin();
+
+    void setAdmin(boolean admin);
+
     int getUserId();
 
     void setUserId(int userId);

@@ -1,3 +1,16 @@
+$(document).ready(function() {
+//Preloader
+    $(window).on("load", function() {
+        preloaderFadeOutTime = 100;
+        function hidePreloader() {
+            var preloader = $('.spinner-wrapper');
+            preloader.fadeOut(preloaderFadeOutTime);
+        }
+        hidePreloader();
+    });
+});
+
+
 function formToJson(form, inputs) {
 
     var tab = {};

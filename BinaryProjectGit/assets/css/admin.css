@@ -1,0 +1,95 @@
+.adminPage{
+    /*padding-top: 50px;*/
+    height:100%;
+    display: none;
+}
+
+.containerAdmin{
+    height: 100%;
+}
+
+
+.rowAdmin{
+    height: 100%;
+}
+
+.iconAdd{
+    background: url("../images/addIconBlack.png");
+}
+
+.adminCol{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.tableAdmin{
+    border-bottom: none;
+    font-size: small;
+    text-align: center;
+}
+
+.adminTableCol{
+    background-color: #141824;
+}
+
+.adminNewCol{
+    font-size: small;
+    position: fixed;
+}
+
+.cardBodyNewTournament{
+    padding-top: 0;
+}
+
+.cardBodyNewTournament form input{
+    width: 100%;
+    height: 30px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.selectDistribution{
+    height: 30px;
+    width: 100%;
+}
+
+
+#newTournamentTitle{
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.btnCreateTournament{
+    width: 100%;
+    background-color: rgb(17, 130, 88);
+    color:whitesmoke;
+}
+
+.divTableAdmin{
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.cardNewTournament{
+    background-color: #141824;
+    color: whitesmoke;
+    border-radius: 0;
+    border-color: #32383e;
+    height: 100%
+}
+
+.containerAdmin{
+    background-color: #141824;
+    border: 1px solid #32383e;
+}
+
+.card-title-admin{
+    padding-top: 8px;
+    text-align: center;
+}
+
+.newTournamentInput{
+    width: 100%;
+    border-radius: 2px;
+}
+

@@ -6,8 +6,9 @@
 *
 *
  */
-var stickySidebar = $('.navbar').height();
+var stickySidebar = $('.navbar').outerHeight();
 $('header').css('margin-bottom',stickySidebar +'px');
+
 
 $.ajax({
    url: '/',
@@ -16,7 +17,12 @@ $.ajax({
        'action': "isConnected"
    } ,
     success : function (response) {
-        isConnected();
+       var user = JSON.parse(response);
+       if(user.admin){
+           console.log("IS CONNECTED: ADMIN");
+           isAdmin();
+       }
+       isConnected();
     },
     error: function(jxqr){
        isNotConnected();
@@ -33,36 +39,10 @@ function isNotConnected(){
     $('.loginLink').append("<a class='nav-link' id='loginLinkHeader' href='/'>Sign in</a>");
 }
 
-
-/*
-*
-*
-* TOURNAMENTS ARRAY FEEDING
-*
-*
- */
-
-function feedTournamentsTab(response){
-    var tbody = $('#tabTournamentsBody');
-    tbody.empty();
-    var tournaments = JSON.parse(response);
-    tournaments.forEach(function(key, index){
-        var tournament = tournaments[index];
-        var line = " <tr>" +
-            "<td class=\"partyCell\"><p>" + tournament.party.length + "</p></td>" +
-            "<td class=\"startingCell\"><p>" + tournament.startingDate + "</p></td>" +
-            "<td class=\"bidCell\"><p>" + tournament.bid + "</p></td>" +
-            "<td class=\"joinCell\">";
-        if(tournament.registered === true){
-            line += "<img class='checkedTableImg' src='images/checked.png'></td></tr>";
-        }else{
-            line += "<button class='joinButton btn' id='" + tournament.tournamentId + "'>Join</button></td></tr>";
-        }
-        tbody.append(line);
-    });
-    $('#tabTournamentsSpinner').hide();
-    $('#tabTournamentsBody').show();
+function isAdmin(){
+    $('.adminLiHeader').css('display','block');
 }
+
 
 
 /*
@@ -91,10 +71,15 @@ $( '.loginLink' ).on( 'click', 'a', function (e) {
 });
 
 function goLogin(e){
-    e.preventDefault();
+    if(e != null) {
+        e.preventDefault();
+    }
     $('.landingPage').css('display','none');
+    $('.playingPage').css('display','none');
     $('.tournamentsPage').css('display', 'none');
     $('.login-page').css('display', 'block');
+    $('.adminPage').css('display', 'none');
+    topFunction();
 }
 
 // LOGOUT
@@ -107,8 +92,38 @@ function signOut(){
             'action': "logout"
         },
         success: function () {
+            window.location.href = "/";
             isNotConnected();
-            goHome(null);
+        }
+    });
+}
+
+//ADMIN PAGE
+$('#adminLinkHeader').on('click', function(e){
+    goAdmin(e);
+});
+
+function goAdmin(e){
+    if(e != null){
+        e.preventDefault();
+    }
+    $('.login-page').css('display', 'none');
+    $('.landingPage').css('display','none');
+    $('.playingPage').css('display','none');
+    $('.tournamentsPage').css('display', 'none');
+    $('.adminPage').css('display', 'block');
+    decaleTab();
+    topFunction();
+    $('#tabAdminBody').hide();
+    $('#tabAdminSpinner').show();
+    $.ajax({
+        url: '/',
+        type: 'POST',
+        data: {
+            'action': "getWeeklyTournaments"
+        },
+        success: function (response) {
+            feedTournamentsAdminTab(response);
         }
     });
 }
@@ -125,7 +140,10 @@ function goTournaments(e){
     }
     $('.login-page').css('display', 'none');
     $('.landingPage').css('display','none');
+    $('.playingPage').css('display','none');
     $('.tournamentsPage').css('display', 'block');
+    $('.adminPage').css('display', 'none');
+    topFunction();
     $('#tabTournamentsBody').hide();
     $('#tabTournamentsSpinner').show();
     $.ajax({
@@ -153,7 +171,16 @@ function goHome(e){
     if(e != null) {
         e.preventDefault();
     }
+    $('.playingPage').css('display','none');
     $('.landingPage').css('display','block');
     $('.tournamentsPage').css('display', 'none');
     $('.login-page').css('display', 'none');
+    $('.adminPage').css('display', 'none');
+    topFunction();
 };
+
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}

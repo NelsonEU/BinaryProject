@@ -47,6 +47,7 @@ public class UserDao implements IUserDao {
                     user.setSalt(rs.getString(4));
                     user.setUsername(rs.getString(5));
                     user.setBalance(rs.getInt(6));
+                    user.setAdmin(rs.getBoolean(7));
 //                    logger.info("Utilisateur trouvé selon son login avec succès.");
                     return user;
                 }

@@ -1,7 +1,5 @@
 package biz.dto;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ITournamentDto {
@@ -45,4 +43,16 @@ public interface ITournamentDto {
     void setRegistered(boolean registered);
 
     boolean isRegistered();
+
+    int getDistribution();
+
+    void setDistribution(int distribution);
+
+    IDistributionDto getDistributionString();
+
+    void setDistributionString(IDistributionDto distributionString);
+
+    int getMinPlayers();
+
+    void setMinPlayers(int minPlayers);
 }

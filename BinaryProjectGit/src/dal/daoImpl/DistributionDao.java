@@ -59,7 +59,6 @@ public class DistributionDao implements IDistributionDao {
         IDistributionDto distribution = bizFactory.getDistributionDto();
         distribution.setId(String.valueOf(rs.getInt(1)));
         String distributionJson = rs.getString(2);
-        System.out.println("JSONJSON: " + distributionJson);
 //        Map<String, Double> map = genson.deserialize(distributionJson, Map.class);
 //        System.out.println("MAPMAP: " + map);
 //        distribution.setDistribution(map);

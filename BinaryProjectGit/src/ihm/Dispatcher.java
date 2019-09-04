@@ -81,6 +81,9 @@ public class Dispatcher {
                             case "registerTournament":
                                 registerTournament(req, resp);
                                 break;
+                            case "newTrade":
+                                newTrade(req,resp);
+                                break;
                             default:
                                 if(adminConnected()){
                                     switch (action){
@@ -151,6 +154,11 @@ public class Dispatcher {
 
     }
 
+    private void newTrade(HttpServletRequest req, HttpServletResponse resp) {
+        String jsonText = req.getParameter("data");
+        System.out.println("TRADE DATA: " + jsonText);
+    }
+
     private void createTournament(HttpServletRequest req, HttpServletResponse resp) {
         String jsonText = req.getParameter("tournament");
         ITournamentDto tournamentDto = genson.deserialize(jsonText, Tournament.class);
@@ -215,7 +223,6 @@ public class Dispatcher {
     private void logout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 
         session = req.getSession(false);
-
         if (session != null) {
             // Supression du JSESSIONID (automatique si le client quitte le
             // navigateur).
@@ -229,6 +236,9 @@ public class Dispatcher {
             resp.setStatus(HttpServletResponse.SC_OK);
             System.out.println("Tranquille");
 //            logger.info("logout : utilisateur déconnecté.");
+        }else{
+            this.user = null;
+            resp.setStatus(HttpServletResponse.SC_OK);
         }
     }
 

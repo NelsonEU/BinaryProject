@@ -6,8 +6,15 @@
 *
 *
  */
-var stickySidebar = $('.navbar').outerHeight();
-$('header').css('margin-bottom',stickySidebar +'px');
+
+function replaceNavbar(){
+    var stickySidebar = $('.navbar').outerHeight();
+    $('header').css('margin-bottom',stickySidebar +'px');
+}
+
+window.onresize = function(e){
+    // replaceNavbar();
+};
 
 
 $.ajax({
@@ -19,7 +26,6 @@ $.ajax({
     success : function (response) {
        var user = JSON.parse(response);
        if(user.admin){
-           console.log("IS CONNECTED: ADMIN");
            isAdmin();
        }
        isConnected();
@@ -92,8 +98,9 @@ function signOut(){
             'action': "logout"
         },
         success: function () {
-            window.location.href = "/";
-            isNotConnected();
+            // window.location.href = "/";
+            location.reload(true);
+            // isNotConnected();
         }
     });
 }

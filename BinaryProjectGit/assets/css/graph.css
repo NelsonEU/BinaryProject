@@ -10,25 +10,25 @@
 
 .graph{
 	width: 900px;
-    height:550px;
+    height:490px;
 }
 @media screen and (max-width: 992px) {
   .graph {
     width: 800px;
-    height:452px;
+    height:392px;
   }
 }
 @media screen and (max-width: 800px) {
   .graph {
     width: 700px;
-    height: 395px;
+    height: 335px;
   }
 }
 
 @media screen and (max-width: 700px) {
   .graph {
     width: 600px;
-    height: 339px;
+    height: 279px;
   }
 }
 

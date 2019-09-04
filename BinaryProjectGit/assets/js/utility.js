@@ -1,7 +1,8 @@
 $(document).ready(function() {
 //Preloader
     $(window).on("load", function() {
-        preloaderFadeOutTime = 100;
+        replaceNavbar();
+        preloaderFadeOutTime = 200;
         function hidePreloader() {
             var preloader = $('.spinner-wrapper');
             preloader.fadeOut(preloaderFadeOutTime);

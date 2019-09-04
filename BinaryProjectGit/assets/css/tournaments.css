@@ -1,8 +1,17 @@
 .tournamentsPage{
     min-width: 100%;
-    min-height:100%;
+    height:100%;
     display: none;
     position: fixed;
+    border-top: 0.5px solid #4c525e;
+}
+
+.tournamentsPageContainer{
+    height: 100%;
+}
+
+.rowPageContainer{
+    height: 80%;
 }
 
 @media screen and (max-width: 992px) {
@@ -33,18 +42,34 @@
     text-align: center;
     color: whitesmoke;
     background-color: #141824;
-    height:75px;
-    padding-top: 20px;
+    height:50px;
+    padding-top: 14px;
     font-size: medium;
 }
 
 .headerTournamentsActionPanel{
     text-align: center;
     color: whitesmoke;
-    height:75px;
+    height:50px;
     font-size: medium;
     background-color: white;
     cursor: pointer;
+}
+
+.linkAllTournaments{
+    font-size: 16px;
+    color: whitesmoke;
+    text-align: left;
+    margin-top: 1.5%;
+    margin-left: 2%;
+    /*text-decoration: underline;*/
+    cursor: pointer;
+}
+
+.goBackArrow{
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
 }
 
 .headerTournamentsActionPanel > .container-fluid {
@@ -56,39 +81,38 @@
 }
 
 .btnTournamentsHeader{
-    padding-top: 20px;
+    padding-top: 14px;
     width: 100%;
     height: 100%;
 }
 
 #colPrizeHeader{
-    border-top: 0.5px solid #4c525e;
-    border-left: 0.5px solid #4c525e;
     border-bottom: 0.5px solid #4c525e;
-    border-right: 0.25px solid #4c525e;
-    border-collapse: collapse;
 }
 
 #colTradeHeader{
-    border-top: 0.5px solid #4c525e;
     border-left: 0.25px solid #4c525e;
     border-bottom: 0.5px solid #4c525e;
     border-right: 0.25px solid #4c525e;
-    border-collapse: collapse;
 }
 
 #colRankHeader{
-    border-top: 0.5px solid #4c525e;
-    border-left: 0.25px solid #4c525e;
     border-bottom: 0.5px solid #4c525e;
-    border-right: 0.5px solid #4c525e;
-    border-collapse: collapse;
+}
+
+.containerTrade{
+    height: 100%;
 }
 
 .tournamentsActionPanel{
     height:100%;
     background-color: #141824;
+    color:whitesmoke;
     display:none;
+}
+
+.tradeTournamentsActionPanel{
+    height: 80%;
 }
 
 .tournamentsListPanel{
@@ -140,6 +164,200 @@
     width: 100%;
 }
 
+.cardParametersTrade{
+    /*background-color: whitesmoke;*/
+    /*background-color: rgba(20,24,36,0.95) !important;*/
+    background-color: #202a33;
+    color: whitesmoke;
+    border: 0.5px solid #4c525e;
+    text-align: left;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 60%;
+    margin-top: 15%;
+    margin-bottom: 25%;
+}
+
+.cardBodyParametersTrade{
+    padding: 0;
+    margin-right: 0;
+    border-bottom: 0.4px solid #4c525e;
+}
+
+.cardBodyParametersTrade h4{
+    margin-top: 12%;
+    font-size: large;
+    padding-left: 6%;
+}
+
+.cardFooterParametersTrade{
+    padding: 0;
+}
+
+.cardTitleParametersTrade{
+    margin-bottom: 4%;
+}
+
+.divPicAndTime{
+    font-size: 14px;
+    height: 40%;
+}
+
+.divPicAndAmount{
+    font-size: 14px;
+    height: 40%;
+}
+
+.imgTimeTrade{
+    width: 15px;
+    height: 15px;
+    margin-left: 6%;
+    vertical-align: middle;
+}
+
+.imgAmountTrade{
+    width: 19px;
+    height: 19px;
+    margin-left: 6%;
+    vertical-align: middle;
+}
+
+.rowTimeButtons, .rowAmountButtons{
+    height: 35%;
+    font-size: 22px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.colTimeButtonPlus, .colAmountButtonPlus{
+    border-right: 0.4px solid #4c525e;
+}
+
+.colTradeTime{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.colTradeAmount{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+.colTradeUp{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.colTradeDown{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.newTradeInput{
+    width: 40%;
+    background: transparent;
+    border: none;
+    margin-left: 3%;
+    color: whitesmoke;
+}
+
+.newTradeInput:focus{
+    /*border-radius: 50%;*/
+}
+
+.rowTradeParameters{
+    height: 50%;
+}
+
+.rowTradeMoves{
+    height: 50%;
+}
+
+.cardMovesTrade{
+    cursor: pointer;
+    height: 60%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.3);
+    /*border: 0.5px solid #4c525e;*/
+}
+
+
+.cardMovesUp{
+    background-color: rgb(17, 130, 88);
+    color: whitesmoke;
+}
+
+.cardMovesUp:hover{
+    background-color: rgb(14, 117, 79);
+}
+
+.cardMovesDown{
+    background-color: darkred;
+    color: whitesmoke;
+    /*border: 0.5px solid #ad1818;*/
+}
+
+.cardMovesDown:hover{
+    background-color: rgb(120,0,0);
+}
+
+.cardTitleMovesTrade{
+    font-size: x-large;
+}
+
+
+.selectSymbol{
+    margin-bottom: 8px;
+    background-color: #202a33;
+    color: whitesmoke;
+}
+
+#symbolInput{
+    background-color: #202a33;
+    color: whitesmoke;
+    height: 24px;
+    font-size: small;
+}
+
+.listSymbols{
+    list-style-type: none;
+    padding: 2px 2px 2px 8px;
+    font-size: 16px;
+}
+
+.lineListSymbols{
+    cursor:pointer;
+    border-top: 0.25px solid #4c525e;
+}
+
+
+/*
+
+ABOUT TRADE CSS
+
+*/
+.containerListAbout{
+    text-align: left;
+}
+
+.btnAbout{
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+#imgCheckedAbout{
+    width: 75px;
+    height: 75px;
+}
+
+#pRegisteredAbout{
+    margin-top: 4px;
+    color:#6ac159;
+}
 
 
 

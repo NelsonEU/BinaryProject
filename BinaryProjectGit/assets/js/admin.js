@@ -10,18 +10,9 @@ function feedTournamentsAdminTab(response){
     var tbody = $('#tabAdminBody');
     tbody.empty();
     var tournaments = JSON.parse(response);
-    console.log(tournaments);
     tournaments.forEach(function(key, index){
         var tournament = tournaments[index];
-        var textDistribution = tournament.distributionString['distribution'];
-
-        textDistribution = textDistribution.replace(/"/g, "");
-        textDistribution = textDistribution.replace(/\\/g, "");
-        textDistribution = textDistribution.replace("{", "");
-        textDistribution = textDistribution.replace("}", "");
-        textDistribution = textDistribution.replace(/,/g, "% - ");
-        textDistribution = textDistribution.replace(/:/g, ": ");
-        textDistribution += "%"
+        var textDistribution = getDistributionString(tournament.distributionString);
         var line = " <tr>" +
             "<td class=\"partyCell\"><p>" + tournament.party.length + "</p></td>" +
             "<td class=\"startingCell\"><p>" + tournament.startingDate + "</p></td>" +
@@ -45,17 +36,9 @@ function feedTournamentsAdminTab(response){
 *
  */
 function getDistributionsSuccess(response) {
-    console.log("RESPONSE: " + response + " LENGTH: " + response.length);
     for(var i = 0; i < response.length; i++){
         var id = response[i]['id'];
-        var text = JSON.stringify(response[i]['distribution']);
-        text = text.replace(/"/g, "");
-        text = text.replace(/\\/g, "");
-        text = text.replace("{", "");
-        text = text.replace("}", "");
-        text = text.replace(/,/g, "% - ");
-        text = text.replace(/:/g, ": ");
-        text += "%"
+        var text = getDistributionString(response[i]);
 
         $('.selectDistribution').append($('<option>', {
             value: id,

@@ -110,7 +110,7 @@
 <!-- ################################################## TOURNAMENTS PAGE ################################################## -->
 <div class="tournamentsPage">
     <div class="container-fluid tournamentsPageContainer">
-        <div class="row">
+        <div class="row rowPageContainer">
             <div class="col-md-5 col-sm-8 col-xs-12 panelTournamentsCol">
                     <div class="tournamentsListPanel">
                         <div class="headerTournamentsList">
@@ -151,7 +151,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-4 btnTournamentsHeader" id="colPrizeHeader">
-                                    <p>Prize/Rules</p>
+                                    <p>About</p>
                                 </div>
                                 <div class="col-4 btnTournamentsHeader" id="colTradeHeader">
                                     <p>Trade</p>
@@ -162,11 +162,73 @@
                             </div>
                         </div>
                     </div>
+                    <div class="linkAllTournaments"><img src="images/arrowWhite30.png" class="goBackArrow">All tournaments</div>
                     <div class="rulesTournamentsActionPanel">
-                        <p>RULES AND PRIZE</p>
+                        <div class="container containerButtonAbout">
+
+                        </div>
+                        <div class="container containerListAbout">
+                            <p id="prizePoolAbout"></p>
+                            <p id="distributionAbout"></p>
+                            <p id="minPlayersAbout"></p>
+                            <p id="startingDateAbout"></p>
+                            <p id="durationAbout"></p>
+                            <p id="endingDate"></p>
+                        </div>
                     </div>
                     <div class="tradeTournamentsActionPanel">
-                        <p>TRADE</p>
+                        <div class="container containerTrade">
+                            <div class="row rowTradeParameters">
+                                <div class="col-6 colTradeTime">
+                                    <div class="card cardParametersTrade">
+                                        <div class="card-body cardBodyParametersTrade">
+                                            <h4 class="card-title cardTitleParametersTrade">Time</h4>
+                                            <div class="divPicAndTime">
+                                                <label for="tradeDurationInput" class="col-2"><img class="imgTimeTrade" src="images/whiteClock.png"></label><input type="text" class="input-element newTradeInput" id="tradeDurationInput" name="tradeDurationInput" placeholder="HH:MM">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer cardFooterParametersTrade">
+                                            <div class="container-fluid containerTimeButtons">
+                                                <div class="row rowTimeButtons">
+                                                    <div class="col-6 colTimeButtonPlus">+</div>
+                                                    <div class="col-6 colTimeButtonLess">-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 colTradeAmount">
+                                    <div class="card cardParametersTrade">
+                                        <div class="card-body cardBodyParametersTrade">
+                                            <h4 class="card-title cardTitleParametersTrade">Amount</h4>
+                                            <div class="divPicAndAmount">
+                                                <label for="tradeAmountInput" class="col-2"><img src="images/whiteDollar.png" class="imgAmountTrade"></label><input type="text" class="newTradeInput" id="tradeAmountInput" name="tradeAmountInput" placeholder="50">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer cardFooterParametersTrade">
+                                            <div class="container-fluid containerAmountButtons">
+                                                <div class="row rowAmountButtons">
+                                                    <div class="col-6 colAmountButtonPlus">+</div>
+                                                    <div class="col-6 colAmountButtonLess">-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row rowTradeMoves">
+                                <div class="col-6 colTradeUp">
+                                    <div class="card cardMovesTrade cardMovesUp" id="cardMovesUp">
+                                            <h2 class="card-title cardTitleMovesTrade cardTitleMovesUp">Up</h2>
+                                    </div>
+                                </div>
+                                <div class="col-6 colTradeDown">
+                                    <div class="card cardMovesTrade cardMovesDown" id="cardMovesDown">
+                                        <h2 class="card-title cardTitleMovesTrade cardTitleMovesDown">Down</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="rankTournamentsActionPanel">
                         <p>RANKING</p>
@@ -174,6 +236,9 @@
                 </div>
             </div>
             <div class="col-md-7 col-sm-4 col-xs-12 graphTournamentsCol">
+                <div class="selectSymbol">
+                    <input type="text" class="form-control" id="symbolInput" onkeyup="keyUpSymbolInput()" value="FX:EURGBP">
+                </div>
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                     <div class="row justify-content-center">
@@ -182,25 +247,25 @@
                                                                      rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
                             by TradingView
                         </div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                        <script type="text/javascript">
-                            new TradingView.widget(
-                                {
-                                    "autosize": true,
-                                    "symbol": "BITSTAMP:BTCUSD",
-                                    "interval": "30",
-                                    "timezone": "Etc/UTC",
-                                    "theme": "Dark",
-                                    "style": "1",
-                                    "locale": "en",
-                                    "toolbar_bg": "#253e52",
-                                    // "toolbar_bg": "#f1f3f6",
-                                    "enable_publishing": false,
-                                    "allow_symbol_change": true,
-                                    "container_id": "tradingview_tournament"
-                                }
-                            );
-                        </script>
+<!--                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>-->
+<!--                        <script type="text/javascript">-->
+<!--                            new TradingView.widget(-->
+<!--                                {-->
+<!--                                    "autosize": true,-->
+<!--                                    "symbol": "BITSTAMP:BTCUSD",-->
+<!--                                    "interval": "30",-->
+<!--                                    "timezone": "Etc/UTC",-->
+<!--                                    "theme": "Dark",-->
+<!--                                    "style": "1",-->
+<!--                                    "locale": "en",-->
+<!--                                    "toolbar_bg": "#253e52",-->
+<!--                                    // "toolbar_bg": "#f1f3f6",-->
+<!--                                    "enable_publishing": false,-->
+<!--                                    "allow_symbol_change": true,-->
+<!--                                    "container_id": "tradingview_tournament"-->
+<!--                                }-->
+<!--                            );-->
+<!--                        </script>-->
                     </div>
                 </div>
                 <!-- TradingView Widget END -->

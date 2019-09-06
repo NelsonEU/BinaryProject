@@ -41,6 +41,21 @@ public class DalServices implements IDalServices, IBackendDalServices {
     }
 
     @Override
+    public PreparedStatement getPreparedStatementReturningId(String query) throws FatalException {
+        PreparedStatement newPrepareStatement;
+        try {
+            conn = DriverManager.getConnection(this.url, this.username, this.password);
+            newPrepareStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            return newPrepareStatement;
+        } catch (SQLException exception) {
+//            logger.info("Exception lancée lors de l'appel de la methode: getPreparedStatement : "
+//                    + exception.getMessage() + "----" + exception.getErrorCode() + "-----");
+            System.out.println("Erreur getPS");
+            throw new FatalException("Fatal error: " + exception.getMessage());
+        }
+    }
+
+    @Override
     public Array getArrayId(Object[] array) throws FatalException {
         try {
             return this.conn.createArrayOf("INT", array);

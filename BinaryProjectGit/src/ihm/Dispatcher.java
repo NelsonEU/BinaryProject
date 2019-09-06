@@ -33,11 +33,13 @@ public class Dispatcher {
     private String jwtSecret;
     private ITournamentUcc tournamentUcc;
     private IDistributionUcc distributionUcc;
+    private ITradeUcc tradeUcc;
 
     public Dispatcher() {
         this.userUcc = new UserUcc();
         this.tournamentUcc = new TournamentUcc();
         this.distributionUcc = new DistributionUcc();
+        this.tradeUcc = new TradeUcc();
 //        this.genson = new Genson();
         // lets also enable runtime type usage
         this.genson = new GensonBuilder().useRuntimeType(true).create();
@@ -146,7 +148,7 @@ public class Dispatcher {
         int userId = this.user.getUserId();
         int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
         try {
-            this.tournamentUcc.register(userId, tournamentId);
+            this.tournamentUcc.register(userId, tournamentId, Integer.parseInt(req.getParameter("playingSum")));
             resp.setStatus(HttpServletResponse.SC_OK);
         }catch(FatalException e){
             resp.sendError(500, "Something went wrong");
@@ -156,7 +158,7 @@ public class Dispatcher {
 
     private void newTrade(HttpServletRequest req, HttpServletResponse resp) {
         String jsonText = req.getParameter("data");
-        System.out.println("TRADE DATA: " + jsonText);
+        this.tradeUcc.newTrade(jsonText, this.user.getUserId());
     }
 
     private void createTournament(HttpServletRequest req, HttpServletResponse resp) {

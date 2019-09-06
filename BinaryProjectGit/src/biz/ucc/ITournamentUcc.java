@@ -8,7 +8,7 @@ public interface ITournamentUcc {
 
     List<ITournamentDto> getWeeklyTournaments(int userId);
 
-    void register(int userId, int tournamentId);
+    void register(int userId, int tournamentId, double playingSum);
 
     void addTournament(ITournamentDto tournamentDto);
 

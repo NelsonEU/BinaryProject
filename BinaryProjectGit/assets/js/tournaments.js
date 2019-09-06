@@ -192,6 +192,10 @@ $(document).on('click', '.btnTournamentsHeader', function (e) {
 });
 
 function goTrade(tournament) {
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+
     //TODO Faudra bien recuperer la balance de l'utilisateur a un moment
     $('.tournamentsListPanel').css('display', 'none');
     $('.rulesTournamentsActionPanel').css('display', 'none');
@@ -353,7 +357,7 @@ function goRules(tournament) {
 }
 
 function feedAbout(tournament){
-    $('#prizePoolAbout').text("Prize pool: " + tournament["minPlayers"]*tournament["bid"] + " (may grow larger as more people join in)");
+    $('#prizePoolAbout').text("Prize pool: " + 0.8*tournament["minPlayers"]*tournament["bid"] + " (may grow larger as more people join in)");
     $('#distributionAbout').text("Distribution: " + getDistributionString(tournament["distributionString"]));
     $('#minPlayersAbout').text("Min. players required: " + tournament["minPlayers"]);
     $('#startingDateAbout').text("Starts: " + tournament["startingDate"]);
@@ -392,7 +396,8 @@ function onJoinClick(e){
         type: 'POST',
         data: {
             'action': "registerTournament",
-            'tournamentId': tournament["tournamentId"]
+            'tournamentId': tournament["tournamentId"],
+            'playingSum': tournament["playingSum"]
         },
         success: function (response) {
             tournament['registered'] = true;
@@ -554,64 +559,74 @@ $('#symbolInput').on('click', function(){
 
 $(document).on('click', '.cardMovesTrade', function (e) {
     e.preventDefault();
-    var pair = $('#symbolInput').val().split(':')[1];
-    var startingDateTrade = Date.now();
-    var urlPrice = 'https://financialmodelingprep.com/api/v3/forex/' + pair;
-    var strikingPrice;
-    $.ajax({
-        url:urlPrice,
-        dataType:'json',
-        async:false,
-        success: function(data){
-            var bid = data['bid'];
-            var ask = data['ask'];
-            strikingPrice = (parseFloat(bid)+parseFloat(ask))/2;
-        }
-    });
-    var movesId = $(this).attr('id');
-    var move;
-    switch (movesId) {
-        case "cardMovesDown":
-            move = 'd';
-            break;
-        case "cardMovesUp":
-            move = 'u';
-            break;
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+    if(!tournament['registered']){
+        alert("You are not registered to this tournament. Please consult the \"About\" section and click on the \"Join\" button in order to compete in this tournament.");
+    }else if(tournament["state"] !== 'o'){
+        alert("The tournament has not started yet. Please consult the \"About\" section for more information.");
     }
-    var time = $('#tradeDurationInput').val();
-    var amount = $('#tradeAmountInput').val();
-    var tournamentId = $('.tournamentsActionPanel').attr('id').split('-')[1];
-    console.log("Starting_Date: " + startingDateTrade);
-    console.log("Move: " + move);
-    console.log("Time: " + time);
-    console.log("Amount: " + amount);
-    console.log("Tournament_ID: " + tournamentId);
-    console.log("Pair: " + pair);
-    console.log("Striking price: " + strikingPrice);
-    //TODO VERIFIER LES DONNEES FRONTEND
-
-    var jsonText = '{"tradeStartingDate:' + startingDateTrade + ',';
-    jsonText += '"move":' + move + ',';
-    jsonText += '"time":"' + time + '",';
-    jsonText += '"amount":"' + amount + '",';
-    jsonText += '"tournamentID":' + tournamentId + ',';
-    jsonText += '"strikingPirce":' + strikingPrice + ',';
-    jsonText += '"pair":' + pair + '}';
-
-    $.ajax({
-       url:"/",
-       type:"POST",
-       data:{
-           "action":"newTrade",
-           "data": jsonText
-       },
-        success:function(response){
-
-        },
-        error:function(e){
-
+    if(tournament['registered'] && tournament['state'] === 'o') {
+        var pair = $('#symbolInput').val().split(':')[1];
+        var startingDateTrade = Date.now();
+        var urlPrice = 'https://financialmodelingprep.com/api/v3/forex/' + pair;
+        var strikingPrice;
+        $.ajax({
+            url: urlPrice,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                var bid = data['bid'];
+                var ask = data['ask'];
+                strikingPrice = (parseFloat(bid) + parseFloat(ask)) / 2;
+            }
+        });
+        var movesId = $(this).attr('id');
+        var move;
+        switch (movesId) {
+            case "cardMovesDown":
+                move = 'd';
+                break;
+            case "cardMovesUp":
+                move = 'u';
+                break;
         }
-    });
+        var time = $('#tradeDurationInput').val();
+        var amount = $('#tradeAmountInput').val();
+        var tournamentId = $('.tournamentsActionPanel').attr('id').split('-')[1];
+        console.log("Starting_Date: " + startingDateTrade);
+        console.log("Move: " + move);
+        console.log("Time: " + time);
+        console.log("Amount: " + amount);
+        console.log("Tournament_ID: " + tournamentId);
+        console.log("Pair: " + pair);
+        console.log("Striking price: " + strikingPrice);
+        //TODO VERIFIER LES DONNEES FRONTEND
+
+        var jsonText = '{"tradeStartingDate":' + startingDateTrade + ',';
+        jsonText += '"move":' + move + ',';
+        jsonText += '"time":"' + time + '",';
+        jsonText += '"amount":"' + amount + '",';
+        jsonText += '"tournamentID":' + tournament['tournamentId'] + ',';
+        jsonText += '"strikingPrice":' + strikingPrice + ',';
+        jsonText += '"pair":' + pair + '}';
+
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data: {
+                "action": "newTrade",
+                "data": jsonText
+            },
+            success: function (response) {
+
+            },
+            error: function (e) {
+
+            }
+        });
+    }
 
 });
 

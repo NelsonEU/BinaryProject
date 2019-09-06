@@ -8,7 +8,7 @@ import java.util.List;
 public interface ITournamentDao {
     List<ITournamentDto> getIntervalTournaments(String interval);
 
-    void registerUser(int userId, int tournamentId);
+    void registerUser(int userId, int tournamentId, double playingSum);
 
     void addTournament(ITournamentDto tournamentDto);
 

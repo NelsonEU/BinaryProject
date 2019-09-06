@@ -99,10 +99,10 @@ public class TournamentUcc implements ITournamentUcc {
     }
 
     @Override
-    public void register(int userId, int tournamentId) {
+    public void register(int userId, int tournamentId, double playingSum) {
         try{
             this.dalServices.startTransaction();
-            tournamentDao.registerUser(userId, tournamentId);
+            tournamentDao.registerUser(userId, tournamentId, playingSum);
         }catch(FatalException e){
             this.dalServices.rollbackTransaction();
             throw new FatalException(e.getMessage());

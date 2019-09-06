@@ -2,6 +2,7 @@ package biz.bizFactory;
 
 import biz.dto.IDistributionDto;
 import biz.dto.ITournamentDto;
+import biz.dto.ITradeDto;
 import biz.dto.IUserDto;
 import biz.impl.User;
 
@@ -12,4 +13,6 @@ public interface IBizFactory {
     ITournamentDto getTournamentDto();
 
     IDistributionDto getDistributionDto();
+
+    ITradeDto getTradeDto();
 }

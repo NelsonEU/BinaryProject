@@ -17,5 +17,7 @@ public interface IBackendDalServices {
      */
     PreparedStatement getPreparedStatement(String query) throws FatalException;
 
+    PreparedStatement getPreparedStatementReturningId(String query) throws FatalException;
+
     Array getArrayId(Object[] array) throws SQLException;
 }

@@ -228,6 +228,7 @@
     font-size: 22px;
     cursor: pointer;
     text-align: center;
+    user-select: none;
 }
 
 .colTimeButtonPlus, .colAmountButtonPlus{
@@ -276,6 +277,7 @@
 }
 
 .cardMovesTrade{
+    user-select: none;
     cursor: pointer;
     height: 60%;
     width: 80%;

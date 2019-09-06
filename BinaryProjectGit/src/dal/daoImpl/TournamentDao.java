@@ -101,7 +101,7 @@ public class TournamentDao implements ITournamentDao {
     }
 
     @Override
-    public void registerUser(int userId, int tournamentId) {
+    public void registerUser(int userId, int tournamentId, double playingSum) {
         try {
             // Si il n'y pas de user pour ce login, on peut l'inscrire
             PreparedStatement ps =
@@ -109,6 +109,7 @@ public class TournamentDao implements ITournamentDao {
 
             ps.setInt(1, userId);
             ps.setInt(2, tournamentId);
+            ps.setDouble(3, playingSum);
 
             ps.executeUpdate();
 

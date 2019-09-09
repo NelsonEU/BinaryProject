@@ -120,11 +120,12 @@ public class TournamentDao implements ITournamentDao {
     }
 
     @Override
-    public void addTournament(ITournamentDto tournamentDto) {
+    public int addTournament(ITournamentDto tournamentDto) {
+        int tournamentId = -1;
         try {
             // Si il n'y pas de user pour ce login, on peut l'inscrire
             PreparedStatement ps =
-                    dalBackendServices.getPreparedStatement(config.getValueOfKey("addTournament"));
+                    dalBackendServices.getPreparedStatementReturningId(config.getValueOfKey("addTournament"));
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             java.util.Date startDate = format.parse(tournamentDto.getStartingDate());
@@ -134,19 +135,23 @@ public class TournamentDao implements ITournamentDao {
             Time t = new Time(ms);
             ps.setInt(1, tournamentDto.getBid());
             ps.setInt(2, tournamentDto.getPlayingSum());
-//            Date testt = Date.valueOf(tournamentDto.getStartingDate());
             ps.setTimestamp(3, new java.sql.Timestamp(startDate.getTime()));
             ps.setTimestamp(4, new java.sql.Timestamp(endDate.getTime()));
             ps.setTime(5, t);
             ps.setInt(6, tournamentDto.getDistribution());
             ps.setInt(7, tournamentDto.getMinPlayers());
-            System.out.println("QUERY: " + ps.toString());
             ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                tournamentId = rs.getInt(1);
+            }
 
         } catch (SQLException | ParseException exception) {
             System.out.println("Erreur addTournament");
             throw new FatalException("Erreur: " + exception.getMessage());
         }
+        return tournamentId;
     }
 
     @Override
@@ -154,6 +159,17 @@ public class TournamentDao implements ITournamentDao {
         try {
             PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("deleteTournament"));
             ps.setInt(1, Integer.parseInt(id));
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new FatalException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void finishTournament(int tournamentId) {
+        try {
+            PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("finishTournament"));
+            ps.setInt(1, tournamentId);
             ps.executeUpdate();
         }catch(SQLException e){
             throw new FatalException(e.getMessage());

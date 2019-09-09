@@ -3,7 +3,6 @@ package dal.daoImpl;
 import biz.bizFactory.BizFactory;
 import biz.bizFactory.IBizFactory;
 import biz.dto.IUserDto;
-import biz.impl.User;
 import dal.daoObject.IUserDao;
 import dal.services.DalServices;
 import dal.services.IBackendDalServices;
@@ -15,8 +14,6 @@ import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class UserDao implements IUserDao {
 
@@ -68,20 +65,43 @@ public class UserDao implements IUserDao {
             // Si il n'y pas de user pour ce login, on peut l'inscrire
             PreparedStatement ps =
                     dalBackendServices.getPreparedStatement(config.getValueOfKey("insertNewUser"));
-
             ps.setString(1, userDto.getEmail());
             ps.setString(2, userDto.getPassword());
             ps.setString(3, userDto.getSalt());
             ps.setString(4, userDto.getUsername());
-
-            System.out.println(ps.toString());
             ps.executeUpdate();
-
             return userDto;
 
         } catch (SQLException exception) {
             System.out.println("Erreur insertUser");
             throw new FatalException("Erreur insertUser");
+        }
+    }
+
+    @Override
+    public void updateUserBalance(int userId, double balance) {
+        try {
+            PreparedStatement ps =
+                    dalBackendServices.getPreparedStatement(config.getValueOfKey("updateUserBalance"));
+            ps.setDouble(1, balance);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException exception) {
+            throw new FatalException("Erreur update balance: " + exception.getMessage());
+        }
+    }
+
+    @Override
+    public void giveCashPrize(double amountWon, int userId) {
+        try {
+            PreparedStatement ps =
+                    dalBackendServices.getPreparedStatement(config.getValueOfKey("giveCashPrize"));
+            ps.setDouble(1, amountWon);
+            ps.setInt(2, userId);
+            System.out.println("QUERY CASHPRIZE: " + ps.toString());
+            ps.executeUpdate();
+        } catch (SQLException exception) {
+            throw new FatalException("Erreur update balance: " + exception.getMessage());
         }
     }
 }

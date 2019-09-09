@@ -1,6 +1,8 @@
 package biz.ucc;
 
 import biz.dto.ITournamentDto;
+import biz.dto.IUserDto;
+
 import java.util.List;
 
 public interface ITournamentUcc {
@@ -8,7 +10,7 @@ public interface ITournamentUcc {
 
     List<ITournamentDto> getWeeklyTournaments(int userId);
 
-    void register(int userId, int tournamentId, double playingSum);
+    void register(IUserDto user, int tournamentId, double playingSum, double bid);
 
     void addTournament(ITournamentDto tournamentDto);
 

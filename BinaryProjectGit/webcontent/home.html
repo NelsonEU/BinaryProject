@@ -27,7 +27,7 @@
                             <span class="icon-learn m-auto text-primary"></span>
                         </div>
                         <h3>Learn</h3>
-                        <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                        <p class="lead mb-0">The best way to learn is to practice with others !</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -36,7 +36,7 @@
                             <span class="icon-trade m-auto text-primary"></span>
                         </div>
                         <h3>Trade</h3>
-                        <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+                        <p class="lead mb-0">Trade major Forex pairs using Tradingview charts</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -45,7 +45,7 @@
                             <span class="icon-compete m-auto text-primary"></span>
                         </div>
                         <h3>Compete</h3>
-                        <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                        <p class="lead mb-0">Compete against others and win some cash !</p>
                     </div>
                 </div>
             </div>
@@ -62,18 +62,18 @@
     <div class="btcChartDiv">
         <div class="btcChartLegendDiv container">
             <h3>
-                Bitcoin
+                Trade forex
             </h3>
             <p>
-                Evaluate your skills and compete while trading BTCUSD !
+                Evaluate your skills and compete with others while trading major Forex pairs.
             </p>
         </div>
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container pt-4">
             <div class="row justify-content-center">
                 <div id="tradingview_6ae6b" class="graph col-sm-12 col-md-10 col-lg-8"></div>
-                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/"
-                                                             rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
+                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/FX:EURGBP/"
+                                                             rel="noopener" target="_blank"><span class="blue-text">EURGBP Chart</span></a>
                     by TradingView
                 </div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -81,7 +81,7 @@
                     new TradingView.widget(
                         {
                             "autosize": true,
-                            "symbol": "BITSTAMP:BTCUSD",
+                            "symbol": "FX:EURGBP",
                             "interval": "60",
                             "timezone": "Etc/UTC",
                             "theme": "Dark",
@@ -89,7 +89,7 @@
                             "locale": "en",
                             "toolbar_bg": "#f1f3f6",
                             "enable_publishing": false,
-                            "allow_symbol_change": true,
+                            "allow_symbol_change": false,
                             "container_id": "tradingview_6ae6b"
                         }
                     );
@@ -109,6 +109,20 @@
 </div>
 <!-- ################################################## TOURNAMENTS PAGE ################################################## -->
 <div class="tournamentsPage">
+<!--    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">-->
+        <div class="toastTrade toast" style="position: fixed;">
+            <div class="toast-header">
+                <img src="images/smallIcon.png" class="rounded mr-2 smallIconToast" alt="...">
+                <strong class="mr-auto toast-title"></strong>
+                <small>Right now</small>
+                <button type="button" class="ml-2 mb-1 close closeToast" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+<!--    </div>-->
     <div class="container-fluid tournamentsPageContainer">
         <div class="row rowPageContainer">
             <div class="col-md-5 col-sm-8 col-xs-12 panelTournamentsCol">
@@ -165,15 +179,30 @@
                     <div class="linkAllTournaments"><img src="images/arrowWhite30.png" class="goBackArrow">All tournaments</div>
                     <div class="rulesTournamentsActionPanel">
                         <div class="container containerButtonAbout">
-
                         </div>
                         <div class="container containerListAbout">
-                            <p id="prizePoolAbout"></p>
-                            <p id="distributionAbout"></p>
-                            <p id="minPlayersAbout"></p>
-                            <p id="startingDateAbout"></p>
-                            <p id="durationAbout"></p>
-                            <p id="endingDate"></p>
+                            <div class="row">
+                            <div class="card cardPrize">
+                                <div class="card-header cardPrizeHeader">Prize</div>
+                                <div class="card-body cardPrizeBody">
+                                    <div class="intelAbout" id="bidAbout"></div>
+                                    <div class="intelAbout" id="prizePoolAbout"></div>
+                                    <div class="intelAbout" id="distributionAbout"></div>
+                                    <div class="intelAbout" id="playingSumAbout"></div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="card cardRules">
+                                <div class="card-header cardRulesHeader">Rules</div>
+                                <div class="card-body cardRulesBody">
+                                    <div class="intelAbout" id="minPlayersAbout"></div>
+                                    <div class="intelAbout" id="startingDateAbout"></div>
+                                    <div class="intelAbout" id="endingDate"></div>
+                                    <div class="intelAbout" id="durationAbout"></div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tradeTournamentsActionPanel">
@@ -231,7 +260,33 @@
                         </div>
                     </div>
                     <div class="rankTournamentsActionPanel">
-                        <p>RANKING</p>
+                        <div class="table table-responsive divTableRanking">
+                            <table class="table-ranking table-striped table-dark table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="rankCell">Rank</th>
+                                    <th class="usernameCell">Username</th>
+                                    <th class="balanceCell">Balance</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="3" id="tabRankingSpinner">
+                                        <div class="lds-roller">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-body-ranking" id="tabRankingBody">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -352,10 +407,6 @@
 <!--        </div>-->
 <!--    </div>-->
 </div>
-<!-- ################################################## PLAYING PAGE ################################################## -->
-<div class="playingPage">
-    <h1>TIME TO PLAY BITCHES</h1>
-</div>
 <!-- ################################################## ADMIN PAGE ################################################## -->
 <div class="adminPage">
     <div class="container-fluid containerAdmin">
@@ -411,7 +462,7 @@
                             <th class="deleteCell"></th>
                         </tr>
                         <tr>
-                            <th colspan="4" id="tabAdminSpinner">
+                            <th colspan="8" id="tabAdminSpinner">
                                 <div class="lds-roller">
                                     <div></div>
                                     <div></div>

@@ -59,11 +59,11 @@ function feedTournamentsTab(response) {
             playingPartyText = '<p class="registeredParty partyPRegistered">' + tournament.party.length + '/' + tournament.minPlayers + '</p><p class="registeredTextList">registered</p></td>';
         }
 
-        var line = "<tr id='tournamentIndex-" + index + "' class='rowTournamentPanel'>" +
-            "<td class=\"countdownCell\"><p class='countdownP'>" + getTimeToShow(tournament.startingDate) + "</p></td>" +
-            "<td class=\"endingDateCell\"><p class='endingDateP'>" + dateText + "</p></td>" +
-            "<td class=\"partyCell\">" + playingPartyText +
-            "<td class=\"entryBidCell\"><p class='entryBidP'>" + tournament.bid + "</p></td></tr>";
+        var line = '<tr id="tournamentIndex-' + index + '" class="rowTournamentPanel">' +
+            '<td class="countdownCell"><p class="countdownP">' + getTimeToShow(tournament.startingDate, tournament.registered) + '</p></td>' +
+            '<td class="endingDateCell"><p class="endingDateP">' + dateText + '</p></td>' +
+            '<td class="partyCell">' + playingPartyText + '</p></td>' +
+            '<td class="entryBidCell"><p class="entryBidP">' + tournament.bid + '</p></td></tr>';
 
         tbody.append(line);
 
@@ -73,10 +73,15 @@ function feedTournamentsTab(response) {
             line.style.backgroundColor = "#118258";
         }
 
-        var countdown = setInterval(function () {
-            startCountdown(index, tournament.startingDate);
-        }, 1000);
-        countdowns.push(countdown);
+        var startingDate = getDateFromStringAt(tournament.startingDate);
+        if (startingDate > new Date(Date.now())) {
+            var countdown = setInterval(function () {
+                startCountdown(index, tournament.startingDate);
+            }, 1000);
+            countdowns.push(countdown);
+        }else{
+            // $('.countdownP').css('font-size', '10px');
+        }
 
 
     });
@@ -85,17 +90,23 @@ function feedTournamentsTab(response) {
 }
 
 function startCountdown(index, startingDate) {
+
     var timeToShow = getTimeToShow(startingDate);
     var lines = $('.rowTournamentPanel');
     var line = lines[index];
     line.firstChild.firstChild.textContent = timeToShow;
+    if(timeToShow === "0:00"){
+        var tournaments = JSON.parse(tournamentsGlobal);
+        tournaments[index]['state'] = 'o';
+        tournamentsGlobal = JSON.stringify(tournaments);
+    }
 }
 
-function getTimeToShow(startingDate) {
+function getTimeToShow(startingDate, registered) {
     var countdownDate = getDateFromStringAt(startingDate);
     var now = Date.now();
     var distance = countdownDate.getTime() - now;
-    var timeToShow;
+    var timeToShow = "";
     if (distance > 0) {
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -154,7 +165,7 @@ $(document).on('click', '.rowTournamentPanel', function (e) {
     var tournaments = JSON.parse(tournamentsGlobal);
     var tournament = tournaments[index];
     $('.tournamentsActionPanel').attr('id', 'selectedTournamentIndex-' + index);
-    if (tournament['registered'] && tournamentHasStarted(tournament['startingDate'])) {
+    if (tournament['registered'] === true && tournamentHasStarted(tournament['startingDate'])) {
         goTrade(index);
     } else {
         goRules(null);
@@ -163,7 +174,7 @@ $(document).on('click', '.rowTournamentPanel', function (e) {
 
 function tournamentHasStarted(dateString) {
     var dateTime = getDateFromStringAt(dateString);
-    return dateTime.getTime() < Date.now();
+    return dateTime.getTime() <= Date.now();
 }
 
 function getDateFromStringAt(dateAt) {
@@ -311,7 +322,7 @@ function plusAmountInput(amount) {
 
 function lessAmountInput(amount) {
     if (amount <= 0) {
-        return 0;
+        return 1;
     }
     return --amount;
 
@@ -357,12 +368,37 @@ function goRules(tournament) {
 }
 
 function feedAbout(tournament){
-    $('#prizePoolAbout').text("Prize pool: " + 0.8*tournament["minPlayers"]*tournament["bid"] + " (may grow larger as more people join in)");
-    $('#distributionAbout').text("Distribution: " + getDistributionString(tournament["distributionString"]));
-    $('#minPlayersAbout').text("Min. players required: " + tournament["minPlayers"]);
-    $('#startingDateAbout').text("Starts: " + tournament["startingDate"]);
-    $('#durationAbout').text("Duration: " + tournament["duration"]);
-    $('#endingDate').text("Ends: " + tournament["endingDate"]);
+    // $('#prizePoolAbout').text("Prize pool: " + 0.8*tournament["minPlayers"]*tournament["bid"] + " (may grow larger as more people join in)");
+    $('#prizePoolAbout').empty();
+    $('#prizePoolAbout').append('<span class="titleAbout">Prize pool:</span>  <span>  ' + 0.8*tournament["minPlayers"]*tournament["bid"] + ' credits</br><span class="prizeIntel">(may grow larger as more people check in)</span></span>');
+    // $('#distributionAbout').text("Distribution: " + getDistributionString(tournament["distributionString"]));
+
+    $('#distributionAbout').empty();
+    $('#distributionAbout').append('<span class="titleAbout">Distribution:</span>  <span>  ' + getDistributionString(tournament["distributionString"]) + '</span>');
+
+    $('#minPlayersAbout').empty();
+    $('#minPlayersAbout').append('<span class="titleAbout">Min. players required:</span>  <span>  ' + tournament["minPlayers"] + '</span>');
+
+    $('#startingDateAbout').empty();
+    $('#startingDateAbout').append('<span class="titleAbout">Starts:</span>  <span>  ' + tournament["startingDate"] + '</span>');
+
+    $('#durationAbout').empty();
+    $('#durationAbout').append('<span class="titleAbout">Duration:</span>  <span>  ' + tournament["duration"] + '</span>');
+
+    $('#playingSumAbout').empty();
+    $('#playingSumAbout').append('<span class="titleAbout">Playing sum:</span>  <span>  ' + tournament["playingSum"] + ' DEMO Credits<br><span class="prizeIntel">(this is the balance you are using to trade in the tournament, it does not affect your real balance)</span></span>');
+
+    $('#endingDate').empty();
+    $('#endingDate').append('<span class="titleAbout">Ends:</span>  <span>  ' + tournament["endingDate"] + '</span>');
+
+    $('#bidAbout').empty();
+    $('#bidAbout').append('<span class="titleAbout">Bid:</span>  <span>  ' + tournament["bid"] + ' credits</span>');
+
+    // $('#minPlayersAbout').text("Min. players required: " + tournament["minPlayers"]);
+    // $('#startingDateAbout').text("Starts: " + tournament["startingDate"]);
+    // $('#durationAbout').text("Duration: " + tournament["duration"]);
+    // $('#playingSumAbout').text("Playing sum: " + tournament["playingSum"]);
+    // $('#endingDate').text("Ends: " + tournament["endingDate"]);
 }
 
 function getDistributionString(distributionJson){
@@ -397,7 +433,8 @@ function onJoinClick(e){
         data: {
             'action': "registerTournament",
             'tournamentId': tournament["tournamentId"],
-            'playingSum': tournament["playingSum"]
+            'playingSum': tournament["playingSum"],
+            'bid': tournament["bid"]
         },
         success: function (response) {
             tournament['registered'] = true;
@@ -411,13 +448,30 @@ function onJoinClick(e){
             }
         },
         error: function (e) {
-            goRules(null);
+
+            switch(e.status){
+                //NOT LOGIN
+                case 401:
+                    goLogin(null);
+                    break;
+                //NOT ENOUGH FUND
+                case 408:
+                    showToast("Check-in error", "You don't have enough funds in your account, please fill your balance to enter new tournaments.");
+                    break;
+            }
+
+
         }
 
     });
 }
 
+
 function goRank() {
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+
     //TODO FETCH LE CLASSEMENT AVEC L'ID DE '.tournamentsActionPanel'
     $('.tournamentsListPanel').css('display', 'none');
     $('.rulesTournamentsActionPanel').css('display', 'none');
@@ -427,6 +481,48 @@ function goRank() {
     $('#colPrizeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
     $('#colRankHeader').css('background-color', 'rgba(20,24,36, 1)');
     $('#colTradeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
+
+    topFunction();
+    $('#tabRankingBody').hide();
+    $('#tabRankingSpinner').show();
+    $.ajax({
+        url: '/',
+        type: 'POST',
+        data: {
+            'action': "getRanking",
+            'tournamentId': tournament["tournamentId"]
+        },
+        success: function (response) {
+            feedRankingTab(response);
+        },
+        error: function(e){
+            console.log("ERROR RANKING AJAX");
+        }
+    });
+}
+
+function feedRankingTab(response) {
+    var tbody = $('#tabRankingBody');
+    tbody.empty();
+    var rankings = JSON.parse(response);
+    var indice = 1;
+    rankings.forEach(function (key, index) {
+        var rank = rankings[index];
+
+        var ranking = indice;
+        var username = rank['username'];
+        var balance = rank['balance'];
+
+        var line = '<tr class="rowRankingPanel">' +
+            '<td class="rankCell"><p class="rankP">' + ranking + '</p></td>' +
+            '<td class="usernameCell"><p class="usernameP">' + username + '</p></td>' +
+            '<td class="balanceCell">' + balance + '<p style="font-size: 10px">DEMO Credits</p></td></tr>';
+
+        tbody.append(line);
+        indice++;
+    });
+    $('#tabRankingSpinner').hide();
+    $('#tabRankingBody').show();
 }
 
 $('.linkAllTournaments').on('click', function (e) {
@@ -562,12 +658,7 @@ $(document).on('click', '.cardMovesTrade', function (e) {
     var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
     var tournaments = JSON.parse(tournamentsGlobal);
     var tournament = tournaments[index];
-    if(!tournament['registered']){
-        alert("You are not registered to this tournament. Please consult the \"About\" section and click on the \"Join\" button in order to compete in this tournament.");
-    }else if(tournament["state"] !== 'o'){
-        alert("The tournament has not started yet. Please consult the \"About\" section for more information.");
-    }
-    if(tournament['registered'] && tournament['state'] === 'o') {
+    if(tournament['state'] === 'o') {
         var pair = $('#symbolInput').val().split(':')[1];
         var startingDateTrade = Date.now();
         var urlPrice = 'https://financialmodelingprep.com/api/v3/forex/' + pair;
@@ -594,15 +685,6 @@ $(document).on('click', '.cardMovesTrade', function (e) {
         }
         var time = $('#tradeDurationInput').val();
         var amount = $('#tradeAmountInput').val();
-        var tournamentId = $('.tournamentsActionPanel').attr('id').split('-')[1];
-        console.log("Starting_Date: " + startingDateTrade);
-        console.log("Move: " + move);
-        console.log("Time: " + time);
-        console.log("Amount: " + amount);
-        console.log("Tournament_ID: " + tournamentId);
-        console.log("Pair: " + pair);
-        console.log("Striking price: " + strikingPrice);
-        //TODO VERIFIER LES DONNEES FRONTEND
 
         var jsonText = '{"tradeStartingDate":' + startingDateTrade + ',';
         jsonText += '"move":' + move + ',';
@@ -620,16 +702,67 @@ $(document).on('click', '.cardMovesTrade', function (e) {
                 "data": jsonText
             },
             success: function (response) {
-
+                newTradeSuccess();
             },
             error: function (e) {
-
+                newTradeError(e);
             }
         });
+    }else{
+        showToast("Too soon", "Tihs tournament hasn't started yet.");
     }
 
 });
 
+function newTradeError(e){
+    //TODO Develop that, go check the different possible error in dispatcher and tread accordingly
+    console.log("NEW TRADE ERROR :" + e.status);
+    switch(e.status){
+        //NOT LOGIN
+        case 401:
+            goLogin(null);
+            break;
+        //NOT ENOUGH FUND
+        case 408:
+            showToast("Balance error", "You don't have enough demo credits left for this tournament.");
+            break;
+        case 416:
+            showToast("Timing error", "The trade must be at least 1 minute long and must finish before the end of the tournament.");
+            break;
+        case 424:
+            showToast("No registration", "You are not yet registered to this tournament, please consult the About section to register.");
+            break;
+        case 432:
+            showToast("Invalid data", "The data you've entered is invalid. Please check again.");
+            break;
+        //SERVER ERROR
+        default:
+            showToast("Oops !", "Something went wrong");
+            break;
+    }
+}
+
+function newTradeSuccess(){
+    showToast("New trade", "Your trade has been successfully processed !");
+}
+
+function showToast(title, body){
+    $('.toast-title').text(title);
+    $('.toast-body').text(body);
+    $('.toastTrade').css('display','block');
+    $('.toastTrade').css('max-height','80px');
+    setTimeout(hideToast, 5000);
+}
+
+$('.closeToast').on('click', function(e){
+   e.preventDefault();
+   hideToast();
+});
+
+function hideToast(){
+    $('.toastTrade').css('display','none');
+    $('.toastTrade').css('max-height','0');
+}
 
 
 

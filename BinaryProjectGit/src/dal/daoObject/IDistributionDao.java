@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IDistributionDao {
     List<IDistributionDto> getDistributions();
+
+    IDistributionDto getDistributionById(int distributionId);
 }

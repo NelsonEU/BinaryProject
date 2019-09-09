@@ -2,16 +2,17 @@
     min-width: 100%;
     height:100%;
     display: none;
-    position: fixed;
+    /*position: fixed;*/
     border-top: 0.5px solid #4c525e;
 }
 
 .tournamentsPageContainer{
+    z-index: 99;
     height: 100%;
 }
 
 .rowPageContainer{
-    height: 80%;
+    height: 100%;
 }
 
 @media screen and (max-width: 992px) {
@@ -20,6 +21,7 @@
     }
 }
 .panelTournamentsCol{
+    height:100%;
     width: 100%;
     padding: 0;
     border-right: 1px solid #4c525e;
@@ -42,15 +44,15 @@
     text-align: center;
     color: whitesmoke;
     background-color: #141824;
-    height:50px;
-    padding-top: 14px;
+    height:60px;
+    padding-top: 18px;
     font-size: medium;
 }
 
 .headerTournamentsActionPanel{
     text-align: center;
     color: whitesmoke;
-    height:50px;
+    height:60px;
     font-size: medium;
     background-color: white;
     cursor: pointer;
@@ -81,7 +83,7 @@
 }
 
 .btnTournamentsHeader{
-    padding-top: 14px;
+    padding-top: 18px;
     width: 100%;
     height: 100%;
 }
@@ -124,6 +126,12 @@
     cursor: pointer;
 }
 
+.rowRankingPanel{
+    /*line-height: 50px;*/
+    /*min-height: 50px;*/
+    /*height: 50px;*/
+}
+
 .countdownP{
     margin-top: 12px;
 }
@@ -158,10 +166,21 @@
 
 .divTableTournaments{
     width: 100%;
+    height:90%;
+}
+
+.divTableRanking{
+    width: 100%;
 }
 
 .table-tournaments{
     width: 100%;
+    user-select: none;
+}
+
+.table-ranking{
+    width: 100%;
+    user-select: none;
 }
 
 .cardParametersTrade{
@@ -174,9 +193,9 @@
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    height: 60%;
-    margin-top: 15%;
-    margin-bottom: 25%;
+
+    height: 50%;
+    margin-top: 24%;
 }
 
 .cardBodyParametersTrade{
@@ -279,7 +298,7 @@
 .cardMovesTrade{
     user-select: none;
     cursor: pointer;
-    height: 60%;
+    height: 50%;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -359,6 +378,118 @@ ABOUT TRADE CSS
 #pRegisteredAbout{
     margin-top: 4px;
     color:#6ac159;
+}
+
+.cardPrize{
+    margin-left: 10%;
+    margin-bottom: 7%;
+    width: 80%;
+    color: #141824;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 10%;
+    border: 1px solid #4c525e;
+}
+
+.cardPrizeBody{
+    opacity: 0.95;
+    background-color: rgba(20, 24, 36, 0.95);
+    color: whitesmoke;
+}
+
+.cardPrizeHeader{
+    background-color: rgba(20, 24, 36, 0.95);
+    color: whitesmoke;
+    font-size: 18px;
+}
+
+.cardRules{
+    margin-left: 10%;
+    width: 80%;
+    color: #141824;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 10%;
+    border: 1px solid #4c525e;
+}
+
+.cardRulesBody{
+    opacity: 0.95;
+    background-color: rgba(20, 24, 36, 0.95);
+    color: whitesmoke;
+}
+
+.cardRulesHeader{
+    background-color: rgba(20, 24, 36, 0.95);
+    color: whitesmoke;
+    font-size: 18px;
+}
+
+.titleAbout {
+    text-decoration: underline;
+}
+
+.prizeIntel{
+    font-size: 10px;
+}
+
+.intelAbout{
+    margin-bottom: 2px;
+}
+
+#btnPlayAbout, #btnJoinAbout{
+    width: 45%;
+    height: 45px;
+    font-size: medium;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.3);
+}
+
+.smallIconToast{
+    width: 35px;
+    height: 35px;
+}
+
+.toastTrade{
+    background-color: #202a33;
+    color: whitesmoke;
+    border: 1px solid #4c525e;
+    z-index: 999;
+    display: none;
+    top: 101px;
+    padding: 8px;
+    right: 15px;
+    border-radius: 4px;
+    height: 80px;
+}
+
+.toast-body{
+    font-size: 14px;
+}
+
+.btnJoinCountdown{
+    margin-top: 4px;
+    font-size: 12px;
+    width: 75px;
+    height: 30px;
+    background-color: #108258;
+    color: whitesmoke;
+}
+
+.btnPlayCountdown{
+    margin-top: 4px;
+    font-size: 12px;
+    width: 75px;
+    height: 30px;
+    background-color: #202a33;
+    color: whitesmoke;
+}
+
+.divTableRanking{
+    margin-top: 4%;
+}
+
+.rankTournamentsActionPanel{
+    height: 100%;
 }
 
 

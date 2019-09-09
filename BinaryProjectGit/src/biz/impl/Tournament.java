@@ -19,7 +19,7 @@ public class Tournament implements ITournamentDto, ITournamentBiz {
     private String duration;
     private String state;
     private List<Integer> party;
-    //TODO BUGGY DE OFU CA JE PENSE
+    //TODO BUGGY DE OUF CA JE PENSE
     private boolean registered;
     private int minPlayers;
 

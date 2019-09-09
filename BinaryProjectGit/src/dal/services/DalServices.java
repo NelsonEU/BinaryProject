@@ -69,6 +69,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
 //        if(this.conn.isClosed()){
 //            throw new FatalException();
 //        }
+        System.out.println("ON ESTABLISH LA CONNECTION");
         try{
             conn = DriverManager.getConnection(this.url, this.username, this.password);
             conn.setAutoCommit(true);
@@ -81,6 +82,7 @@ public class DalServices implements IDalServices, IBackendDalServices {
 
     @Override
     public void startTransaction() throws FatalException {
+        System.out.println("ON START TRANSACTION");
         try {
             if (this.conn == null || this.conn.isClosed()) {
                 establishConnection();

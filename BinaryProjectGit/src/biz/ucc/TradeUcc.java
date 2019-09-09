@@ -1,14 +1,14 @@
 package biz.ucc;
 
-import biz.bizFactory.BizFactory;
 import biz.dto.ITradeDto;
 import biz.impl.Trade;
 import com.google.gson.Gson;
-import dal.daoImpl.DistributionDao;
-import dal.daoImpl.TournamentDao;
+import dal.daoImpl.ParticipationDao;
 import dal.daoImpl.TradeDao;
+import dal.daoObject.IParticipationDao;
 import dal.daoObject.ITradeDao;
 import dal.services.DalServices;
+import dal.services.IDalServices;
 import exceptions.BizException;
 import exceptions.FatalException;
 import ihm.Config;
@@ -17,11 +17,6 @@ import ihm.Config;
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -37,23 +32,22 @@ public class TradeUcc implements ITradeUcc {
 
     private ScheduledExecutorService ses;
     private Gson genson;
-    private BizFactory bizFactory;
-    private DalServices dalServices;
-    private TradeDao tradeDao;
+    private IDalServices dalServices;
+    private ITradeDao tradeDao;
     private Config config;
+    private IParticipationDao participationDao;
 
     public TradeUcc() {
-        bizFactory = new BizFactory();
         this.genson = new Gson();
         try {
             dalServices = new DalServices();
             tradeDao = new TradeDao();
+            participationDao = new ParticipationDao();
             this.config = new Config("properties/prod.properties");
         } catch (SQLException | FileNotFoundException e) {
             System.out.println("ERREUR DB: " + e.getMessage());
         }
         ses = Executors.newScheduledThreadPool(10000);
-
     }
 
     @Override
@@ -153,7 +147,19 @@ public class TradeUcc implements ITradeUcc {
 
 
     private ITradeDto checkAndCreateTrade(String tradeJson, int userId) {
-        ITradeDto trade = genson.fromJson(tradeJson, Trade.class);
+        ITradeDto trade;
+        try {
+            trade = genson.fromJson(tradeJson, Trade.class);
+        }catch(NumberFormatException e){
+            throw new BizException("Invalid data");
+        }
+        double userTournamentBalance = this.participationDao.getUserTournamentBalance(trade.getTournamentID(), userId);
+        if(userTournamentBalance == -1){
+            throw new BizException("No registration");
+        }
+        if(trade.getAmount() > userTournamentBalance){
+            throw new BizException("Insufficient balance");
+        }
         try {
             createDates(trade);
         }catch (BizException e){
@@ -173,7 +179,7 @@ public class TradeUcc implements ITradeUcc {
         int hours = Integer.parseInt(hoursString);
         int minutes = Integer.parseInt(minutesString);
         if(hours == 0 && minutes < 1){
-            throw new BizException("TimeError");
+            throw new BizException("Timing error");
         }
         LocalDateTime endingDate = startingDate.plusHours(hours).plusMinutes(minutes);
         LocalTime duration = LocalTime.parse(trade.getTime());

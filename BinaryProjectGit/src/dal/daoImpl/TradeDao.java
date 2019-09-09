@@ -54,7 +54,6 @@ public class TradeDao implements ITradeDao {
             ps.setTimestamp(9, new java.sql.Timestamp(java.util.Date.from(tradeDto.getStartingDate().atZone(ZoneId.systemDefault()).toInstant()).getTime()));
             ps.setTimestamp(10, new java.sql.Timestamp(java.util.Date.from(tradeDto.getEndingDate().atZone(ZoneId.systemDefault()).toInstant()).getTime()));
             ps.setString(11, String.valueOf(tradeDto.getState()));
-            System.out.println("QUERY: " + ps.toString());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();

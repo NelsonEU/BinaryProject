@@ -4,33 +4,45 @@ import biz.bizFactory.BizFactory;
 import biz.bizFactory.IBizFactory;
 import biz.bizObject.ITournamentBiz;
 import biz.dto.IDistributionDto;
+import biz.dto.IParticipationDto;
 import biz.dto.ITournamentDto;
+import biz.dto.IUserDto;
+import com.owlike.genson.Genson;
 import dal.daoImpl.DistributionDao;
+import dal.daoImpl.ParticipationDao;
 import dal.daoImpl.TournamentDao;
 import dal.daoImpl.UserDao;
 import dal.daoObject.IDistributionDao;
+import dal.daoObject.IParticipationDao;
 import dal.daoObject.ITournamentDao;
 import dal.daoObject.IUserDao;
 import dal.services.DalServices;
 import dal.services.IDalServices;
 import exceptions.BizException;
 import exceptions.FatalException;
+import ihm.Config;
 import org.joda.time.DateTime;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class TournamentUcc implements ITournamentUcc {
 
+    private final ScheduledExecutorService ses;
+    private Genson genson;
     private IDalServices dalServices;
     private IBizFactory bizFactory;
     private ITournamentDao  tournamentDao;
     private IDistributionDao distributionDao;
+    private IUserDao userDao;
+    private IParticipationDao participationDao;
+    private Config config;
 
     public TournamentUcc(){
         bizFactory = new BizFactory();
@@ -38,9 +50,14 @@ public class TournamentUcc implements ITournamentUcc {
             dalServices = new DalServices();
             tournamentDao = new TournamentDao();
             distributionDao = new DistributionDao();
+            userDao = new UserDao();
+            participationDao = new ParticipationDao();
+            this.config = new Config("properties/prod.properties");
         } catch (SQLException | FileNotFoundException e) {
             System.out.println("ERREUR DB: " + e.getMessage());
         }
+        genson = new Genson();
+        ses = Executors.newScheduledThreadPool(1000);
     }
 
     @Override
@@ -82,6 +99,7 @@ public class TournamentUcc implements ITournamentUcc {
     }
 
     private void getDistributions(List<ITournamentDto> listTournaments) {
+
         List<IDistributionDto> distributionDtoList = distributionDao.getDistributions();
         Map<String, IDistributionDto>  mapIdDistributionDto = new HashMap<>();
         for(IDistributionDto distributionDto : distributionDtoList){
@@ -99,10 +117,15 @@ public class TournamentUcc implements ITournamentUcc {
     }
 
     @Override
-    public void register(int userId, int tournamentId, double playingSum) {
+    public void register(IUserDto user, int tournamentId, double playingSum, double bid) {
         try{
             this.dalServices.startTransaction();
-            tournamentDao.registerUser(userId, tournamentId, playingSum);
+            if(user.getBalance() < bid){
+                throw new BizException("Not enough fund");
+            }
+            tournamentDao.registerUser(user.getUserId(), tournamentId, playingSum);
+            user.setBalance(user.getBalance() - bid);
+            userDao.updateUserBalance(user.getUserId(), user.getBalance());
         }catch(FatalException e){
             this.dalServices.rollbackTransaction();
             throw new FatalException(e.getMessage());
@@ -116,12 +139,83 @@ public class TournamentUcc implements ITournamentUcc {
         try{
             this.dalServices.startTransaction();
             tournamentDto = checkNewTournament(tournamentDto);
-            tournamentDao.addTournament(tournamentDto);
+            //CREATE NEW TOURNAMENT AND SET RETURNING ID INTO DTO
+            tournamentDto.setTournamentId(tournamentDao.addTournament(tournamentDto));
+            launchScheduler(tournamentDto);
         } catch(FatalException | ParseException e){
             this.dalServices.rollbackTransaction();
             throw new FatalException(e.getMessage());
         } finally {
             this.dalServices.commitTransaction();
+        }
+    }
+
+    private void launchScheduler(ITournamentDto tournamentDto) {
+        Runnable finishTournamentTask = () -> {
+            finishTournament(tournamentDto);
+        };
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        try {
+            Date startDate = format.parse(tournamentDto.getStartingDate());
+            Date endDate = format.parse(tournamentDto.getEndingDate());
+            long millisEnding = endDate.getTime();
+            long millisStarting = startDate.getTime();
+            System.out.println("DIFFERENCE IN MILLIS:" + (millisEnding-millisStarting));
+            ses.schedule(finishTournamentTask, millisEnding-millisStarting, TimeUnit.MILLISECONDS);
+        } catch (ParseException e) {
+            throw new BizException("Error parsing date when launching scheduler");
+        }
+    }
+
+    private void finishTournament(ITournamentDto tournamentDto) {
+        try{
+            this.dalServices.startTransaction();
+
+            System.out.println("TOURNAMENT: " + tournamentDto);
+
+            List<IParticipationDto> rankingList = this.participationDao.getRanking(tournamentDto.getTournamentId());
+            IDistributionDto distributionDto = this.distributionDao.getDistributionById(tournamentDto.getDistribution());
+
+            if(distributionDto == null){
+                this.dalServices.rollbackTransaction();
+                throw new BizException("Could not find distributionDto for tournament " + tournamentDto.getTournamentId());
+            }
+
+            double prizePool = Double.parseDouble(config.getValueOfKey("tournamentRatio"))*rankingList.size()*tournamentDto.getBid();
+            Map mapDistribution = genson.deserialize(distributionDto.getDistribution(), Map.class);
+            giveCashPrize(prizePool, mapDistribution, rankingList);
+
+            tournamentDto.setState("f");
+            this.tournamentDao.finishTournament(tournamentDto.getTournamentId());
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally{
+            this.dalServices.commitTransaction();
+        }
+
+    }
+
+    private void giveCashPrize(double prizePool, Map mapDistribution, List<IParticipationDto> rankingList) {
+        Set keys = mapDistribution.keySet();
+        for(Object key : keys){
+            String keyString = (String)key;
+            int keyInt = Integer.parseInt(keyString);
+            int userId;
+            try {
+                System.out.println("ON RENTRE DANS LE TRY: keyINT: " + keyInt);
+                userId = rankingList.get(keyInt - 1).getUserId();
+                double percentWin = (Double.parseDouble(mapDistribution.get(key).toString()))/100;
+                System.out.println("PERCENT WIN: " + percentWin);
+                double amountWon = percentWin*prizePool;
+                System.out.println("AMOUNT WON: " + amountWon);
+                this.userDao.giveCashPrize(amountWon, userId);
+                System.out.println("ON A UPDATE LE CASHPRIZE DE " + userId);
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("ERREUR GIVECASHPRIZE: " + e.getMessage());
+                continue;
+            }
         }
     }
 
@@ -140,9 +234,6 @@ public class TournamentUcc implements ITournamentUcc {
 
     private ITournamentDto checkNewTournament(ITournamentDto tournamentDto) throws ParseException {
         ITournamentDto toReturn = tournamentDto;
-        if(1 < 0){
-            throw new BizException("Données incorrectes");
-        }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date date = format.parse(toReturn.getStartingDate());
         DateTime dateTime = new DateTime(date);

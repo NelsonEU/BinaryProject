@@ -1,6 +1,7 @@
 package ihm;
 
 import biz.dto.IDistributionDto;
+import biz.dto.IParticipationDto;
 import biz.dto.ITournamentDto;
 import biz.dto.IUserDto;
 import biz.impl.Tournament;
@@ -20,6 +21,7 @@ import com.auth0.jwt.JWTSigner;
 import com.google.gson.Gson;
 import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;
+import dal.daoImpl.ParticipationDao;
 import exceptions.BizException;
 import exceptions.FatalException;
 
@@ -34,12 +36,14 @@ public class Dispatcher {
     private ITournamentUcc tournamentUcc;
     private IDistributionUcc distributionUcc;
     private ITradeUcc tradeUcc;
+    private IParticipationUcc participationUcc;
 
     public Dispatcher() {
         this.userUcc = new UserUcc();
         this.tournamentUcc = new TournamentUcc();
         this.distributionUcc = new DistributionUcc();
         this.tradeUcc = new TradeUcc();
+        this.participationUcc = new ParticipationUcc();
 //        this.genson = new Genson();
         // lets also enable runtime type usage
         this.genson = new GensonBuilder().useRuntimeType(true).create();
@@ -77,6 +81,9 @@ public class Dispatcher {
                 case "getDistributions":
                     getDistributions(req,resp,session);
                     break;
+                case "getRanking":
+                    getRanking(req,resp,session);
+                    break;
                 default:
                     if(userConnected()){
                         switch(action){
@@ -96,6 +103,8 @@ public class Dispatcher {
                                             deleteTournament(req,resp);
                                             break;
                                     }
+                                }else{
+                                    sendResponse(resp, "Unauthorized", 401);
                                 }
                         }
                     }else {
@@ -106,7 +115,6 @@ public class Dispatcher {
         } catch (IOException exception) {
 //            logger.info("Exception lancée lors de l'appel de la methode: operer : "
 //                    + exception.getMessage() + "-----");
-            System.out.println("EXCEPTION: " + exception.getMessage());
             exception.printStackTrace();
             System.out.println(exception.getLocalizedMessage());
             sendResponse(resp, exception.getMessage(), 002);
@@ -145,11 +153,26 @@ public class Dispatcher {
     }
 
     private void registerTournament(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int userId = this.user.getUserId();
         int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        int bid = Integer.parseInt(req.getParameter("bid"));
         try {
-            this.tournamentUcc.register(userId, tournamentId, Integer.parseInt(req.getParameter("playingSum")));
+            this.tournamentUcc.register(this.user, tournamentId, Integer.parseInt(req.getParameter("playingSum")), bid);
             resp.setStatus(HttpServletResponse.SC_OK);
+        }catch(BizException e){
+            resp.sendError(408, "Not enough funds available");
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
+
+    }
+
+    private void getRanking(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try{
+            List<IParticipationDto> listParticipations = this.participationUcc.getRanking(tournamentId);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setCharacterEncoding("UTF-8");
+            resp.getOutputStream().print(this.genson.serialize(listParticipations));
         }catch(FatalException e){
             resp.sendError(500, "Something went wrong");
         }
@@ -158,7 +181,25 @@ public class Dispatcher {
 
     private void newTrade(HttpServletRequest req, HttpServletResponse resp) {
         String jsonText = req.getParameter("data");
-        this.tradeUcc.newTrade(jsonText, this.user.getUserId());
+        try {
+            this.tradeUcc.newTrade(jsonText, this.user.getUserId());
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }catch(BizException e){
+            if(e.getMessage().equals("Insufficient balance")){
+                resp.setStatus(408);
+            }else if(e.getMessage().equals("Timing error")){
+                resp.setStatus(416);
+            }else if(e.getMessage().equals("No registration")) {
+                resp.setStatus(424);
+            }else if(e.getMessage().equals("Invalid data")){
+                resp.setStatus(432);
+            }
+            else{
+                resp.setStatus(404);
+            }
+        }catch (FatalException e){
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
     }
 
     private void createTournament(HttpServletRequest req, HttpServletResponse resp) {

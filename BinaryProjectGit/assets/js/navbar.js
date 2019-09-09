@@ -153,6 +153,10 @@ function goTournaments(e){
     topFunction();
     $('#tabTournamentsBody').hide();
     $('#tabTournamentsSpinner').show();
+    callAjaxTournaments();
+}
+
+function callAjaxTournaments(){
     $.ajax({
         url: '/',
         type: 'POST',

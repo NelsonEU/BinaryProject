@@ -4,7 +4,8 @@ html {
 body {
     background: #0e3554;
     /*background: linear-gradient(to right, #17232d, #143956);*/
-    background: linear-gradient(to right, #202a33, #253e52);
+    /*background: linear-gradient(to right, #202a33, #253e52);*/
+    background-color: #141824;
     position: absolute;
     height: 100%;
     width: 100%;

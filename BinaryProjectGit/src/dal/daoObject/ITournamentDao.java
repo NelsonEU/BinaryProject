@@ -10,7 +10,9 @@ public interface ITournamentDao {
 
     void registerUser(int userId, int tournamentId, double playingSum);
 
-    void addTournament(ITournamentDto tournamentDto);
+    int addTournament(ITournamentDto tournamentDto);
 
     void deleteTournament(String id);
+
+    void finishTournament(int tournamentId);
 }

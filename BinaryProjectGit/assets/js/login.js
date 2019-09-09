@@ -113,7 +113,7 @@ function loginSuccessful(response){
         console.log("IL EST ADMIN");
         isAdmin();
     }
-    goTournaments(null);
+    goTournamentsList(null);
 }
 
 function loginError(jqXHR, textStatus, errorThrown){
@@ -148,7 +148,7 @@ function registerSuccessful(response){
     var user = JSON.parse(response);
     $('.notifError').remove();
     isConnected();
-    goTournaments(null);
+    goTournamentsList(null);
 }
 
 function registerError(jqXHR, textStatus, errorThrown){

@@ -9,9 +9,25 @@
 }
 
 .graph{
-	width: 900px;
-    height:490px;
+  width: 1100px;
+  height:570px;
 }
+
+@media screen and (max-width: 1300px) {
+  .graph{
+    width: 1000px;
+    height:510px;
+  }
+}
+
+
+@media screen and (max-width: 1050px) {
+  .graph{
+    width: 900px;
+    height:510px;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .graph {
     width: 800px;

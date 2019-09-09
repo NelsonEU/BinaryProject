@@ -45,23 +45,35 @@ public class DistributionDao implements IDistributionDao {
                     tabDistributions.add(distr);
 //                    logger.info("Utilisateur trouvé selon son login avec succès.");
                 }
-
-//                listTournaments = new ArrayList<>(mapTournaments.values());
             }
-        }catch (FatalException | SQLException e){
-
+        }catch (SQLException e){
+            throw new FatalException(e.getMessage());
         }
         return tabDistributions;
+    }
 
+    @Override
+    public IDistributionDto getDistributionById(int distributionId) {
+        IDistributionDto distributionDto = null;
+        try{
+            PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("getDistributionById"));
+            ps.setInt(1, distributionId);
+            try(ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    distributionDto = createDistribution(rs);
+                }
+            }
+
+        }catch(SQLException e){
+            throw new FatalException(e.getMessage());
+        }
+        return distributionDto;
     }
 
     private IDistributionDto createDistribution(ResultSet rs) throws SQLException {
         IDistributionDto distribution = bizFactory.getDistributionDto();
         distribution.setId(String.valueOf(rs.getInt(1)));
         String distributionJson = rs.getString(2);
-//        Map<String, Double> map = genson.deserialize(distributionJson, Map.class);
-//        System.out.println("MAPMAP: " + map);
-//        distribution.setDistribution(map);
         distribution.setDistribution(distributionJson);
         return distribution;
     }

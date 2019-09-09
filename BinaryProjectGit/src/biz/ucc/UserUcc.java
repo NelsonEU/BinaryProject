@@ -14,6 +14,11 @@ import exceptions.FatalException;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 public class UserUcc implements IUserUcc {
 
@@ -67,6 +72,10 @@ public class UserUcc implements IUserUcc {
         IUserDto newUser = bizFactory.getUserDto();
         newUser.setEmail(email);
         newUser.setPassword(password);
+        if(username == null) {
+            String date = String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli());
+            username = date.substring(date.length()-6, date.length()-1);
+        }
         newUser.setUsername(username);
         try{
             ((IUserBiz) newUser).checkDataSignIn();

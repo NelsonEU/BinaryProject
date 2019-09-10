@@ -13,8 +13,22 @@ function replaceNavbar(){
 }
 
 window.onresize = function(e){
-    // replaceNavbar();
+    replaceNavbar();
 };
+
+$('.navbar-nav>li>a').on('click', function(){
+    collapseNavbar();
+});
+
+$('.linkDropdown').on('click', function(){
+    console.log("ON CLIQUE");
+    collapseNavbar();
+});
+
+function collapseNavbar(){
+    $('.navbar-collapse').collapse('hide');
+}
+
 
 
 $.ajax({
@@ -36,13 +50,14 @@ $.ajax({
 });
 
 function isConnected(){
-    $('.loginLink').empty();
-    $('.loginLink').append("<a class='nav-link' href='/' id='logoutLinkHeader'>Sign out</a>");
+    $('.dropdownMenuUser').empty();
+    $('.dropdownMenuUser').append("<li><a class='nav-link linkDropdown' id='profileLinkHeader'>Account</a></li>");
+    $('.dropdownMenuUser').append("<li><a class='nav-link linkDropdown loginLink' id='logoutLinkHeader' onclick='signOut()'>Sign out</a></li>");
 }
 
 function isNotConnected(){
-    $('.loginLink').empty();
-    $('.loginLink').append("<a class='nav-link' id='loginLinkHeader' href='/'>Sign in</a>");
+    $('.dropdownMenuUser').empty();
+    $('.dropdownMenuUser').append("<li><a class='nav-link linkDropdown loginLink' id='loginLinkHeader' onclick='goLogin(null)'>Sign in</a></li>");
 }
 
 function isAdmin(){
@@ -61,22 +76,24 @@ function isAdmin(){
 
 
 // LOGIN
-$( '.loginLink' ).on( 'click', 'a', function (e) {
-    e.preventDefault();
-    var linkId = $(this).attr('id');
-    switch(linkId){
-        case "loginLinkHeader":
-            goLogin(e);
-            break;
-        case "logoutLinkHeader":
-            signOut();
-            break;
-        default:
-            break;
-    }
-});
+// $('.loginLink').on( 'click', 'a', function (e) {
+//     e.preventDefault();
+//     console.log("ON EST LAAAAA");
+//     var linkId = $(this).attr('id');
+//     switch(linkId){
+//         case "loginLinkHeader":
+//             goLogin(e);
+//             break;
+//         case "logoutLinkHeader":
+//             signOut();
+//             break;
+//         default:
+//             break;
+//     }
+// });
 
 function goLogin(e){
+    collapseNavbar();
     if(e != null) {
         e.preventDefault();
     }
@@ -90,6 +107,7 @@ function goLogin(e){
 
 // LOGOUT
 function signOut(){
+    collapseNavbar();
     console.log("SIGN OUT");
     $.ajax({
         url: '/',
@@ -138,7 +156,9 @@ function goAdmin(e){
 
 //TOURNAMENTS PAGE
 $('#tournamentsLinkHeader').on('click',function(e){
-    goTournaments(e);
+    e.preventDefault();
+    goTournamentsList();
+    // goTournaments(e);
 });
 
 function goTournaments(e){

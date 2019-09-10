@@ -2,43 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3eb34dd-200c-4d50-907f-7021d400b4e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/biz/dto/IParticipationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/biz/impl/Participation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/biz/ucc/IParticipationUcc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/biz/ucc/ParticipationUcc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dal/daoImpl/ParticipationDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dal/daoObject/IParticipationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/key.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/logoCobinix.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/trophy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/user.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/graph.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/graph.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/tournaments.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/tournaments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/navbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/tournaments.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/tournaments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/BizFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/bizFactory/IBizFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/ucc/UserUcc.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/biz/ucc/UserUcc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoImpl/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoImpl/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoObject/IUserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/daoObject/IUserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/DalServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/dal/services/DalServices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BinaryProjectGit/ihm/Dispatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/properties/prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/properties/prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/BizFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/bizFactory/IBizFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/impl/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/impl/Tournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/ITournamentUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/TournamentUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/TradeUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/TradeUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/biz/ucc/UserUcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/biz/ucc/UserUcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/DistributionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/DistributionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/TournamentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/TradeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/TradeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoImpl/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoImpl/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoObject/IDistributionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoObject/IDistributionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoObject/ITournamentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/daoObject/IUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/daoObject/IUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dal/services/DalServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dal/services/DalServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ihm/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ihm/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcontent/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webcontent/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webcontent/home.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -76,7 +51,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -85,12 +60,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/js" />
       <recent name="$PROJECT_DIR$/assets/images" />
+      <recent name="$PROJECT_DIR$/assets/js" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/assets/css" />
       <recent name="$PROJECT_DIR$/assets/js" />
       <recent name="$PROJECT_DIR$/src/utility" />
@@ -151,7 +127,7 @@
       <workItem from="1566373445530" duration="77835000" />
       <workItem from="1566858922236" duration="1232000" />
       <workItem from="1566860312069" duration="24452000" />
-      <workItem from="1567453789872" duration="85519000" />
+      <workItem from="1567453789872" duration="109287000" />
     </task>
     <servers />
   </component>

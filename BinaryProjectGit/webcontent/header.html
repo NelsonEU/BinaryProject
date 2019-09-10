@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crypto Contests</title>
+    <title>Cobinix</title>
     <meta name="google-signin-client_id" content="398953615251-opllhkrv8a95cqpq6lau3tf29gekk119.apps.googleusercontent.com">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
@@ -19,31 +19,33 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
         <!-- Navbar content -->
 
+
+
+        <a class="navbar-brand navbar-nav" href="/" id="homeButtonHeader"><img class="logo-header" src="images/logoCobinix.png"></a>
+        <div id="navbarTogglerDemo03" class="collapse navbar-collapse order-3">
+            <ul class="navbar-nav my-2 my-lg-0 ml-auto">
+                <li class="nav_item depositLiHeader">
+                    <button class="nav-link buttonDeposit">Deposit</button>
+                </li>
+                <li class="nav-item tournamentsLiHeader">
+                    <a class="nav-link" id="tournamentsLinkHeader"><img src="images/trophy.png" class="navImg" id="navTrophy"><span class="headerSpan">Tournaments</span></a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropwdown-toggle" data-toggle="dropdown" id="userLinkHeader"><img src="images/user.png" class="navImg" id="navUser"><span class="headerSpan">Profile</span></a>
+                        <ul class="dropdown-menu dropdownMenuUser">
+                        </ul>
+                    </div>
+                </li>
+                <li class='nav-item adminLiHeader'><a class='nav-link' id='adminLinkHeader'>
+                    <img src="images/key.png" class="navImg" id="navAdmin"><span class="headerSpan">Admin</span>
+                </a></li>
+
+            </ul>
+        </div>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <a class="navbar-brand navbar-nav" href="/" id="homeButtonHeader"><img class="logo-header" src="images/logo.png"></a>
-        <div id="navbarTogglerDemo03" class="collapse navbar-collapse order-3">
-            <ul class="navbar-nav my-2 my-lg-0 ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/" id="homeLinkHeader">Home</a>
-                </li>
-
-                <li class="nav-item tournamentsLiHeader">
-                    <a class="nav-link" href="/" id="tournamentsLinkHeader">Tournaments</a>
-                </li>
-                <li class='nav-item adminLiHeader'><a class='nav-link' href='/' id='adminLinkHeader'>Admin</a></li>
-                <li class="nav-item loginLink">
-<!--&lt;!&ndash;                    <?php if($_SESSION['connectedUser'] != null) { ?>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <a class="nav-link" href="index.php?action=logout" onclick="logout()">Sign out</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <?php } else { ?>&ndash;&gt;-->
-<!--                    <a class="nav-link" id="loginLinkHeader" href="/" id="loginLinkHeader">Sign in</a>-->
-<!--&lt;!&ndash;                    <?php } ?>&ndash;&gt;-->
-
-                </li>
-            </ul>
-        </div>
     </nav>
 </header>

@@ -33,7 +33,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #202a33;
+    background-color: rgba(20,24,36, 1);
     z-index: 999999;
 }
 
@@ -59,7 +59,8 @@ body {
 
 
 .navbar{
-    background-color: #202a33;
+    background-color: #27293d;
+    padding-left: 20px;
 }
 
 .nav-item{
@@ -68,24 +69,62 @@ body {
 }
 
 .logo-header{
-    height: 65px;
+    height: 25px;
 }
 
 header{
     position: relative;
 }
 
-.loginLink{
-    text-decoration: underline;
+.headerSpan{
+    color: whitesmoke;
+    font-size: small;
+    margin-left: 4px;
+}
+.navImg{
+    height:20px;
+    width: 20px;
 }
 
 .adminLiHeader{
     display: none;
 }
 
+.dropdownMenuUser{
+    background-color: #26293b;
+    color: whitesmoke;
+}
+
+.dropdown{
+    cursor:pointer;
+}
+
+.buttonDeposit{
+    background-color: #118258;
+    border: none;
+    color: whitesmoke !important;
+    font-size: small;
+    border-radius: 0.25rem;
+    cursor:pointer;
+    margin-top: 4px;
+    user-select: none;
+}
+
+.buttonDeposit:hover{
+    background-color: rgb(14, 117, 79);;
+}
+
 .checkedImg{
     width: 128px;
     height: 128px;
+}
+
+.linkDropdown{
+    color:whitesmoke !important;
+}
+
+.linkDropdown:hover{
+    color:rgba(255,255,255,.8) !important;
 }
 
 footer{

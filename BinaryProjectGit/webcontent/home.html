@@ -7,13 +7,14 @@
     <div class="headLanding masthead text-white text-center" id="kingsLanding">
         <div class="overlay"></div>
         <div class="container headLandingContainer">
-            <div class="row">
+            <div class="row rowHeadLanding">
                 <div class="col-xl-9 mx-auto mb-1 text-headLanding colTitleLanding">
-                    <h1 class="mb-1 headTitle">CRYPTOCONTESTS</h1>
+<!--                    <h1 class="mb-1 headTitle">COBINIX</h1>-->
+                    <img src="images/logoCobinix.png" class="imgTitleLanding">
                     <p>Learn, trade, compete</p>
                 </div>
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto colButtonLanding">
-                    <button class="btn btnHeadLanding" id="btnStartCompeting">Start competing now</button>
+                    <button class="btn btnHeadLanding" id="btnStartCompeting">Start competing now !</button>
                 </div>
             </div>
         </div>
@@ -52,8 +53,8 @@
         </div>
     </div>
     <div class="separatorDiv">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
+        <div class="container-fluid p-0 containerSeparator">
+            <div class="row no-gutters rowSeparator">
                 <div class="col-12 order-lg-2 text-white showcase-img parallax-window" data-parallax="scroll"
                      data-image-src="Views/Assets/images/bg-headLanding2.jpg"></div>
             </div>
@@ -99,12 +100,10 @@
         <!-- TradingView Widget END -->
     </div>
     <div id="cookie-msg"
-         style="position: fixed; bottom: 0px; width: 100%; text-align: center; padding: 30px 50px; background-color: #202a33; color: whitesmoke; font-size: 16px;">
-        <span class="msg">This website uses cookies. By using this website you consent to our use of these cookies. For more information visit our <a
-                href="https://www.jqueryscript.net/privacy/"
-                style="color: rgb(255, 255, 0); text-decoration: underline;">Privacy Policy</a>. <button
+         style="position: fixed; bottom: 0px; width: 100%; height:60px; text-align: center; padding: 18px 50px; background-color: #27293d; color: whitesmoke; font-size: 16px;">
+        <span class="msg">This website uses cookies. By using this website you consent to our use of these cookies. <button
                 onclick="OnCookieAccept()" class="btn-aceptar"
-                style="text-decoration: none; padding: 5px 10px; border-radius: 5px; background-color: whitesmoke; color:#202a33; font-size: 11px;">Got It!</button></span>
+                style="text-decoration: none; padding: 5px 10px; border-radius: 5px; border: 1px solid #27293d;  background-color: rgb(17, 130, 88); color:whitesmoke; font-size: 11px;">Got It!</button></span>
     </div>
 </div>
 <!-- ################################################## TOURNAMENTS PAGE ################################################## -->
@@ -134,7 +133,7 @@
                             <table class="table-tournaments table-striped table-dark table-hover">
                                 <thead>
                                 <tr>
-                                    <th class="countdownCell">Countdown</th>
+                                    <th class="countdownCell">Starting date</th>
                                     <th class="endingDateCell">Ending date</th>
                                     <th class="partyCell">Party</th>
                                     <th class="entryBudCell">Entry bid</th>
@@ -176,7 +175,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="linkAllTournaments"><img src="images/arrowWhite30.png" class="goBackArrow">All tournaments</div>
+                    <div class="container-fluid containerSubHeader">
+                    <div class="row">
+                    <div class="linkAllTournaments col-5"><img src="images/arrowWhite30.png" class="goBackArrow"><img src="images/trophy.png" class="navImg"><span class="headerSpan">Tournaments</span></div>
+                    <div class="creditsDiv col-6" id="divCredits"><p>Credits: <span class="creditsSpan">1000</span></p></div>
+                    </div>
+                    </div>
                     <div class="rulesTournamentsActionPanel">
                         <div class="container containerButtonAbout">
                         </div>
@@ -207,57 +211,87 @@
                     </div>
                     <div class="tradeTournamentsActionPanel">
                         <div class="container containerTrade">
-                            <div class="row rowTradeParameters">
-                                <div class="col-6 colTradeTime">
-                                    <div class="card cardParametersTrade">
-                                        <div class="card-body cardBodyParametersTrade">
-                                            <h4 class="card-title cardTitleParametersTrade">Time</h4>
-                                            <div class="divPicAndTime">
-                                                <label for="tradeDurationInput" class="col-2"><img class="imgTimeTrade" src="images/whiteClock.png"></label><input type="text" class="input-element newTradeInput" id="tradeDurationInput" name="tradeDurationInput" placeholder="HH:MM">
-                                            </div>
-                                        </div>
-                                        <div class="card-footer cardFooterParametersTrade">
-                                            <div class="container-fluid containerTimeButtons">
-                                                <div class="row rowTimeButtons">
-                                                    <div class="col-6 colTimeButtonPlus">+</div>
-                                                    <div class="col-6 colTimeButtonLess">-</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 colTradeAmount">
-                                    <div class="card cardParametersTrade">
-                                        <div class="card-body cardBodyParametersTrade">
-                                            <h4 class="card-title cardTitleParametersTrade">Amount</h4>
-                                            <div class="divPicAndAmount">
-                                                <label for="tradeAmountInput" class="col-2"><img src="images/whiteDollar.png" class="imgAmountTrade"></label><input type="text" class="newTradeInput" id="tradeAmountInput" name="tradeAmountInput" placeholder="50">
-                                            </div>
-                                        </div>
-                                        <div class="card-footer cardFooterParametersTrade">
-                                            <div class="container-fluid containerAmountButtons">
-                                                <div class="row rowAmountButtons">
-                                                    <div class="col-6 colAmountButtonPlus">+</div>
-                                                    <div class="col-6 colAmountButtonLess">-</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="row rowTrade">
+                            <div class="col-6">
+                                <div class="divPicAndTime">
+                                    <label for="tradeDurationInput" class="tradeLabel"><img class="imgTimeTrade" src="images/whiteClock.png"> Time:</label><input type="text" class="input-element newTradeInput" id="tradeDurationInput" name="tradeDurationInput" placeholder="HH:MM">
                                 </div>
                             </div>
-                            <div class="row rowTradeMoves">
-                                <div class="col-6 colTradeUp">
-                                    <div class="card cardMovesTrade cardMovesUp" id="cardMovesUp">
-                                            <h2 class="card-title cardTitleMovesTrade cardTitleMovesUp">Up</h2>
-                                    </div>
+                            <div class="col-6">
+                                <div class="divPicAndAmount">
+                                     <label for="tradeAmountInput" class="tradeLabel"><img src="images/whiteDollar.png" class="imgAmountTrade"> Amount: </label><input type="text" class="newTradeInput" id="tradeAmountInput" name="tradeAmountInput" placeholder="50">
                                 </div>
-                                <div class="col-6 colTradeDown">
-                                    <div class="card cardMovesTrade cardMovesDown" id="cardMovesDown">
-                                        <h2 class="card-title cardTitleMovesTrade cardTitleMovesDown">Down</h2>
-                                    </div>
-                                </div>
+                            </div>
+                            </div>
+                            <div class="row rowTrade rowButtonsTrade">
+                                 <div class="col-6">
+                                     <div class="colTradeUp">
+                                     <div class="card cardMovesTrade cardMovesUp" id="cardMovesUp">
+                                             <h2 class="card-title cardTitleMovesTrade cardTitleMovesUp">Up</h2>
+                                     </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-6">
+                                     <div class="colTradeDown">
+                                     <div class="card cardMovesTrade cardMovesDown" id="cardMovesDown">
+                                         <h2 class="card-title cardTitleMovesTrade cardTitleMovesDown">Down</h2>
+                                     </div>
+                                     </div>
+                                 </div>
                             </div>
                         </div>
+<!--                        <div class="container containerTrade">-->
+<!--                            <div class="row rowTradeParameters">-->
+<!--                                <div class="col-6 colTradeTime">-->
+<!--                                    <div class="card cardParametersTrade">-->
+<!--                                        <div class="card-body cardBodyParametersTrade">-->
+<!--                                            <h4 class="card-title cardTitleParametersTrade">Time</h4>-->
+<!--                                            <div class="divPicAndTime">-->
+<!--                                                <label for="tradeDurationInput" class="col-2"><img class="imgTimeTrade" src="images/whiteClock.png"></label><input type="text" class="input-element newTradeInput" id="tradeDurationInput" name="tradeDurationInput" placeholder="HH:MM">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-footer cardFooterParametersTrade">-->
+<!--                                            <div class="container-fluid containerTimeButtons">-->
+<!--                                                <div class="row rowTimeButtons">-->
+<!--                                                    <div class="col-6 colTimeButtonPlus">+</div>-->
+<!--                                                    <div class="col-6 colTimeButtonLess">-</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6 colTradeAmount">-->
+<!--                                    <div class="card cardParametersTrade">-->
+<!--                                        <div class="card-body cardBodyParametersTrade">-->
+<!--                                            <h4 class="card-title cardTitleParametersTrade">Amount</h4>-->
+<!--                                            <div class="divPicAndAmount">-->
+<!--                                                <label for="tradeAmountInput" class="col-2"><img src="images/whiteDollar.png" class="imgAmountTrade"></label><input type="text" class="newTradeInput" id="tradeAmountInput" name="tradeAmountInput" placeholder="50">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-footer cardFooterParametersTrade">-->
+<!--                                            <div class="container-fluid containerAmountButtons">-->
+<!--                                                <div class="row rowAmountButtons">-->
+<!--                                                    <div class="col-6 colAmountButtonPlus">+</div>-->
+<!--                                                    <div class="col-6 colAmountButtonLess">-</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="row rowTradeMoves">-->
+<!--                                <div class="col-6 colTradeUp">-->
+<!--                                    <div class="card cardMovesTrade cardMovesUp" id="cardMovesUp">-->
+<!--                                            <h2 class="card-title cardTitleMovesTrade cardTitleMovesUp">Up</h2>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6 colTradeDown">-->
+<!--                                    <div class="card cardMovesTrade cardMovesDown" id="cardMovesDown">-->
+<!--                                        <h2 class="card-title cardTitleMovesTrade cardTitleMovesDown">Down</h2>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="rankTournamentsActionPanel">
                         <div class="table table-responsive divTableRanking">
@@ -291,121 +325,25 @@
                 </div>
             </div>
             <div class="col-md-7 col-sm-4 col-xs-12 graphTournamentsCol">
+                <div class="colGraphDiv">
                 <div class="selectSymbol">
                     <input type="text" class="form-control" id="symbolInput" onkeyup="keyUpSymbolInput()" value="FX:EURGBP">
                 </div>
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center rowGraph">
                         <div id="tradingview_tournament" class="graph col-sm-12 col-md-12 col-lg-12 pb-8"></div>
                         <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/"
                                                                      rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
                             by TradingView
                         </div>
-<!--                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>-->
-<!--                        <script type="text/javascript">-->
-<!--                            new TradingView.widget(-->
-<!--                                {-->
-<!--                                    "autosize": true,-->
-<!--                                    "symbol": "BITSTAMP:BTCUSD",-->
-<!--                                    "interval": "30",-->
-<!--                                    "timezone": "Etc/UTC",-->
-<!--                                    "theme": "Dark",-->
-<!--                                    "style": "1",-->
-<!--                                    "locale": "en",-->
-<!--                                    "toolbar_bg": "#253e52",-->
-<!--                                    // "toolbar_bg": "#f1f3f6",-->
-<!--                                    "enable_publishing": false,-->
-<!--                                    "allow_symbol_change": true,-->
-<!--                                    "container_id": "tradingview_tournament"-->
-<!--                                }-->
-<!--                            );-->
-<!--                        </script>-->
                     </div>
                 </div>
                 <!-- TradingView Widget END -->
+                </div>
             </div>
         </div>
     </div>
-<!--    <div class="container-fluid tournamentsContainer">-->
-<!--        <div class="confirmDiv">-->
-<!--            <h3>Confirmation</h3>-->
-<!--            <p>Are you sure to take part in this competition ?</p>-->
-<!--            <p class="align-right">Once registered, you won't be able to back out.</br>The bid amount will be credited-->
-<!--                from your account at the beginning of the tournament.</p></br>-->
-<!--            <div class="container containerButtonPopUp">-->
-<!--                <div class="row containerButtonRow">-->
-<!--                    <div class="col-6 containerButtonCol">-->
-<!--                        <button class="btn btn-danger" id="btnCancelPopUp">Cancel</button>-->
-<!--                    </div>-->
-<!--                    <div class="col-6 containerButtonCol">-->
-<!--                        <button class="btn btn-success" id="btnConfirmPopUp">Confirm</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row tabTournamentsRow">-->
-<!--            <div class="col-12">-->
-<!--                <div class="tournamentsBox bg-dark">-->
-<!--                    <h1 class="tournamentsTitle">Tournaments <a href="/" id="refreshTabTournamentsA"><img-->
-<!--                            src="images/refreshW32.png" id="refreshTabTournaments"></a></h1>-->
-<!--                    &lt;!&ndash;                    <hr class="my-4 separator separatorTournament">&ndash;&gt;-->
-<!--                    <div class="table table-responsive divTableTournaments">-->
-<!--                        <table class="table-tournaments table-striped table-dark table-hover">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th class="partyCell">Party</th>-->
-<!--                                <th class="durationCell">Starting date</th>-->
-<!--                                <th class="bidCell">Bid</th>-->
-<!--                                <th class="joinCell"></th>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <th colspan="4" id="tabTournamentsSpinner">-->
-<!--                                    <div class="lds-roller">-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                        <div></div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            <tbody class="table-body-tournaments" id="tabTournamentsBody">-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-6 col-sm-12 text-light tournamentExplain">-->
-<!--                <div class="rulesBox">-->
-<!--                    <h3>Rules</h3>-->
-<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
-<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
-<!--                        ipsum </p>-->
-<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
-<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
-<!--                        ipsum </p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-6 col-sm-12 text-light tournamentExplain">-->
-<!--                <div class="priceBox">-->
-<!--                    <h3>Price pool</h3>-->
-<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
-<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
-<!--                        ipsum </p>-->
-<!--                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum-->
-<!--                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem-->
-<!--                        ipsum </p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
 <!-- ################################################## ADMIN PAGE ################################################## -->
 <div class="adminPage">

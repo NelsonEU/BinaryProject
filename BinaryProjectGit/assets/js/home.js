@@ -7,6 +7,10 @@ function OnCookieAccept(){
     $('#cookie-msg').hide();
 }
 
+$(function(){
+    topFunction();
+})
+
 $('#btnStartCompeting').on('click', function (e) {
     console.log("On click home");
     goTournaments(e);

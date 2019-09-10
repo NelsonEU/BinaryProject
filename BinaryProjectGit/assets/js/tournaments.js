@@ -6,8 +6,13 @@
 *
  */
 
+
 window.onresize = function (event) {
     centerMoves();
+    fixTournamentsListHeight();
+    fixRulesHeight();
+    // fixTradeHeight();
+    // fixRankingHeight();
 };
 
 
@@ -20,10 +25,42 @@ var cleaveTime = new Cleave('#tradeDurationInput', {
     timePattern: ['h', 'm']
 });
 
-var cleaveAmount = new Cleave('#tradeAmountInput', {
-    numeral: true,
-    numeralThousandsGroupStyle: 'thousand'
+// var cleaveAmount = new Cleave('#tradeAmountInput', {
+//     numeral: true,
+//     numeralThousandsGroupStyle: 'thousand'
+// });
+
+$(function(){
+    fixTournamentsListHeight();
 });
+
+function fixTournamentsListHeight() {
+
+
+    var rowGraphHeight = $('.rowGraph').height();
+    var inputSymbolHeight = $('.selectSymbol').height();
+
+    var graphHeightTo = rowGraphHeight + inputSymbolHeight + 12;
+
+    $('.colGraphDiv').css('height', graphHeightTo + 'px');
+
+    var graphHeight = $('.colGraphDiv').height();
+    var tableHeight = $('.table-tournaments').height();
+
+    console.log("TABLE HEIGHT: " + tableHeight);
+
+    var height;
+    if(tableHeight < graphHeight) {
+        height = tableHeight + 50;
+        $('.divTableTournaments').css('height', tableHeight + 'px');
+    }else{
+        height = graphHeight + 16;
+        var tHeight = graphHeight - 34;
+        $('.divTableTournaments').css('height', tHeight + 'px');
+    }
+    height += 2;
+    $('.tournamentsListPanel').css('height', height + 'px');
+}
 
 function centerMoves() {
     var title = $('.cardTitleMovesTrade');
@@ -60,7 +97,7 @@ function feedTournamentsTab(response) {
         }
 
         var line = '<tr id="tournamentIndex-' + index + '" class="rowTournamentPanel">' +
-            '<td class="countdownCell"><p class="countdownP">' + getTimeToShow(tournament.startingDate, tournament.registered) + '</p></td>' +
+            '<td class="countdownCell"><p class="countdownP">' + getTimeToShow(tournament.startingDate) + '</p></td>' +
             '<td class="endingDateCell"><p class="endingDateP">' + dateText + '</p></td>' +
             '<td class="partyCell">' + playingPartyText + '</p></td>' +
             '<td class="entryBidCell"><p class="entryBidP">' + tournament.bid + '</p></td></tr>';
@@ -73,88 +110,107 @@ function feedTournamentsTab(response) {
             line.style.backgroundColor = "#118258";
         }
 
-        var startingDate = getDateFromStringAt(tournament.startingDate);
-        if (startingDate > new Date(Date.now())) {
-            var countdown = setInterval(function () {
-                startCountdown(index, tournament.startingDate);
-            }, 1000);
-            countdowns.push(countdown);
-        }else{
-            // $('.countdownP').css('font-size', '10px');
-        }
+        // var startingDate = getDateFromStringAt(tournament.startingDate);
+        // if (startingDate > new Date(Date.now())) {
+        //     var countdown = setInterval(function () {
+        //         startCountdown(index, tournament.startingDate);
+        //     }, 1000);
+        //     countdowns.push(countdown);
+        // }else{
+        //     // $('.countdownP').css('font-size', '10px');
+        // }
 
 
     });
     $('#tabTournamentsSpinner').hide();
     $('#tabTournamentsBody').show();
+    fixTournamentsListHeight();
 }
 
-function startCountdown(index, startingDate) {
-
-    var timeToShow = getTimeToShow(startingDate);
-    var lines = $('.rowTournamentPanel');
-    var line = lines[index];
-    line.firstChild.firstChild.textContent = timeToShow;
-    if(timeToShow === "0:00"){
-        var tournaments = JSON.parse(tournamentsGlobal);
-        tournaments[index]['state'] = 'o';
-        tournamentsGlobal = JSON.stringify(tournaments);
-    }
-}
-
-function getTimeToShow(startingDate, registered) {
-    var countdownDate = getDateFromStringAt(startingDate);
-    var now = Date.now();
-    var distance = countdownDate.getTime() - now;
-    var timeToShow = "";
-    if (distance > 0) {
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        if (days > 0) {
-            if (hours === 0) {
-                hours = "00";
-            } else if (hours.toString().length === 1) {
-                hours = "0" + hours;
-            }
-            if (minutes === 0) {
-                minutes = "00";
-            } else if (minutes.toString().length === 1) {
-                minutes = "0" + minutes;
-            }
-            if (seconds === 0) {
-                seconds = "00";
-            } else if (seconds.toString().length === 1) {
-                seconds = "0" + seconds;
-            }
-            timeToShow = days + ":" + hours + ":" + minutes + ":" + seconds;
-        } else if (hours > 0) {
-            if (minutes === 0) {
-                minutes = "00";
-            } else if (minutes.toString().length === 1) {
-                minutes = "0" + minutes;
-            }
-            if (seconds === 0) {
-                seconds = "00";
-            } else if (seconds.toString().length === 1) {
-                seconds = "0" + seconds;
-            }
-            timeToShow = hours + ":" + minutes + ":" + seconds;
-        } else {
-            if (seconds === 0) {
-                seconds = "00";
-            } else if (seconds.toString().length === 1) {
-                seconds = "0" + seconds;
-            }
-            timeToShow = minutes + ":" + seconds;
+function getTimeToShow(startingDateString) {
+    var startingDate = getDateFromStringAt(startingDateString);
+    if (startingDate > new Date(Date.now())) {
+        var now = new Date(Date.now());
+        var dateText = startingDateString;
+        if (startingDate.getDate() === now.getDate() && startingDate.getMonth() === now.getMonth() && startingDate.getFullYear() === now.getFullYear()) {
+            var dateArray = dateText.split(" at ");
+            dateText = "Today at " + dateArray[1];
+        } else if (startingDate.getDate() === now.getDate() + 1 && startingDate.getMonth() === now.getMonth() && startingDate.getFullYear() === now.getFullYear()) {
+            var dateArray = dateText.split(" at ");
+            dateText = "Tomorrow at " + dateArray[1];
         }
-    } else {
-        timeToShow = "0:00";
+        return dateText;
+    }else{
+        return "Already started";
     }
-    return timeToShow;
 }
+//
+// function startCountdown(index, startingDate) {
+//
+//     var timeToShow = getTimeToShow(startingDate);
+//     var lines = $('.rowTournamentPanel');
+//     var line = lines[index];
+//     line.firstChild.firstChild.textContent = timeToShow;
+//     if(timeToShow === "0:00"){
+//         var tournaments = JSON.parse(tournamentsGlobal);
+//         tournaments[index]['state'] = 'o';
+//         tournamentsGlobal = JSON.stringify(tournaments);
+//     }
+// }
+
+// function getTimeToShow(startingDate, registered) {
+//     var countdownDate = getDateFromStringAt(startingDate);
+//     var now = Date.now();
+//     var distance = countdownDate.getTime() - now;
+//     var timeToShow = "";
+//     if (distance > 0) {
+//         // Time calculations for days, hours, minutes and seconds
+//         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//         if (days > 0) {
+//             if (hours === 0) {
+//                 hours = "00";
+//             } else if (hours.toString().length === 1) {
+//                 hours = "0" + hours;
+//             }
+//             if (minutes === 0) {
+//                 minutes = "00";
+//             } else if (minutes.toString().length === 1) {
+//                 minutes = "0" + minutes;
+//             }
+//             if (seconds === 0) {
+//                 seconds = "00";
+//             } else if (seconds.toString().length === 1) {
+//                 seconds = "0" + seconds;
+//             }
+//             timeToShow = days + ":" + hours + ":" + minutes + ":" + seconds;
+//         } else if (hours > 0) {
+//             if (minutes === 0) {
+//                 minutes = "00";
+//             } else if (minutes.toString().length === 1) {
+//                 minutes = "0" + minutes;
+//             }
+//             if (seconds === 0) {
+//                 seconds = "00";
+//             } else if (seconds.toString().length === 1) {
+//                 seconds = "0" + seconds;
+//             }
+//             timeToShow = hours + ":" + minutes + ":" + seconds;
+//         } else {
+//             if (seconds === 0) {
+//                 seconds = "00";
+//             } else if (seconds.toString().length === 1) {
+//                 seconds = "0" + seconds;
+//             }
+//             timeToShow = minutes + ":" + seconds;
+//         }
+//     } else {
+//         timeToShow = "0:00";
+//     }
+//     return timeToShow;
+// }
 
 $(document).on('click', '.rowTournamentPanel', function (e) {
     if (e != null) {
@@ -214,9 +270,9 @@ function goTrade(tournament) {
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'block');
     centerMoves();
-    $('#colPrizeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
-    $('#colRankHeader').css('background-color', 'rgba(20,24,36, 0.95)');
-    $('#colTradeHeader').css('background-color', 'rgba(20,24,36, 1)');
+    $('#colPrizeHeader').css('background-color', '#26293b');
+    $('#colRankHeader').css('background-color', '#26293b');
+    $('#colTradeHeader').css('background-color', 'rgba(20,24,36)');
 }
 
 $('.colTimeButtonPlus').on('click', function (e) {
@@ -346,11 +402,11 @@ function goRules(tournament) {
     var tournament = tournaments[index];
     if(!tournament['registered']){
         $('.containerButtonAbout').empty();
-        $('.containerButtonAbout').append('<button class="btn btn-success btnAbout" id="btnJoinAbout" onclick="onJoinClick()">Join now !</button>');
+        $('.containerButtonAbout').append('<button class="btn btnAbout" id="btnJoinAbout" onclick="onJoinClick()">Join now !</button>');
     }else{
         if(tournament['state'] === 'o'){
             $('.containerButtonAbout').empty();
-            $('.containerButtonAbout').append('<button class="btn btn-success btnAbout" id="btnPlayAbout" onclick="onPlayClick()">Play now !</button>');
+            $('.containerButtonAbout').append('<button class="btn btnAbout" id="btnPlayAbout" onclick="onPlayClick()">Play now !</button>');
         }else{
             $('.containerButtonAbout').empty();
             $('.containerButtonAbout').append('<img id="imgCheckedAbout" src="images/checked.png"><p id="pRegisteredAbout">You are registered in this tournament</p>');
@@ -363,14 +419,31 @@ function goRules(tournament) {
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'none');
     $('#colPrizeHeader').css('background-color', 'rgba(20,24,36, 1)');
-    $('#colRankHeader').css('background-color', 'rgba(20,24,36, 0.95)');
-    $('#colTradeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
+    $('#colRankHeader').css('background-color', '#26293b');
+    $('#colTradeHeader').css('background-color', '#26293b');
+    fixRulesHeight();
+}
+
+function fixRulesHeight() {
+    var headerHeight = $('.headerTournamentsActionPanel').outerHeight();
+    var linkHeight = $('.linkAllTournaments').outerHeight();
+    var rulesHeight = $('.rulesTournamentsActionPanel').outerHeight();
+    var allHeight = headerHeight + linkHeight + rulesHeight + 18;
+
+    var graphHeight = $('.colGraphDiv').outerHeight();
+
+    console.log(graphHeight);
+
+    if(allHeight < graphHeight){
+        allHeight = graphHeight;
+    }
+    $('.tournamentsActionPanel').css('height', allHeight + 'px');
 }
 
 function feedAbout(tournament){
     // $('#prizePoolAbout').text("Prize pool: " + 0.8*tournament["minPlayers"]*tournament["bid"] + " (may grow larger as more people join in)");
     $('#prizePoolAbout').empty();
-    $('#prizePoolAbout').append('<span class="titleAbout">Prize pool:</span>  <span>  ' + 0.8*tournament["minPlayers"]*tournament["bid"] + ' credits</br><span class="prizeIntel">(may grow larger as more people check in)</span></span>');
+    $('#prizePoolAbout').append('<span class="titleAbout">Prize pool:</span>  <span>  ' + 0.8*tournament["minPlayers"]*tournament["bid"] + ' Credits <span class="prizeIntel">(may grow larger as more people check in)</span></span>');
     // $('#distributionAbout').text("Distribution: " + getDistributionString(tournament["distributionString"]));
 
     $('#distributionAbout').empty();
@@ -386,13 +459,13 @@ function feedAbout(tournament){
     $('#durationAbout').append('<span class="titleAbout">Duration:</span>  <span>  ' + tournament["duration"] + '</span>');
 
     $('#playingSumAbout').empty();
-    $('#playingSumAbout').append('<span class="titleAbout">Playing sum:</span>  <span>  ' + tournament["playingSum"] + ' DEMO Credits<br><span class="prizeIntel">(this is the balance you are using to trade in the tournament, it does not affect your real balance)</span></span>');
+    $('#playingSumAbout').append('<span class="titleAbout">Playing sum:</span>  <span>  ' + tournament["playingSum"] + '$ <span class="prizeIntel">(this is the balance you are using to trade in the tournament, it does not affect your real balance)</span></span>');
 
     $('#endingDate').empty();
     $('#endingDate').append('<span class="titleAbout">Ends:</span>  <span>  ' + tournament["endingDate"] + '</span>');
 
     $('#bidAbout').empty();
-    $('#bidAbout').append('<span class="titleAbout">Bid:</span>  <span>  ' + tournament["bid"] + ' credits</span>');
+    $('#bidAbout').append('<span class="titleAbout">Bid:</span>  <span>  ' + tournament["bid"] + ' Credits</span>');
 
     // $('#minPlayersAbout').text("Min. players required: " + tournament["minPlayers"]);
     // $('#startingDateAbout').text("Starts: " + tournament["startingDate"]);
@@ -478,9 +551,9 @@ function goRank() {
     $('.rankTournamentsActionPanel').css('display', 'block');
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'none');
-    $('#colPrizeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
+    $('#colPrizeHeader').css('background-color', '#26293b');
     $('#colRankHeader').css('background-color', 'rgba(20,24,36, 1)');
-    $('#colTradeHeader').css('background-color', 'rgba(20,24,36, 0.95)');
+    $('#colTradeHeader').css('background-color', '#26293b');
 
     topFunction();
     $('#tabRankingBody').hide();
@@ -532,6 +605,7 @@ $('.linkAllTournaments').on('click', function (e) {
 
 function goTournamentsList() {
     goTournaments(null);
+    fixTournamentsListHeight();
     $('.tournamentsListPanel').css('display', 'block');
     $('.tournamentsActionPanel').css('display', 'none');
 }
@@ -621,6 +695,7 @@ function hideAllListSymbols(){
     {
         $(this).css('display','none');
     });
+    $('.listSymbols').css('display','none');
 }
 
 $(document).on('click','.lineListSymbols', function(e){
@@ -651,6 +726,7 @@ function loadChart(symbol){
 
 $('#symbolInput').on('click', function(){
     this.select();
+    $('.listSymbols').css('display','block');
 });
 
 $(document).on('click', '.cardMovesTrade', function (e) {

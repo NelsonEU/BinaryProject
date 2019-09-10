@@ -1,6 +1,19 @@
-/*.landingPage{*/
-/*    padding-top: 60px;*/
-/*}*/
+.landingPage{
+    height: 100%;
+}
+
+.imgTitleLanding{
+    height: 60px;
+    margin-bottom: 8px;
+}
+
+.headLanding{
+    height: 100%;
+}
+
+.rowHeadLanding{
+    padding-top: 12%;
+}
 
 .masthead {
     position: relative;
@@ -27,8 +40,8 @@
 }
 
 .btnHeadLanding{
-    border: 2px solid #202a33;
-    background-color: #202a33;
+    border: 2px solid #27293d;
+    background-color: #27293d;
     opacity: 0.95;
     color: whitesmoke;
     width: 240px;
@@ -37,13 +50,14 @@
 }
 
 .btnHeadLanding:hover{
-    background-color: #202a33;
+    background-color: #27293d;
     opacity: 1;
     color: whitesmoke;
 }
 
 .headLandingContainer{
-    padding-top: 140px;
+    /*padding-top: 140px;*/
+    padding-top: 4%;
 }
 
 .colButtonLanding{
@@ -107,9 +121,15 @@ header.masthead h1 {
     color: whitesmoke;
 }
 
+.features-icons{
+    /*height: 65% !important;*/
+}
+
 .containerExplain{
-    padding-top: 100px;
-    padding-bottom: 120px;
+    /*padding-top: 100px;*/
+    /*padding-bottom: 120px;*/
+    padding-top: 8%;
+    padding-bottom: 8%;
 }
 
 .btcChartLegendDiv{
@@ -117,6 +137,17 @@ header.masthead h1 {
     text-align: center;
 }
 
+.separatorDiv{
+    height: 60%;
+}
+
+.containerSeparator{
+    height: 100%;
+}
+
+.rowSeparator{
+    height: 100%;
+}
 
 
 .showcase-img{
@@ -125,7 +156,7 @@ header.masthead h1 {
     position: relative;
     background-size: cover;
     background-attachment: fixed;
-    min-height: 450px;
+    /*min-height: 450px;*/
     padding-top: 3rem;
     padding-bottom: 10rem;
 }
@@ -134,6 +165,7 @@ header.masthead h1 {
 .btcChartDiv{
     padding-top: 48px;
     padding-bottom: 48px;
+    height:92%;
 }
 
 

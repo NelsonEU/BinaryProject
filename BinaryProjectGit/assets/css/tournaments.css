@@ -28,7 +28,7 @@
 
     padding-right: 10px;
     padding-left: 20px;
-    padding-top: 8px;
+    padding-top: 12px;
 }
 
 .graphTournamentsCol{
@@ -36,15 +36,21 @@
 
     padding-right: 20px;
     padding-left: 10px;
-    padding-top: 8px;
+    padding-top: 12px;
 
 }
 
+.rowGraph{
+    height: 100%;
+}
+
+
+
 .colGraphDiv{
-    height: 95%;
+    height: 89%;
     padding: 8px;
     background-color: #26293b;
-    border: 1px solid #313452;
+    border: 2px solid #313452;
 }
 
 .registeredParty {
@@ -83,10 +89,10 @@
 
 .creditsDiv{
     cursor: default;
-    margin-top: 1.5%;
+    margin-top: 2.4%;
     margin-left: 4%;
     text-align: right;
-    font-size: small;
+    font-size: 12px;
 }
 
 .goBackArrow{
@@ -110,35 +116,41 @@
 }
 
 #colPrizeHeader{
-    border-bottom: 1px solid #313452;
+    border-bottom: 2px solid #313452;
 }
 
 #colTradeHeader{
-    border-left: 1px solid #313452;
-    border-bottom: 1px solid #313452;
-    border-right: 1px solid #313452;
+    border-left: 2px solid #313452;
+    border-bottom: 2px solid #313452;
+    border-right: 2px solid #313452;
 }
 
 #colRankHeader{
-    border-bottom: 1px solid #313452;
+    border-bottom: 2px solid #313452;
 }
 
 .containerTrade{
-    border-bottom: 1px solid rgb(49, 52, 82) !important;
-    height: 110px;
-    padding-top: 8px;
+    /*border-bottom: 1px solid rgb(49, 52, 82) !important;*/
+    height: 124px;
+    padding-top: 18px;
 }
 
 .tournamentsActionPanel{
     height:100%;
     background-color: #26293b;
-    border: 1px solid #313452;
+    border: 2px solid #313452;
     color:whitesmoke;
     display:none;
 }
 
 .tradeTournamentsActionPanel{
-    height: 80%;
+    /*height: 80%;*/
+}
+
+
+.userTournamentBalanceP{
+    font-size: 8px;
+    margin-bottom: 0 !important;
 }
 
 #tournamentsLinkHeader{
@@ -152,7 +164,7 @@
 .tournamentsListPanel{
     height: 95%;
     background-color: #26293b;
-    border: 1px solid #313452;
+    border: 2px solid #313452;
 }
 
 .rowTournamentPanel{
@@ -160,7 +172,7 @@
 }
 
 .rowRankingPanel{
-    /*line-height: 50px;*/
+    line-height: 10px !important;
     /*min-height: 50px;*/
     /*height: 50px;*/
 }
@@ -204,6 +216,24 @@
 
 .divTableRanking{
     width: 100%;
+}
+
+#divTabOpen{
+    /*border-left: 1px solid #313452;*/
+    /*border-bottom: 1px solid #313452;*/
+    /*border-right: 1px solid #313452;*/
+    background-color: #313452;
+}
+
+#divTabHistory{
+    /*border-left: 1px solid #313452;*/
+    /*border-bottom: 1px solid #313452;*/
+    /*border-right: 1px solid #313452;*/
+    background-color: #313452;
+}
+
+#tabHistoryTrades{
+    border-right: 0;
 }
 
 .table-tournaments{
@@ -350,7 +380,8 @@
     cursor: pointer;
     width: 200px;
     height: 30px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);*/
 }
 
 @media screen and (max-width: 1550px) {
@@ -382,7 +413,7 @@
         cursor: pointer;
         width: 160px;
         height: 30px;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);
+        /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);*/
     }
 }
 
@@ -415,7 +446,7 @@
         cursor: pointer;
         width: 160px;
         height: 30px;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);
+        /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4), 0 3px 10px 0 rgba(0,0,0,0.3);*/
     }
 }
 
@@ -474,8 +505,13 @@
 }
 
 .containerSubHeader{
-    border-bottom: 1px solid rgb(49, 52, 82) !important;
-    margin-bottom: 4px;
+    border-bottom: 2px solid rgb(49, 52, 82) !important;
+    background-color: white;
+    /*margin-bottom: 4px;*/
+}
+
+.rowSubHeader{
+    background-color: rgba(20, 24, 36,0.96);
 }
 
 
@@ -489,8 +525,8 @@ ABOUT TRADE CSS
 }
 
 .btnAbout{
-    margin-top: 8px;
-    margin-bottom: 32px;
+    margin-top: 6px;
+    margin-bottom: 24px;
     color:whitesmoke;
     background-color: rgb(17, 130, 88);
 }
@@ -504,8 +540,8 @@ ABOUT TRADE CSS
 }
 
 #imgCheckedAbout{
-    width: 75px;
-    height: 75px;
+    width: 30px;
+    height: 30px;
 }
 
 #pRegisteredAbout{
@@ -577,9 +613,9 @@ ABOUT TRADE CSS
 
 #btnPlayAbout, #btnJoinAbout{
     width: 45%;
-    height: 45px;
+    height: 40px;
     font-size: medium;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.4), 0 1px 3px 0 rgba(0,0,0,0.3)
 }
 
 .smallIconToast{
@@ -623,7 +659,7 @@ ABOUT TRADE CSS
 }
 
 .divTableRanking{
-    margin-top: 4%;
+    /*margin-top: 4%;*/
 }
 
 .rankTournamentsActionPanel{
@@ -632,5 +668,96 @@ ABOUT TRADE CSS
 
 
 .containerButtonAbout{
-    height: 75px;
+    height: 60px;
+    margin-top: 8px;
+}
+
+.tableTradeRow{
+    height: 100%;
+}
+
+.tableTradeCol{
+    height: 100%;
+}
+
+.tableTradeDiv{
+    height: 100%;
+}
+
+
+.containerTableTrades{
+    padding: 0;
+    margin-top: 20px;
+    border: 2px solid #313452 !important;
+}
+
+.listTabsTrade{
+    background-color: white;
+    border-bottom: 1px solid #313452 !important;
+    height: 50px;
+}
+
+.tabsTrade{
+    padding-top: 14px;
+    width: 50%;
+    cursor: pointer;
+    /*border: 1px solid #313452 !important;*/
+    color:whitesmoke;
+    border-right: 1px solid #313452 !important;
+    border-bottom: 1px solid #313452 !important;
+
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+
+}
+
+
+.tabsTrade:hover{
+    /*border: 1px solid #313452 !important;*/
+    border-left: 0;
+    border-top: 0;
+    border-right: 1px solid #313452 !important;
+    border-bottom: 1px solid #313452 !important;
+    text-decoration: none !important;
+}
+
+.linkTabsTrade{
+    color:whitesmoke;
+}
+
+.linkTabsTrade:hover{
+    color:whitesmoke !important;
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.notifNothing{
+    background-color: #26293b;
+    margin-top: 18px;
+    text-decoration: underline;
+    color:whitesmoke;
+    font-size: medium;
+}
+
+.tabTournamentOpenTrades{
+    width:100%;
+    font-size: 9px;
+}
+
+.tabTournamentHistoryTrades{
+    width: 100%;
+    font-size: 9px;
+}
+
+.chevronTabTrades{
+    width: 10px;
+    height: 10px;
+}
+
+#tdWin{
+    color: #6ac159;
+}
+
+#tdLose{
+    color: red;
 }

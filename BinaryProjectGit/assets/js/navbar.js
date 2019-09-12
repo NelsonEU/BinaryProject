@@ -53,6 +53,7 @@ function isConnected(){
     $('.dropdownMenuUser').empty();
     $('.dropdownMenuUser').append("<li><a class='nav-link linkDropdown' id='profileLinkHeader'>Account</a></li>");
     $('.dropdownMenuUser').append("<li><a class='nav-link linkDropdown loginLink' id='logoutLinkHeader' onclick='signOut()'>Sign out</a></li>");
+    goTournamentsList();
 }
 
 function isNotConnected(){
@@ -202,6 +203,7 @@ function goHome(e){
     if(e != null) {
         e.preventDefault();
     }
+    hideOrders();
     $('.playingPage').css('display','none');
     $('.landingPage').css('display','block');
     $('.tournamentsPage').css('display', 'none');

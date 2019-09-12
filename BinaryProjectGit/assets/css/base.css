@@ -99,8 +99,7 @@ header{
     cursor:pointer;
 }
 
-.buttonDeposit{
-    background-color: #118258;
+.buttonDW{
     border: none;
     color: whitesmoke !important;
     font-size: small;
@@ -108,10 +107,28 @@ header{
     cursor:pointer;
     margin-top: 4px;
     user-select: none;
+    width: 100px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#homeButtonHeader{
+    padding-left: 6px;
+}
+
+.buttonDeposit{
+    background-color: #118258;
 }
 
 .buttonDeposit:hover{
     background-color: rgb(14, 117, 79);;
+}
+
+.buttonWithdraw{
+    background-color: darkred;
+}
+
+.buttonWithdraw:hover{
+    background-color: rgb(120,0,0);
 }
 
 .checkedImg{

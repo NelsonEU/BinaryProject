@@ -23,6 +23,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -48,6 +49,45 @@ public class TradeUcc implements ITradeUcc {
             System.out.println("ERREUR DB: " + e.getMessage());
         }
         ses = Executors.newScheduledThreadPool(10000);
+    }
+
+    @Override
+    public List<ITradeDto> getTournamentOpenTrades(int userId, int tournamentId){
+        try{
+            this.dalServices.startTransaction();
+            return this.tradeDao.getTournamentOpenTrades(userId, tournamentId);
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally {
+            this.dalServices.commitTransaction();
+        }
+    }
+
+    @Override
+    public List<ITradeDto> getTournamentHistoryTrades(int userId, int tournamentId){
+        try{
+            this.dalServices.startTransaction();
+            return this.tradeDao.getTournamentHistoryTrades(userId, tournamentId);
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally {
+            this.dalServices.commitTransaction();
+        }
+    }
+
+    @Override
+    public int getTournamentTradesCount(int userId, int tournamentId){
+        try{
+            this.dalServices.startTransaction();
+            return this.tradeDao.getTradeTournamentCount(userId, tournamentId);
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally {
+            this.dalServices.commitTransaction();
+        }
     }
 
     @Override

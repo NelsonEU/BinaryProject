@@ -1,9 +1,6 @@
 package ihm;
 
-import biz.dto.IDistributionDto;
-import biz.dto.IParticipationDto;
-import biz.dto.ITournamentDto;
-import biz.dto.IUserDto;
+import biz.dto.*;
 import biz.impl.Tournament;
 import biz.ucc.*;
 
@@ -93,6 +90,18 @@ public class Dispatcher {
                             case "newTrade":
                                 newTrade(req,resp);
                                 break;
+                            case "getTournamentOpenTrades":
+                                getTournamentsOpenTrades(req,resp);
+                                break;
+                            case "getTournamentHistoryTrades":
+                                getTournamentsHistoryTrades(req,resp);
+                                break;
+                            case "getTradesCount":
+                                getTradesCount(req,resp);
+                                break;
+                            case "getUserTournamentBalance":
+                                getUserTournamentBalance(req,resp);
+                                break;
                             default:
                                 if(adminConnected()){
                                     switch (action){
@@ -131,6 +140,7 @@ public class Dispatcher {
         }
     }
 
+
     private void isConnected(HttpServletResponse resp) throws IOException {
         if(userConnected()){
             IUserDto userResponse = this.user;
@@ -166,6 +176,29 @@ public class Dispatcher {
 
     }
 
+    private void getTradesCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try{
+            int tradesCount = this.tradeUcc.getTournamentTradesCount(this.user.getUserId(), tournamentId);
+            if(tradesCount == 0) resp.sendError(488, "No trades");
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
+    }
+
+    private void getUserTournamentBalance(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try{
+            double balance = this.tournamentUcc.getUserTournamentBalance(tournamentId, this.user.getUserId());
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setCharacterEncoding("UTF-8");
+            resp.getOutputStream().print(balance);
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
+    }
+
     private void getRanking(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
         int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
         try{
@@ -176,7 +209,30 @@ public class Dispatcher {
         }catch(FatalException e){
             resp.sendError(500, "Something went wrong");
         }
+    }
 
+    private void getTournamentsHistoryTrades(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try{
+            List<ITradeDto> list = this.tradeUcc.getTournamentHistoryTrades(this.user.getUserId(), tournamentId);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setCharacterEncoding("UTF-8");
+            resp.getOutputStream().print(this.genson.serialize(list));
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
+    }
+
+    private void getTournamentsOpenTrades(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int tournamentId = Integer.parseInt(req.getParameter("tournamentId"));
+        try{
+            List<ITradeDto> list = this.tradeUcc.getTournamentOpenTrades(this.user.getUserId(), tournamentId);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setCharacterEncoding("UTF-8");
+            resp.getOutputStream().print(this.genson.serialize(list));
+        }catch(FatalException e){
+            resp.sendError(500, "Something went wrong");
+        }
     }
 
     private void newTrade(HttpServletRequest req, HttpServletResponse resp) {

@@ -10,10 +10,23 @@
 window.onresize = function (event) {
     centerMoves();
     fixTournamentsListHeight();
-    fixRulesHeight();
-    // fixTradeHeight();
+    if($('#colPrizeHeader').css('background-color') ===  'rgb(20, 24, 36)') {
+        fixRulesHeight();
+    }else if($('#colTradeHeader').css('background-color') ===  'rgb(20, 24, 36)') {
+        fixTournamentsActionPanelHeight();
+        fixContainerTableOpenTrades();
+        fixContainerTableHistoryTrades();
+    }else if($('#colRankHeader').css('background-color') ===  'rgb(20, 24, 36)'){
+        fixRanking();
+    }
+    // fixContainerTableOpenTrades();
     // fixRankingHeight();
 };
+
+$(function(){
+    hideOrders();
+});
+
 
 
 var tournamentsGlobal = null;
@@ -30,9 +43,117 @@ var cleaveTime = new Cleave('#tradeDurationInput', {
 //     numeralThousandsGroupStyle: 'thousand'
 // });
 
-$(function(){
-    fixTournamentsListHeight();
-});
+// $(function(){
+//     fixTournamentsListHeight();
+// });
+
+function fixContainerTableOpenTrades(){
+
+
+
+    var headerHeight = $('.listTabsTrade').height();
+    var tabHeight = $('.tabTournamentOpenTrades').height();
+    var graphHeight = $('.colGraphDiv').outerHeight();
+    var actionPanel = $('.tournamentsActionPanel').outerHeight();
+
+    var height;
+    if(headerHeight + tabHeight < graphHeight - actionPanel - 20){
+        height = headerHeight + tabHeight + 5;
+    }else{
+        height = graphHeight - actionPanel - 20;
+    }
+    if(height <= 0){
+        height = 250;
+    }
+    var newTabHeight = height - headerHeight - 4;
+    $('#divTabOpen').css('height', newTabHeight + 'px');
+    $('.containerTableTrades').css('height', height + 'px');
+}
+
+function fixContainerTableHistoryTrades(){
+
+    var headerHeight = $('.listTabsTrade').height();
+    var tabHeight = $('.tabTournamentHistoryTrades').height();
+    var graphHeight = $('.colGraphDiv').outerHeight();
+    var actionPanel = $('.tournamentsActionPanel').outerHeight();
+
+    var height;
+    if(headerHeight + tabHeight < graphHeight - actionPanel - 20){
+        console.log("PLUS PETIT");
+        height = headerHeight + tabHeight + 5;
+    }else{
+        height = graphHeight - actionPanel - 20;
+        console.log("PLUS GRAND");
+    }
+    if(height <= 0){
+        height = 250;
+    }
+    var newTabHeight = height - headerHeight - 4;
+    $('#divTabHistory').css('height', newTabHeight + 'px');
+    $('.containerTableTrades').css('height', height + 'px');
+}
+
+function fixDisplayOpenNothingToShowHeight(){
+    // $('#divTabOpen').css('padding-top', '10px');
+    // $('.notifNothing').css('margin-top', '2px');
+    //
+    // var headerHeight = $('.listTabsTrade').height();
+    // var tabHeight = $('#divTabOpen').height();
+    //
+    // var height = headerHeight + tabHeight + 4;
+
+    var height = $('.notifNothing').height() + $('.listTabsTrade').height() + 44;
+    if(height === 0) height = 100;
+    $('.divTabs').css('height', $('.notifNothing').height());
+    $('#divTabOpen').css('height', $('.notifNothing').height());
+    $('.containerTableTrades').css('height', height + 'px');
+}
+
+function fixDisplayHistoryNothingToShowHeight(){
+    // $('#divTabHistory').css('padding-top', '10px');
+    // $('.notifNothing').css('margin-top', '2px');
+    //
+    // var headerHeight = $('.listTabsTrade').height();
+    // var tabHeight = $('#divTabHistory').height();
+    //
+    // var height = headerHeight + tabHeight + 4;
+
+    var height = $('.notifNothing').height() + $('.listTabsTrade').height() + 44;
+
+    console.log("ON PASSE ICI");
+    console.log("H: " + height);
+    if(height === 0) height = 100;
+    $('.divTabs').css('height', $('.notifNothing').height());
+    $('#divTabHistory').css('height', $('.notifNothing').height());
+    $('.containerTableTrades').css('height', height + 'px');
+}
+
+function fixTournamentsActionPanelHeight(){
+    var containerTradeHeight = $('.tradeTournamentsActionPanel').height();
+    var containerSubHeaderHeight = $('.containerSubHeader').height();
+    var headerHeight = $('.headerTournamentsActionPanel').height();
+
+    var height = containerSubHeaderHeight + containerTradeHeight + headerHeight;
+
+    $('.tournamentsActionPanel').css('height',height+'px');
+
+}
+
+function fixRulesHeight() {
+    var headerHeight = $('.headerTournamentsActionPanel').outerHeight();
+    var linkHeight = $('.linkAllTournaments').outerHeight();
+    var rulesHeight = $('.rulesTournamentsActionPanel').outerHeight();
+    var allHeight = headerHeight + linkHeight + rulesHeight + 18;
+
+    var graphHeight = $('.colGraphDiv').outerHeight();
+
+    console.log(graphHeight);
+
+    if(allHeight < graphHeight){
+        allHeight = graphHeight;
+    }
+    $('.tournamentsActionPanel').css('height', allHeight + 'px');
+}
 
 function fixTournamentsListHeight() {
 
@@ -42,7 +163,7 @@ function fixTournamentsListHeight() {
 
     var graphHeightTo = rowGraphHeight + inputSymbolHeight + 12;
 
-    $('.colGraphDiv').css('height', graphHeightTo + 'px');
+    // $('.colGraphDiv').css('height', graphHeightTo + 'px');
 
     var graphHeight = $('.colGraphDiv').height();
     var tableHeight = $('.table-tournaments').height();
@@ -51,15 +172,44 @@ function fixTournamentsListHeight() {
 
     var height;
     if(tableHeight < graphHeight) {
-        height = tableHeight + 50;
+        height = tableHeight + 52;
         $('.divTableTournaments').css('height', tableHeight + 'px');
     }else{
-        height = graphHeight + 16;
+        height = graphHeight + 18;
         var tHeight = graphHeight - 34;
         $('.divTableTournaments').css('height', tHeight + 'px');
     }
     height += 2;
     $('.tournamentsListPanel').css('height', height + 'px');
+}
+
+function fixRanking(){
+    var rowGraphHeight = $('.rowGraph').height();
+    var inputSymbolHeight = $('.selectSymbol').height();
+
+    // var graphHeightTo = rowGraphHeight + inputSymbolHeight + 12;
+
+    // $('.colGraphDiv').css('height', graphHeightTo + 'px');
+
+    var graphHeight = $('.colGraphDiv').height();
+    var tableHeight = $('.table-ranking').height();
+
+    var headerHeight = $('.headerTournamentsActionPanel').outerHeight();
+    var linkHeight = $('.linkAllTournaments').outerHeight();
+
+    var height = headerHeight + linkHeight + tableHeight;
+    if(tableHeight + headerHeight + linkHeight < graphHeight) {
+        // height = tableHeight + 52;
+        $('.divTableRanking').css('height', tableHeight + 'px');
+        height += 12;
+    }else{
+        console.log("ON EST LAAAAAA");
+        height = graphHeight;
+        var tHeight = graphHeight - headerHeight - linkHeight + 8;
+        $('.divTableRanking').css('height', tHeight + 'px');
+        height += 20;
+    }
+    $('.tournamentsActionPanel').css('height', height + 'px');
 }
 
 function centerMoves() {
@@ -258,11 +408,193 @@ $(document).on('click', '.btnTournamentsHeader', function (e) {
     }
 });
 
-function goTrade(tournament) {
+$('#tabOpenTrades').on('click', function(e){
+    e.preventDefault();
+    resetBackgroundTabs();
+    feedOpenTab();
+    $('#divTabOpen').css('display', 'block');
+    $('#divTabHistory').css('display', 'none');
+    $('#tabOpenTrades').css('background-color', 'rgba(20,24,36,1)');
+});
+
+$('#tabHistoryTrades').on('click', function(e){
+    e.preventDefault();
+    resetBackgroundTabs();
+    feedHistoryTab();
+    $('#divTabOpen').css('display', 'none');
+    $('#divTabHistory').css('display', 'block');
+    $('#tabHistoryTrades').css('background-color', 'rgba(20,24,36,1)');
+});
+
+function resetBackgroundTabs(){
+    $('#tabHistoryTrades').css('background-color', 'rgba(20, 24, 36,0.96)');
+    $('#tabOpenTrades').css('background-color', 'rgba(20, 24, 36,0.96)');
+}
+
+function feedOpenTab(){
     var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
     var tournaments = JSON.parse(tournamentsGlobal);
     var tournament = tournaments[index];
+    $.ajax({
+        url:'/',
+        type: 'POST',
+        data: {
+           'action':'getTournamentOpenTrades',
+           'tournamentId':tournament['tournamentId']
+        },
+        success: function(response){
+            feedOpenTabHtml(response);
+        },
+        error: function(e){
+            displayOpenNothingToShow();
+            // console.log("ERROR FEED OPEN");
+            // hideOrders();
+        }
+    });
+}
 
+function displayOpenNothingToShow(){
+    $('.containerTableTrades').css('background-color', '#26293b');
+    $('#divTabOpen').css('background-color','rgb(20, 24, 36)');
+    $('#divTabOpen').empty();
+    $('#divTabOpen').append('<p class="notifNothing">Nothing to show</p>');
+    fixDisplayOpenNothingToShowHeight();
+}
+
+function displayHistoryNothingToShow(){
+    $('.containerTableTrades').css('background-color', '#26293b');
+    $('#divTabHistory').css('background-color','rgb(20, 24, 36)');
+    $('#divTabHistory').empty();
+    $('#divTabHistory').append('<p class="notifNothing">Nothing to show</p>');
+    fixDisplayHistoryNothingToShowHeight();
+}
+
+function getStringDate(sD){
+    var date = sD.dayOfMonth + "/" + sD.monthValue + "/" + sD.year;
+    date += " " + sD.hour + ":" + sD.minute;
+    return date;
+}
+
+function feedOpenTabHtml(response){
+    var trades = JSON.parse(response);
+    if(trades.length > 0) {
+        $('#divTabOpen').empty();
+        $('#divTabOpen').addClass("table table-responsive");
+        $('#divTabOpen').append('<table class="tabTournamentOpenTrades table-striped table-dark table-hover"></table>');
+        $('.tabTournamentOpenTrades').append('<thead class="tHeadTournamentOpenTrades">' +
+            + '<tr>'
+            + '<th class="pairCell">Asset</th>'
+            + '<th class="startingCell">Date</th>'
+            + '<th class="endingCell">Expiration</th>'
+            + '<th class="amountCell">Amount</th>'
+            + '<th class="strikeCell">Strike price</th>'
+            + '</tr>'
+            + '</thead><tbody class="tBodyTournamentOpenTrades"></tbody>');
+
+        trades.forEach(function (key, index) {
+            var trade = trades[index];
+            var line = '<tr>';
+            if(trade.move === 'u'){
+                line += '<td><img class="chevronTabTrades" src="images/chevronUp.png"> ' + trade.pair + '</td>';
+            }else{
+                line += '<td><img class="chevronTabTrades" src="images/chevronDown.png"> ' + trade.pair + '</td>';
+            }
+            line += '<td>' + getStringDate(trade.startingDate) + '</td>';
+            line += '<td>' + getStringDate(trade.endingDate) + '</td>';
+            line += '<td>' + trade.amount + ' $</td>';
+            line += '<td>' + parseFloat(trade.strikingPrice.toFixed(8)) + '</td>';
+            line += '</tr>';
+            $('.tBodyTournamentOpenTrades').append(line);
+            $('#divTabOpen').css('background-color', '#313452');
+        });
+        fixContainerTableOpenTrades();
+    }else{
+        $('#divTabOpen').removeClass("table table-responsive");
+        displayOpenNothingToShow();
+
+    }
+}
+
+function feedHistoryTab(){
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+    $.ajax({
+        url:'/',
+        type: 'POST',
+        data: {
+            'action':'getTournamentHistoryTrades',
+            'tournamentId':tournament['tournamentId']
+        },
+        success: function(response){
+            feedHistoryTabHtml(response);
+        },
+        error: function(e){
+            displayHistoryNothingToShow();
+            // hideOrders();
+        }
+    });
+}
+
+function feedHistoryTabHtml(response){
+    var trades = JSON.parse(response);
+    if(trades.length > 0) {
+        $('#divTabHistory').empty();
+        $('#divTabHistory').addClass("table table-responsive");
+        $('#divTabHistory').append('<table class="tabTournamentHistoryTrades table-striped table-dark table-hover"></table>');
+        $('.tabTournamentHistoryTrades').empty();
+        $('.tabTournamentHistoryTrades').append('<thead class="tHeadTournamentHistoryTrades">' +
+            + '<tr>'
+            + '<th class="resultCell">Result</th>'
+            + '<th class="pairCell">Asset</th>'
+            + '<th class="startingCell">Date</th>'
+            + '<th class="endingCell">Expiration</th>'
+            + '<th class="amountCell">Amount</th>'
+            + '<th class="strikeCell">Strike price</th>'
+            + '<th class="closeCell">Close price</th>'
+            + '</tr>'
+            + '</thead><tbody class="tBodyTournamentHistoryTrades"></tbody>');
+        $('.tBodyTournamentHistoryTrades').empty();
+        trades.forEach(function (key, index) {
+            var trade = trades[index];
+            console.log(trade);
+            var line = '<tr>';
+            if(trade.state === 'w'){
+                line += '<td id="tdWin">W</td>';
+            }else{
+                line += '<td id="tdLose">L</td>';
+            }
+            if(trade.move === 'u'){
+                line += '<td><img class="chevronTabTrades" src="images/chevronUp.png"> ' + trade.pair + '</td>';
+            }else{
+                line += '<td><img class="chevronTabTrades" src="images/chevronDown.png"> ' + trade.pair + '</td>';
+            }
+            line += '<td>' + getStringDate(trade.startingDate) + '</td>';
+            line += '<td>' + getStringDate(trade.endingDate) + '</td>';
+            line += '<td>' + trade.amount + ' $</td>';
+            line += '<td>' + parseFloat(trade.strikingPrice.toFixed(8)) + '</td>';
+            line += '<td>' + parseFloat(trade.endingPrice.toFixed(8)) + '</td>';
+            line += '</tr>';
+            $('.tBodyTournamentHistoryTrades').append(line);
+        });
+        fixContainerTableHistoryTrades();
+    }else{
+        $('#divTabHistory').removeClass("table table-responsive");
+        displayHistoryNothingToShow();
+    }
+}
+
+function goTrade(tournamenttt) {
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+    var tournamentId = tournament['tournamentId'];
+
+    $('#tabOpenTrades').css('background-color', 'rgba(20,24,36)');
+    $('#tabHistoryTrades').css('background-color', '#26293b');
+    // feedOpenTab();
+    checkUserTournamentBalance(tournamentId);
+    checkOrders(tournamentId);
     //TODO Faudra bien recuperer la balance de l'utilisateur a un moment
     $('.tournamentsListPanel').css('display', 'none');
     $('.rulesTournamentsActionPanel').css('display', 'none');
@@ -270,9 +602,145 @@ function goTrade(tournament) {
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'block');
     centerMoves();
-    $('#colPrizeHeader').css('background-color', '#26293b');
-    $('#colRankHeader').css('background-color', '#26293b');
+    $('#colPrizeHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
+    $('#colRankHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
     $('#colTradeHeader').css('background-color', 'rgba(20,24,36)');
+    $('#divTabOpen').css('display', 'block');
+    $('#divTabHistory').css('display', 'none');
+    fixTournamentsActionPanelHeight();
+}
+
+function fixTournamentsActionPanelHeightWithAmount(){
+    console.log("coucou on fait que passer");
+    fixTournamentsActionPanelHeight();
+    var height = $('.tournamentsActionPanel').height();
+    var toAdd = $('.userTournamentBalanceP').outerHeight();
+    height += toAdd;
+    $('.tournamentsActionPanel').css('height',height + 'px');
+}
+
+function checkUserTournamentBalance(tournamentId) {
+    $.ajax({
+        url:'/',
+        type:'POST',
+        // async:false,
+        data:{
+            'action':'getUserTournamentBalance',
+            'tournamentId':tournamentId
+        },
+        success:function(response){
+            console.log("success");
+            console.log(response);
+            if(response != -1) {
+                $(".userTournamentBalanceP").remove();
+                $('.rowButtonsTrade').css('margin-top', '12px');
+                $('.divPicAndAmount').after('<p class="userTournamentBalanceP">' + parseFloat(response).toFixed(2) + '$</p>');
+                fixTournamentsActionPanelHeightWithAmount();
+            }else{
+                var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+                var tournaments = JSON.parse(tournamentsGlobal);
+                var tournament = tournaments[index];
+                var tournamentPlayingSum = tournament['playingSum'];
+                $(".userTournamentBalanceP").remove();
+                $('.rowButtonsTrade').css('margin-top', '12px');
+                $('.divPicAndAmount').after('<p class="userTournamentBalanceP">' + parseFloat(tournamentPlayingSum).toFixed(2) + '$</p>');
+            }
+        },
+        error:function(e){
+            console.log("ERROR checkBALANCE");
+            console.log(e.status);
+            $(".userTournamentBalanceP").remove();
+            $('.rowButtonsTrade').css('margin-top', '24px');
+        }
+    });
+}
+
+function checkOrders(){
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+    $.ajax({
+       url:'/',
+       type:'POST',
+       // async:false,
+       data:{
+           'action':'getTradesCount',
+           'tournamentId':tournament['tournamentId']
+       },
+        success:function(){
+           console.log("Y A des trucs");
+           showOrders();
+           checkOpenTrades(tournament['tournamentId']);
+        },
+        error:function(e){
+           if(e.status === 488){
+               hideOrders();
+           }
+        }
+    });
+}
+
+function showOrders(){
+    $('.containerTableTrades').css('display','block');
+}
+
+function checkOpenTrades(tournamentId){
+    $.ajax({
+        url:'/',
+        type: 'POST',
+        // async: false,
+        data: {
+            'action':'getTournamentOpenTrades',
+            'tournamentId':tournamentId
+        },
+        success: function(response){
+            var trades = JSON.parse(response);
+            if(trades.length > 0) {
+                resetBackgroundTabs();
+                $('#tabOpenTrades').css('background-color', 'rgba(20,24,36)');
+                $('#divTabOpen').css('display', 'block');
+                $('#divTabHistory').css('display', 'none');
+                feedOpenTabHtml(response);
+            }else{
+                displayOpenNothingToShow();
+                checkHistoryTrades(tournamentId);
+            }
+        },
+        error: function(e){
+            displayOpenNothingToShow();
+        }
+    });
+}
+
+function checkHistoryTrades(tournamentId){
+    $.ajax({
+        url:'/',
+        type: 'POST',
+        // async: false,
+        data: {
+            'action':'getTournamentHistoryTrades',
+            'tournamentId':tournamentId
+        },
+        success: function(response){
+            var trades = JSON.parse(response);
+            if(trades.length > 0) {
+                resetBackgroundTabs();
+                $('#tabHistoryTrades').css('background-color', 'rgba(20,24,36)');
+                $('#divTabOpen').css('display', 'none');
+                $('#divTabHistory').css('display', 'block');
+                feedHistoryTabHtml(response);
+            }else{
+                displayHistoryNothingToShow();
+            }
+        },
+        error: function(e){
+            displayOpenNothingToShow();
+        }
+    });
+}
+
+function hideOrders(){
+    $('.containerTableTrades').css('display','none');
 }
 
 $('.colTimeButtonPlus').on('click', function (e) {
@@ -413,31 +881,16 @@ function goRules(tournament) {
         }
     }
     feedAbout(tournament);
+    hideOrders();
     $('.tournamentsListPanel').css('display', 'none');
     $('.rulesTournamentsActionPanel').css('display', 'block');
     $('.rankTournamentsActionPanel').css('display', 'none');
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'none');
     $('#colPrizeHeader').css('background-color', 'rgba(20,24,36, 1)');
-    $('#colRankHeader').css('background-color', '#26293b');
-    $('#colTradeHeader').css('background-color', '#26293b');
+    $('#colRankHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
+    $('#colTradeHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
     fixRulesHeight();
-}
-
-function fixRulesHeight() {
-    var headerHeight = $('.headerTournamentsActionPanel').outerHeight();
-    var linkHeight = $('.linkAllTournaments').outerHeight();
-    var rulesHeight = $('.rulesTournamentsActionPanel').outerHeight();
-    var allHeight = headerHeight + linkHeight + rulesHeight + 18;
-
-    var graphHeight = $('.colGraphDiv').outerHeight();
-
-    console.log(graphHeight);
-
-    if(allHeight < graphHeight){
-        allHeight = graphHeight;
-    }
-    $('.tournamentsActionPanel').css('height', allHeight + 'px');
 }
 
 function feedAbout(tournament){
@@ -545,15 +998,16 @@ function goRank() {
     var tournaments = JSON.parse(tournamentsGlobal);
     var tournament = tournaments[index];
 
+    hideOrders();
     //TODO FETCH LE CLASSEMENT AVEC L'ID DE '.tournamentsActionPanel'
     $('.tournamentsListPanel').css('display', 'none');
     $('.rulesTournamentsActionPanel').css('display', 'none');
     $('.rankTournamentsActionPanel').css('display', 'block');
     $('.tournamentsActionPanel').css('display', 'block');
     $('.tradeTournamentsActionPanel').css('display', 'none');
-    $('#colPrizeHeader').css('background-color', '#26293b');
+    $('#colPrizeHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
     $('#colRankHeader').css('background-color', 'rgba(20,24,36, 1)');
-    $('#colTradeHeader').css('background-color', '#26293b');
+    $('#colTradeHeader').css('background-color', 'rgba(20, 24, 36,0.96)');
 
     topFunction();
     $('#tabRankingBody').hide();
@@ -589,13 +1043,14 @@ function feedRankingTab(response) {
         var line = '<tr class="rowRankingPanel">' +
             '<td class="rankCell"><p class="rankP">' + ranking + '</p></td>' +
             '<td class="usernameCell"><p class="usernameP">' + username + '</p></td>' +
-            '<td class="balanceCell">' + balance + '<p style="font-size: 10px">DEMO Credits</p></td></tr>';
+            '<td class="balanceCell">' + balance + '$</td></tr>';
 
         tbody.append(line);
         indice++;
     });
     $('#tabRankingSpinner').hide();
     $('#tabRankingBody').show();
+    fixRanking();
 }
 
 $('.linkAllTournaments').on('click', function (e) {
@@ -606,9 +1061,11 @@ $('.linkAllTournaments').on('click', function (e) {
 function goTournamentsList() {
     goTournaments(null);
     fixTournamentsListHeight();
+    hideOrders();
     $('.tournamentsListPanel').css('display', 'block');
     $('.tournamentsActionPanel').css('display', 'none');
 }
+
 
 /*
 *
@@ -719,9 +1176,11 @@ function loadChart(symbol){
             "locale": "en",
             "toolbar_bg": "#253e52",
             "enable_publishing": false,
+            "hide_side_toolbar": false,
             "container_id": "tradingview_tournament"
         }
     );
+    $('.legendChartText').text(symbol);
 }
 
 $('#symbolInput').on('click', function(){
@@ -819,6 +1278,12 @@ function newTradeError(e){
 }
 
 function newTradeSuccess(){
+    var index = $('.tournamentsActionPanel').attr('id').split('-')[1];
+    var tournaments = JSON.parse(tournamentsGlobal);
+    var tournament = tournaments[index];
+    var tournamentId = tournament['tournamentId'];
+    feedOpenTab();
+    checkUserTournamentBalance(tournamentId);
     showToast("New trade", "Your trade has been successfully processed !");
 }
 

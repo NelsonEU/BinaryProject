@@ -15,6 +15,8 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TradeDao implements ITradeDao {
 
@@ -98,5 +100,71 @@ public class TradeDao implements ITradeDao {
         } catch (SQLException e) {
             throw new FatalException(e.getMessage());
         }
+    }
+
+    @Override
+    public List<ITradeDto> getTournamentOpenTrades(int userId, int tournamentId){
+        PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("tournamentOpenTrades"));
+        try {
+            return getListFromSelectPS(ps, userId, tournamentId);
+        } catch (SQLException e) {
+            throw new FatalException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<ITradeDto> getTournamentHistoryTrades(int userId, int tournamentId){
+        PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("tournamentHistoryTrades"));
+        try {
+            return getListFromSelectPS(ps, userId, tournamentId);
+        } catch (SQLException e) {
+            throw new FatalException(e.getMessage());
+        }
+    }
+
+    @Override
+    public int getTradeTournamentCount(int userId, int tournamentId){
+        PreparedStatement ps = dalBackendServices.getPreparedStatement(config.getValueOfKey("getTournamentUserCount"));
+        try {
+            ps.setInt(1, userId);
+            ps.setInt(2, tournamentId);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(ps.toString());
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new FatalException(e.getMessage());
+        }
+    }
+
+    private List<ITradeDto> getListFromSelectPS(PreparedStatement ps, int userId, int tournamentId) throws SQLException {
+        List<ITradeDto> list = new ArrayList<>();
+        ps.setInt(1, userId);
+        ps.setInt(2, tournamentId);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            list.add(createTradeDto(rs));
+        }
+        return list;
+
+    }
+
+    private ITradeDto createTradeDto(ResultSet rs) throws SQLException {
+        ITradeDto tradeDto = bizFactory.getTradeDto();
+        tradeDto.setTradeId(rs.getInt(1));
+        tradeDto.setUserId(rs.getInt(2));
+        tradeDto.setTournamentID(rs.getInt(3));
+        tradeDto.setDuration(rs.getTime(4).toLocalTime());
+        tradeDto.setAmount(rs.getDouble(5));
+        tradeDto.setMove(rs.getString(6).charAt(0));
+        tradeDto.setStrikingPrice(rs.getDouble(7));
+        tradeDto.setEndingPrice(rs.getDouble(8));
+        tradeDto.setPair(rs.getString(9));
+        tradeDto.setStartingDate(rs.getTimestamp(10).toLocalDateTime());
+        tradeDto.setEndingDate(rs.getTimestamp(11).toLocalDateTime());
+        tradeDto.setState(rs.getString(12).charAt(0));
+        return tradeDto;
     }
 }

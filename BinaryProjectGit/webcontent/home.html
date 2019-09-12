@@ -176,7 +176,7 @@
                         </div>
                     </div>
                     <div class="container-fluid containerSubHeader">
-                    <div class="row">
+                    <div class="row rowSubHeader">
                     <div class="linkAllTournaments col-5"><img src="images/arrowWhite30.png" class="goBackArrow"><img src="images/trophy.png" class="navImg"><span class="headerSpan">Tournaments</span></div>
                     <div class="creditsDiv col-6" id="divCredits"><p>Credits: <span class="creditsSpan">1000</span></p></div>
                     </div>
@@ -240,58 +240,6 @@
                                  </div>
                             </div>
                         </div>
-<!--                        <div class="container containerTrade">-->
-<!--                            <div class="row rowTradeParameters">-->
-<!--                                <div class="col-6 colTradeTime">-->
-<!--                                    <div class="card cardParametersTrade">-->
-<!--                                        <div class="card-body cardBodyParametersTrade">-->
-<!--                                            <h4 class="card-title cardTitleParametersTrade">Time</h4>-->
-<!--                                            <div class="divPicAndTime">-->
-<!--                                                <label for="tradeDurationInput" class="col-2"><img class="imgTimeTrade" src="images/whiteClock.png"></label><input type="text" class="input-element newTradeInput" id="tradeDurationInput" name="tradeDurationInput" placeholder="HH:MM">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="card-footer cardFooterParametersTrade">-->
-<!--                                            <div class="container-fluid containerTimeButtons">-->
-<!--                                                <div class="row rowTimeButtons">-->
-<!--                                                    <div class="col-6 colTimeButtonPlus">+</div>-->
-<!--                                                    <div class="col-6 colTimeButtonLess">-</div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-6 colTradeAmount">-->
-<!--                                    <div class="card cardParametersTrade">-->
-<!--                                        <div class="card-body cardBodyParametersTrade">-->
-<!--                                            <h4 class="card-title cardTitleParametersTrade">Amount</h4>-->
-<!--                                            <div class="divPicAndAmount">-->
-<!--                                                <label for="tradeAmountInput" class="col-2"><img src="images/whiteDollar.png" class="imgAmountTrade"></label><input type="text" class="newTradeInput" id="tradeAmountInput" name="tradeAmountInput" placeholder="50">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="card-footer cardFooterParametersTrade">-->
-<!--                                            <div class="container-fluid containerAmountButtons">-->
-<!--                                                <div class="row rowAmountButtons">-->
-<!--                                                    <div class="col-6 colAmountButtonPlus">+</div>-->
-<!--                                                    <div class="col-6 colAmountButtonLess">-</div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row rowTradeMoves">-->
-<!--                                <div class="col-6 colTradeUp">-->
-<!--                                    <div class="card cardMovesTrade cardMovesUp" id="cardMovesUp">-->
-<!--                                            <h2 class="card-title cardTitleMovesTrade cardTitleMovesUp">Up</h2>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-6 colTradeDown">-->
-<!--                                    <div class="card cardMovesTrade cardMovesDown" id="cardMovesDown">-->
-<!--                                        <h2 class="card-title cardTitleMovesTrade cardTitleMovesDown">Down</h2>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                     <div class="rankTournamentsActionPanel">
                         <div class="table table-responsive divTableRanking">
@@ -323,6 +271,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid containerTableTrades">
+                    <div class="row tableTradeRow">
+                        <div class="col-12 tableTradeCol">
+                            <div class="tableTradeDiv">
+                                <ul class="nav nav-tabs listTabsTrade">
+                                    <li class="nav-item nav-link tabsTrade" id="tabOpenTrades"><a class="linkTabsTrade" id="linkOpen">Open trades</a></li>
+                                    <li class="nav-item nav-link tabsTrade" id="tabHistoryTrades"><a class="linkTabsTrade" id="linkHistory">Trade history</a></li>
+                                </ul>
+
+                                <div class="divTabs">
+                                    <div id="divTabOpen" class="tab-pane">
+                                    </div>
+                                    <div id="divTabHistory" class="tab-pane">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-7 col-sm-4 col-xs-12 graphTournamentsCol">
                 <div class="colGraphDiv">
@@ -334,7 +301,7 @@
                     <div class="row justify-content-center rowGraph">
                         <div id="tradingview_tournament" class="graph col-sm-12 col-md-12 col-lg-12 pb-8"></div>
                         <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/"
-                                                                     rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a>
+                                                                     rel="noopener" target="_blank"><span class="blue-text legendChartText"></span></a>
                             by TradingView
                         </div>
                     </div>

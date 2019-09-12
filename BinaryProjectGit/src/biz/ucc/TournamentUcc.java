@@ -98,6 +98,19 @@ public class TournamentUcc implements ITournamentUcc {
         return listTournaments;
     }
 
+    @Override
+    public double getUserTournamentBalance(int tournamentId, int userId){
+        try{
+            this.dalServices.startTransaction();
+            return this.participationDao.getUserTournamentBalance(tournamentId,userId);
+        }catch(FatalException e){
+            this.dalServices.rollbackTransaction();
+            throw new FatalException(e.getMessage());
+        }finally {
+            this.dalServices.commitTransaction();
+        }
+    }
+
     private void getDistributions(List<ITournamentDto> listTournaments) {
 
         List<IDistributionDto> distributionDtoList = distributionDao.getDistributions();
